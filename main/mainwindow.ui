@@ -113,6 +113,15 @@
      </layout>
     </widget>
    </widget>
+   <widget class="QStackedWidget" name="stations_widget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>401</width>
+      <height>341</height>
+     </rect>
+    </property>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
