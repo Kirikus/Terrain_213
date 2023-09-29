@@ -44,6 +44,75 @@
      </attribute>
     </widget>
    </widget>
+   <widget class="QGroupBox" name="calculation_parametres">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>380</y>
+      <width>371</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tw Cen MT Condensed</family>
+     </font>
+    </property>
+    <property name="title">
+     <string>Параметры расчётов</string>
+    </property>
+    <widget class="QWidget" name="verticalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>371</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="calc_param_layout">
+      <item>
+       <widget class="QRadioButton" name="flat_surface_mode">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Плоская поверхность земли</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="curvature_mode">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>С учётом кривизны земли</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="refraction_mode">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>С учётом преломления в атмосфере земли</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
