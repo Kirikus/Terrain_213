@@ -18,6 +18,32 @@
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar"/>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="maps">
+    <property name="geometry">
+     <rect>
+      <x>416</x>
+      <y>9</y>
+      <width>651</width>
+      <height>581</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="visibility_map">
+     <attribute name="title">
+      <string>Карта видимости РЛС</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="screening_angle_map">
+     <attribute name="title">
+      <string>Карта углов закрытия</string>
+     </attribute>
+    </widget>
+   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
