@@ -6,8 +6,6 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
     <width>1074</width>
     <height>622</height>
    </rect>
@@ -15,8 +13,6 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="maps">
     <property name="geometry">
@@ -123,7 +119,6 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
      <number>0</number>
     </property>
     <widget class="QWidget" name="station_1_page">
