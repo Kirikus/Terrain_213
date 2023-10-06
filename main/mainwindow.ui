@@ -666,31 +666,26 @@
     <property name="title">
      <string>Меню</string>
     </property>
-    <addaction name="add_CMR"/>
-    <addaction name="create_CMR"/>
-    <addaction name="add_substrate_map"/>
+    <addaction name="load_cmr"/>
+    <addaction name="generate_cmr"/>
+    <addaction name="load_substrate_map"/>
    </widget>
    <addaction name="menu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="add_CMR">
+  <action name="load_cmr">
    <property name="text">
     <string>Загрузить ЦМР</string>
    </property>
   </action>
-  <action name="action_2">
-   <property name="text">
-    <string>Загрузить карту-пдложку</string>
-   </property>
-  </action>
-  <action name="add_substrate_map">
-   <property name="text">
-    <string>Загрузить карту-подложку</string>
-   </property>
-  </action>
-  <action name="create_CMR">
+  <action name="generate_cmr">
    <property name="text">
     <string>Сгенерировать ЦМР</string>
+   </property>
+  </action>
+  <action name="load_substrate_map">
+   <property name="text">
+    <string>Загрузить карту подложку</string>
    </property>
   </action>
  </widget>
