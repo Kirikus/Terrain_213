@@ -102,10 +102,111 @@
      </spacer>
     </item>
     <item row="5" column="0">
+     <widget class="QGroupBox" name="calculation_parametres">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>412</width>
+        <height>105</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Tw Cen MT Condensed</family>
+       </font>
       </property>
       <property name="title">
        <string>Параметры расчётов</string>
       </property>
+      <layout class="QGridLayout" name="gridLayout_5">
+       <item row="1" column="0">
+        <widget class="QRadioButton" name="curvature_mode">
+         <property name="font">
+          <font>
+           <family>Tw Cen MT Condensed</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>С учётом кривизны земли</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QRadioButton" name="refraction_mode">
+         <property name="font">
+          <font>
+           <family>Tw Cen MT Condensed</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>С учётом преломления в атмосфере земли</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QRadioButton" name="flat_surface_mode">
+         <property name="font">
+          <font>
+           <family>Tw Cen MT Condensed</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Плоская поверхность земли</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>412</width>
+        <height>348</height>
+       </size>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Triangular</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="documentMode">
+       <bool>true</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="RLS_1">
+       <property name="enabled">
+        <bool>true</bool>
        </property>
        <attribute name="title">
         <string>РЛС 1</string>
@@ -549,13 +650,15 @@
        <layout class="QGridLayout" name="gridLayout_9"/>
       </widget>
      </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1074</width>
+     <width>1047</width>
      <height>22</height>
     </rect>
    </property>
