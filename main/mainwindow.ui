@@ -14,125 +14,22 @@
    <string>Модель рельефа</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="maps">
-    <property name="geometry">
-     <rect>
-      <x>416</x>
-      <y>9</y>
-      <width>651</width>
-      <height>581</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="currentIndex">
-     <number>1</number>
-    </property>
-    <widget class="QWidget" name="visibility_map">
-     <attribute name="title">
-      <string>Карта видимости РЛС</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="screening_angle_map">
-     <attribute name="title">
-      <string>Карта углов закрытия</string>
-     </attribute>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="calculation_parametres">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>380</y>
-      <width>371</width>
-      <height>111</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Tw Cen MT Condensed</family>
-     </font>
-    </property>
-    <property name="title">
-     <string>Параметры расчётов</string>
-    </property>
-    <widget class="QWidget" name="verticalLayoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>20</y>
-       <width>371</width>
-       <height>80</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="calc_param_layout">
-      <item>
-       <widget class="QRadioButton" name="flat_surface_mode">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Плоская поверхность земли</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="curvature_mode">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>С учётом кривизны земли</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="refraction_mode">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>С учётом преломления в атмосфере земли</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-   <widget class="QStackedWidget" name="stations_widget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>401</width>
-      <height>341</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="station_1_page">
-     <widget class="QGroupBox" name="station_1_box">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>10</y>
-        <width>381</width>
-        <height>291</height>
-       </rect>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1" rowspan="8">
+     <widget class="QTabWidget" name="maps">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
       <property name="title">
        <string>РЛС №1</string>
+      <property name="minimumSize">
+       <size>
+        <width>611</width>
+        <height>521</height>
+       </size>
       </property>
       <widget class="QGroupBox" name="station_1_position">
        <property name="geometry">
@@ -514,6 +411,25 @@
          <string>W</string>
         </property>
        </widget>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="visibility_map">
+       <attribute name="title">
+        <string>Карта видимости РЛС</string>
+       </attribute>
       </widget>
       <widget class="QGroupBox" name="station_1_parametres">
        <property name="geometry">
@@ -632,6 +548,10 @@
          </item>
         </layout>
        </widget>
+      <widget class="QWidget" name="screening_angle_map">
+       <attribute name="title">
+        <string>Карта углов закрытия</string>
+       </attribute>
       </widget>
      </widget>
     </widget>
