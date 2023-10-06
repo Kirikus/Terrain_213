@@ -1187,7 +1187,7 @@
      <string>Меню</string>
     </property>
     <addaction name="add_CMR"/>
-    <addaction name="action"/>
+    <addaction name="create_CMR"/>
     <addaction name="add_substrate_map"/>
    </widget>
    <addaction name="menu"/>
@@ -1195,7 +1195,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="add_CMR">
    <property name="text">
-    <string> Загрузить ЦМР</string>
+    <string>Загрузить ЦМР</string>
    </property>
   </action>
   <action name="action_2">
@@ -1208,7 +1208,7 @@
     <string>Загрузить карту-подложку</string>
    </property>
   </action>
-  <action name="action">
+  <action name="create_CMR">
    <property name="text">
     <string>Сгенерировать ЦМР</string>
    </property>
