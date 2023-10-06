@@ -55,6 +55,53 @@
        </attribute>
       </widget>
      </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QDialogButtonBox" name="apply_reset_button">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::RightToLeft</enum>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="standardButtons">
+       <set>QDialogButtonBox::Apply|QDialogButtonBox::Reset</set>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <spacer name="top_vertical_spacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="0">
+     <spacer name="bottom_vertical_spacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="5" column="0">
       </property>
       <property name="title">
        <string>Параметры расчётов</string>
@@ -502,30 +549,6 @@
        <layout class="QGridLayout" name="gridLayout_9"/>
       </widget>
      </widget>
-    </widget>
-   </widget>
-   <widget class="QDialogButtonBox" name="reset_apply_buttons">
-    <property name="geometry">
-     <rect>
-      <x>220</x>
-      <y>520</y>
-      <width>161</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Tw Cen MT</family>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="standardButtons">
-     <set>QDialogButtonBox::Apply|QDialogButtonBox::Reset</set>
-    </property>
-    <property name="centerButtons">
-     <bool>false</bool>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
