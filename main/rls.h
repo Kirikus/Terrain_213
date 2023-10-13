@@ -1,11 +1,22 @@
 #ifndef RLS_H
 #define RLS_H
 
+#include <QWidget>
 
-class RLS
+namespace Ui {
+class RLS;
+}
+
+class RLS : public QWidget
 {
+    Q_OBJECT
+
 public:
-    RLS();
+    explicit RLS(QWidget *parent = nullptr);
+    ~RLS();
+
+private:
+    Ui::RLS *ui;
 };
 
 #endif // RLS_H
