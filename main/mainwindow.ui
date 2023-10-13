@@ -172,6 +172,8 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_16">
         <item row="0" column="0">
+         <widget class="RLS" name="widget_2" native="true">
+          <layout class="QGridLayout" name="gridLayout_2"/>
          </widget>
         </item>
        </layout>
@@ -180,31 +182,102 @@
        <attribute name="title">
         <string>РЛС 2</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_4"/>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <widget class="RLS" name="widget_7" native="true">
+          <layout class="QGridLayout" name="gridLayout_13"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="RLS_3">
        <attribute name="title">
         <string>РЛС 3</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_6"/>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="RLS" name="widget_3" native="true">
+          <layout class="QGridLayout" name="gridLayout_3"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="RLS_4">
        <attribute name="title">
         <string>РЛС 4</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_7"/>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="RLS" name="widget_6" native="true">
+          <layout class="QGridLayout" name="gridLayout_12"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="RLS_5">
        <attribute name="title">
         <string>РЛС 5</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_8"/>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="0" column="0">
+         <widget class="RLS" name="widget_5" native="true">
+          <layout class="QGridLayout" name="gridLayout_11"/>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="RLS_6">
        <attribute name="title">
         <string>РЛС 6</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_9"/>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="0" column="0">
+         <widget class="RLS" name="widget_4" native="true">
+          <layout class="QGridLayout" name="gridLayout_10"/>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="1" rowspan="8">
+     <widget class="QTabWidget" name="maps">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>611</width>
+        <height>521</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="visibility_map">
+       <attribute name="title">
+        <string>Карта видимости РЛС</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="screening_angle_map">
+       <attribute name="title">
+        <string>Карта углов закрытия</string>
+       </attribute>
       </widget>
      </widget>
     </item>
@@ -246,6 +319,14 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RLS</class>
+   <extends>QWidget</extends>
+   <header location="global">rls.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <buttongroups>
