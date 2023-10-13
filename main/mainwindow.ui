@@ -329,8 +329,4 @@
  </customwidgets>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="E_W_button_group"/>
-  <buttongroup name="N_S_button_group"/>
- </buttongroups>
 </ui>
