@@ -111,6 +111,44 @@
         </property>
        </widget>
       </item>
+      <item row="5" column="8" colspan="2">
+       <layout class="QHBoxLayout" name="east_west_layout">
+        <item>
+         <widget class="QRadioButton" name="east">
+          <property name="font">
+           <font>
+            <family>Tw Cen MT Condensed</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>E</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">EW_button_group</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="west">
+          <property name="font">
+           <font>
+            <family>Tw Cen MT Condensed</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>W</string>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">EW_button_group</string>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item row="5" column="3" rowspan="3" colspan="2">
        <widget class="QDoubleSpinBox" name="longititude_minutes">
@@ -145,6 +183,56 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="8" colspan="2">
+       <layout class="QHBoxLayout" name="north_south_layout">
+        <item>
+         <widget class="QRadioButton" name="north">
+          <property name="font">
+           <font>
+            <family>Tw Cen MT Condensed</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>N</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>false</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">NS_button_group</string>
+          </attribute>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="south">
+          <property name="font">
+           <font>
+            <family>Tw Cen MT Condensed</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>S</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">NS_button_group</string>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="2" column="5" rowspan="2">
+       <widget class="QLabel" name="minutes_sign_latitude">
         <property name="font">
          <font>
           <family>Tw Cen MT Condensed</family>
@@ -227,93 +315,6 @@
          <string>&quot;</string>
         </property>
        </widget>
-      </item>
-      <item row="2" column="8" colspan="2">
-       <layout class="QHBoxLayout" name="north_south_layout">
-        <item>
-         <widget class="QRadioButton" name="north">
-          <property name="font">
-           <font>
-            <family>Tw Cen MT Condensed</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>N</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <property name="autoRepeat">
-           <bool>false</bool>
-          </property>
-          <property name="autoExclusive">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">NS_button_group</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="south">
-          <property name="font">
-           <font>
-            <family>Tw Cen MT Condensed</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>S</string>
-          </property>
-          <property name="autoExclusive">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">NS_button_group</string>
-          </attribute>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="5" column="8" colspan="2">
-       <layout class="QHBoxLayout" name="east_west_layout">
-        <item>
-         <widget class="QRadioButton" name="east">
-          <property name="font">
-           <font>
-            <family>Tw Cen MT Condensed</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>E</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">EW_button_group</string>
-          </attribute>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="west">
-          <property name="font">
-           <font>
-            <family>Tw Cen MT Condensed</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>W</string>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">EW_button_group</string>
-          </attribute>
-         </widget>
-        </item>
-       </layout>
       </item>
      </layout>
     </widget>
