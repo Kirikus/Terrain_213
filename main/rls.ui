@@ -32,6 +32,32 @@
       <string>Положение</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
+      <item row="5" column="5" rowspan="3">
+       <widget class="QLabel" name="minutes_sign_longtitude">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string> '</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QLabel" name="degrees_sign_long">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string> °</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0" colspan="10">
        <layout class="QHBoxLayout" name="decimal_degree_layout">
         <item>
@@ -65,62 +91,6 @@
         </item>
        </layout>
       </item>
-      <item row="5" column="3" rowspan="3" colspan="2">
-       <widget class="QDoubleSpinBox" name="longititude_minutes">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="6" rowspan="3">
-       <widget class="QDoubleSpinBox" name="longitude_seconds">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="7">
-       <widget class="QLabel" name="seconds_sign_longtitude">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string> *</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="6" rowspan="2">
-       <widget class="QDoubleSpinBox" name="latitude_seconds">
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QLabel" name="degrees_sign_lat">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string> °</string>
-        </property>
-       </widget>
-      </item>
       <item row="5" column="1" rowspan="3">
        <widget class="QDoubleSpinBox" name="longitude_degree">
         <property name="font">
@@ -131,60 +101,8 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0" rowspan="4">
-       <widget class="QLabel" name="longtitude_label">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Долгота</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QLabel" name="degrees_sign_long">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string> °</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="5" rowspan="2">
-       <widget class="QLabel" name="minutes_sign_latitude">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string> '</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="5" rowspan="3">
-       <widget class="QLabel" name="minutes_sign_longtitude">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>14</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string> '</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1" rowspan="2">
-       <widget class="QDoubleSpinBox" name="latitude_degree">
+      <item row="2" column="3" rowspan="2" colspan="2">
+       <widget class="QDoubleSpinBox" name="latitude_minutes">
         <property name="font">
          <font>
           <family>Segoe UI</family>
@@ -193,21 +111,9 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0" rowspan="2">
-       <widget class="QLabel" name="latitude_label">
-        <property name="font">
-         <font>
-          <family>Tw Cen MT Condensed</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Широта</string>
-        </property>
-       </widget>
       </item>
-      <item row="2" column="3" rowspan="2" colspan="2">
-       <widget class="QDoubleSpinBox" name="latitude_minutes">
+      <item row="5" column="3" rowspan="3" colspan="2">
+       <widget class="QDoubleSpinBox" name="longititude_minutes">
         <property name="font">
          <font>
           <family>Segoe UI</family>
@@ -225,7 +131,100 @@
          </font>
         </property>
         <property name="text">
-         <string> *</string>
+         <string>&quot;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="6" rowspan="2">
+       <widget class="QDoubleSpinBox" name="latitude_seconds">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string> '</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" rowspan="4">
+       <widget class="QLabel" name="longtitude_label">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Долгота</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" rowspan="2">
+       <widget class="QLabel" name="latitude_label">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Широта</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="degrees_sign_lat">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string> °</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="6" rowspan="3">
+       <widget class="QDoubleSpinBox" name="longitude_seconds">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" rowspan="2">
+       <widget class="QDoubleSpinBox" name="latitude_degree">
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="7">
+       <widget class="QLabel" name="seconds_sign_longtitude">
+        <property name="font">
+         <font>
+          <family>Tw Cen MT Condensed</family>
+          <pointsize>14</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>&quot;</string>
         </property>
        </widget>
       </item>
