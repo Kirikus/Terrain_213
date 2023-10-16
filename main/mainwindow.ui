@@ -237,7 +237,7 @@
       <property name="tabBarAutoHide">
        <bool>false</bool>
       </property>
-      <widget class="QWidget" name="visibility_map">
+      <widget class="QCustomPlot" name="visibility_map">
        <attribute name="title">
         <string>Карта видимости РЛС</string>
        </attribute>
@@ -324,6 +324,12 @@
    <class>RLS</class>
    <extends>QWidget</extends>
    <header location="global">rls.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
