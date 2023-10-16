@@ -242,11 +242,6 @@
         <string>Карта видимости РЛС</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="screening_angle_map">
-       <attribute name="title">
-        <string>Карта углов закрытия</string>
-       </attribute>
-      </widget>
      </widget>
     </item>
     <item row="6" column="0">
