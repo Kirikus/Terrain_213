@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
+add_compile_options(-Wa,-mbig-obj)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -14,8 +15,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/qcustomplot) # here adding qcustomplot subfolder
 
-find_package(Boost REQUIRED COMPONENTS locale unit_test_framework)
-set(Boost_COMPILER=mgw8)
+set(Boost_COMPILER "mgw12")
+set(Boost_USE_STATIC_LIBS OFF)
+find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
 add_subdirectory(lib)
 add_subdirectory(tests)
