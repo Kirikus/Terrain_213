@@ -8,12 +8,13 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
-  ui->setupUi(this);
+    ui->setupUi(this);
+
+    ui->visibility_map->setBackground(pix);
+    ui->visibility_map->setBackgroundScaledMode(Qt::IgnoreAspectRatio);
 
   QPixmap pix(":map/map.jpg");
   //  std::cout << pix.height();
-  ui->visibility_map->setBackground(pix);
-  ui->visibility_map->setBackgroundScaledMode(Qt::IgnoreAspectRatio);
     ui->visibility_map->addGraph();
     ui->visibility_map->xAxis->setRange(-2, 2);
     ui->visibility_map->yAxis->setRange(-2, 2);
