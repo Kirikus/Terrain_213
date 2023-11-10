@@ -28,6 +28,13 @@ endif()
 target_link_libraries(main PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(main PRIVATE core)
 
+# Link needed libraries
+# QCustomPlot library
+target_link_libraries(${PROJECT_NAME} PRIVATE qcustomplot)
+
+# Compile needed definitions
+target_compile_definitions(${PROJECT_NAME} PRIVATE QCUSTOMPLOT_USE_LIBRARY)
+
 set_target_properties(main PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
