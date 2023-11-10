@@ -35,11 +35,12 @@ MainWindow::MainWindow(QWidget *parent)
         data_cirle_outside[i] = QCPCurveData(i, 0.7*qCos(phi), 0.7*qSin(phi));
     }
 
-    QVector<QCPCurveData> data_polygon(4);
+    QVector<QCPCurveData> data_polygon(5);
     data_polygon[0] = QCPCurveData(0, 0.5, -0.5);
     data_polygon[1] = QCPCurveData(1, 0.5, 0.5);
     data_polygon[2] = QCPCurveData(2, -0.5, 0.5);
     data_polygon[3] = QCPCurveData(3, -0.5, -0.5);
+    data_polygon[4] = QCPCurveData(4, 0.5, -0.5);
 
     QCPCurve *circle_inside = new QCPCurve(ui->visibility_map->xAxis, ui->visibility_map->yAxis);
     circle_inside->data()->set(data_cirle_inside, true);
