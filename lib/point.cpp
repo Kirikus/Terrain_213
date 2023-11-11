@@ -1,19 +1,22 @@
 #include "point.h"
 
-SphericPoint::SphericPoint(CartesianPoint center, CartesianPoint target)
+PointSpheric::PointSpheric(PointCartesian center, PointCartesian target)
 {
-    double r_x = target.get_x() - center.get_x();
-    double r_y = target.get_y() - center.get_y();
-    double r_h = target.get_h() - center.get_h();
-    double r_xy = hypot(r_x, r_y);
+    double x = target.get_x() - center.get_x();
+    double y = target.get_y() - center.get_y();
+    double h = target.get_h() - center.get_h();
+    double xy = hypot(x, y);
 
     this->center = center;
-    this->R = sqrt(pow(r_x, 2) + pow(r_y, 2) + pow(r_h, 2));
-    this->azimuth = atan2(r_y, r_x) * 180 / M_PI;
-    this->phi = atan2(r_h, r_xy) * 180 / M_PI;
+    this->R = sqrt(pow(x, 2) + pow(y, 2) + pow(h, 2));
+
+    this->azimuth = atan2(y, x) * 180 / M_PI;
+    this->azimuth *= M_PI;
+
+    this->phi = atan(h/xy);
 }
 
-SphericPoint::SphericPoint(const SphericPoint& sp)
+PointSpheric::PointSpheric(const PointSpheric& sp)
 {
     this->center = sp.center;
     this->azimuth = sp.azimuth;
