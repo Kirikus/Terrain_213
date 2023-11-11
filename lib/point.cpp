@@ -19,6 +19,7 @@ PointSpheric::PointSpheric(PointCartesian center, PointCartesian target)
     this->azimuth /= 180;
     this->azimuth *= M_PI;
 
+    //atan defined in the range from -90 to 90
     this->phi = atan(h/xy);
 }
 

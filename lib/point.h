@@ -16,9 +16,9 @@ public:
 class PointCartesian : Point
 {
 private:
-    double x;
-    double y;
-    double h;
+    double x; // in meters
+    double y; // in meters
+    double h; // in meters
 
 public:
 
@@ -55,9 +55,9 @@ private:
     PointCartesian center;
     PointCartesian target;
 
-    double azimuth;
-    double R;
-    double phi;
+    double azimuth; //in radians
+    double R; //in meters
+    double phi; //in radians
 };
 
 #endif // POINT_H
