@@ -63,6 +63,7 @@ BOOST_AUTO_TEST_CASE(PointSpheric_coord_get) {
     BOOST_TEST(sp.get_x() == 2, tt::tolerance(1e-6));
     BOOST_TEST(sp.get_y() == 2, tt::tolerance(1e-6));
     BOOST_TEST(sp.get_h() == 2, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_d() == 2*sqrt(2), tt::tolerance(1e-6));
 }
 
 
