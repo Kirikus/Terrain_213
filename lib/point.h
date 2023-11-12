@@ -38,6 +38,7 @@ public:
     double get_R() {return R;};
     double get_phi() {return phi;};
     double get_azimuth() {return azimuth;};
+    double get_d() {return R*cos(phi);}
 
     virtual double get_x() override {return target.get_x() - center.get_x();};
     virtual double get_y() override {return target.get_y() - center.get_y();};
