@@ -61,3 +61,14 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() { delete ui; }
+
+void MainWindow::on_apply_reset_button_clicked(QAbstractButton *button)
+{
+    ui->RLS_data_1->reset_data();
+    ui->RLS_data_2->reset_data();
+    ui->RLS_data_3->reset_data();
+    ui->RLS_data_4->reset_data();
+    ui->RLS_data_5->reset_data();
+    ui->RLS_data_6->reset_data();
+}
+

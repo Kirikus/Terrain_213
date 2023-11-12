@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QAbstractButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,7 +17,10 @@ class MainWindow : public QMainWindow {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
- private:
+  private slots:
+  void on_apply_reset_button_clicked(QAbstractButton *button);
+
+  private:
   Ui::MainWindow *ui;
 };
 #endif  // MAINWINDOW_H
