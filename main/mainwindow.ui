@@ -129,7 +129,7 @@
      </widget>
     </item>
     <item row="3" column="0">
-     <widget class="QTabWidget" name="tabWidget">
+     <widget class="QTabWidget" name="RLS_widgets">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -172,7 +172,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_16">
         <item row="0" column="0">
-         <widget class="RLS" name="widget_2" native="true">
+         <widget class="RLS" name="RLS_data_1" native="true">
           <layout class="QGridLayout" name="gridLayout_2"/>
          </widget>
         </item>
@@ -184,7 +184,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="RLS" name="widget_7" native="true">
+         <widget class="RLS" name="RLS_data_2" native="true">
           <layout class="QGridLayout" name="gridLayout_13"/>
          </widget>
         </item>
@@ -196,7 +196,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="0" column="0">
-         <widget class="RLS" name="widget_3" native="true">
+         <widget class="RLS" name="RLS_data_3" native="true">
           <layout class="QGridLayout" name="gridLayout_3"/>
          </widget>
         </item>
@@ -208,7 +208,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0">
-         <widget class="RLS" name="widget_6" native="true">
+         <widget class="RLS" name="RLS_data_4" native="true">
           <layout class="QGridLayout" name="gridLayout_12"/>
          </widget>
         </item>
@@ -220,7 +220,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
         <item row="0" column="0">
-         <widget class="RLS" name="widget_5" native="true">
+         <widget class="RLS" name="RLS_data_5" native="true">
           <layout class="QGridLayout" name="gridLayout_11"/>
          </widget>
         </item>
@@ -232,7 +232,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_9">
         <item row="0" column="0">
-         <widget class="RLS" name="widget_4" native="true">
+         <widget class="RLS" name="RLS_data_6" native="true">
           <layout class="QGridLayout" name="gridLayout_10"/>
          </widget>
         </item>
