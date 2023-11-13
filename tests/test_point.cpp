@@ -66,5 +66,17 @@ BOOST_AUTO_TEST_CASE(PointSpheric_coord_get) {
     BOOST_TEST(sp.get_d() == 2*sqrt(2), tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(PointSpheric_move_target) {
+    PointSpheric sp(center, target1);
+    sp.move_target(sp.get_x() + 1, sp.get_y() + 2, sp.get_h() + 3);
+
+    BOOST_TEST(sp.get_x() == 3, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_y() == 4, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_h() == 5, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_d() == 5, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_R() == 5*sqrt(2), tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_azimuth() == acos(3./5), tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_phi() == 0.78539, tt::tolerance(1e-4));
+}
 
 BOOST_AUTO_TEST_SUITE_END()
