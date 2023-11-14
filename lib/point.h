@@ -39,10 +39,11 @@ public:
     double get_phi() {return phi;};
     double get_azimuth() {return azimuth;};
     double get_d() {return R*cos(phi);}
+    PointCartesian get_center() {return center;}
 
-    virtual double get_x() override {return target.get_x() - center.get_x();};
-    virtual double get_y() override {return target.get_y() - center.get_y();};
-    virtual double get_h() override {return target.get_h() - center.get_h();};
+    virtual double get_x() override {return target.get_x();};
+    virtual double get_y() override {return target.get_y();};
+    virtual double get_h() override {return target.get_h();};
 
     PointSpheric() = default;
     PointSpheric(PointCartesian center, PointCartesian target);
