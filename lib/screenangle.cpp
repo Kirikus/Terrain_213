@@ -1,9 +1,9 @@
 #include "screenangle.h"
 
-// The function simulates the relief
+// The function models the relief with cones
 double ModelReliefFunction(double x, double y)
 {
-    return -sqrt(pow((x-20), 2) + pow(y, 2)) + 15;
+    return -sqrt(pow((x - 20), 2) + pow(y, 2)) + 15;
 }
 
 
