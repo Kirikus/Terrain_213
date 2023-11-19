@@ -58,6 +58,15 @@ void PointSpheric::change_phi(double new_phi)
     double h = sin(phi)*R;
     move_target(x, y, h);
 }
+
+void PointSpheric::change_d(double new_d)
+{
+    double x = new_d*cos(azimuth);
+    double y = new_d*sin(azimuth);
+    double h = sin(phi)*R;
+    move_target(x, y, h);
+}
+
 void PointSpheric::move_target(double new_x, double new_y, double new_h)
 {
     this->target = PointCartesian(new_x, new_y, new_h);
