@@ -13,39 +13,24 @@ double ModelReliefFunction(double x, double y)
 //Traversed by a continuous relief function
 double FindScreeningAngle(PointCartesian rls, double azi, double R)
 {
-    double rls_x = rls.get_x();
-    double rls_y = rls.get_y();
-    double rls_h = rls.get_h();
-
-    double curr_x = rls_x;
-    double curr_y = rls_y;
-    double curr_h = rls_h;
-
-    PointCartesian curr_dot(curr_x, curr_y, curr_h);
-    PointSpheric sp(rls, curr_dot);
-
     double dx = 0.001*cos(azi);
     double dy = 0.001*sin(azi);
 
-    double curr_r = 0;
+    PointSpheric sp(rls, rls);
+
     double screening_angle = 0;
 
-    while (curr_r < R)
+    while (sp.get_R() < R)
     {
-        curr_x += dx;
-        curr_y += dy;
-        curr_h = fmax(ModelReliefFunction(curr_x, curr_y), 0);
+        double curr_h = fmax(ModelReliefFunction(sp.get_x() + dx, sp.get_y() + dy), 0);
 
-        sp.move_target(curr_x, curr_y, curr_h);
-        curr_r = sp.get_R();
+        sp.move_target(sp.get_x()+dx, sp.get_y()+dy, curr_h);
 
-        if (curr_h <= rls_h)
+        if (curr_h <= rls.get_h())
             continue;
 
-        if (sp.get_phi() <= screening_angle)
-            continue;
-
-        screening_angle = sp.get_phi();
+        if (sp.get_phi() > screening_angle)
+            screening_angle = sp.get_phi();
     }
 
     return screening_angle;
