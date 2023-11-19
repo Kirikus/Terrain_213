@@ -49,9 +49,9 @@ public:
     PointSpheric(PointCartesian center, PointCartesian target);
     PointSpheric(const PointSpheric& sp);
 
-    void change_r(double new_R) {this->R = new_R;}
     void change_azimuth(double new_azimuth) {this->azimuth = new_azimuth;}
     void change_phi(double new_phi) {this->phi = new_phi;}
+    void change_r(double new_R);
     void move_target(double new_x, double new_y, double new_h);
 
 private:
