@@ -75,6 +75,19 @@ BOOST_AUTO_TEST_CASE(PointSpheric_center_get) {
     BOOST_TEST(sp.get_d() == 2*sqrt(2), tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(PointSpheric_change_r) {
+    PointSpheric sp(center, target1);
+
+    sp.change_r(3*sqrt(3));
+    BOOST_TEST(sp.get_x() == 3, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_y() == 3, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_h() == 3, tt::tolerance(1e-6));
+
+    sp.change_r(4*sqrt(3));
+    BOOST_TEST(sp.get_x() == 4, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_y() == 4, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_h() == 4, tt::tolerance(1e-6));
+}
 BOOST_AUTO_TEST_CASE(PointSpheric_move_target) {
     PointSpheric sp(center, target1);
     sp.move_target(sp.get_x() + 1, sp.get_y() + 2, sp.get_h() + 3);
