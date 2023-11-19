@@ -88,6 +88,21 @@ BOOST_AUTO_TEST_CASE(PointSpheric_change_r) {
     BOOST_TEST(sp.get_y() == 4, tt::tolerance(1e-6));
     BOOST_TEST(sp.get_h() == 4, tt::tolerance(1e-6));
 }
+
+BOOST_AUTO_TEST_CASE(PointSpheric_change_azimuth) {
+    PointSpheric sp(center, target1);
+
+    sp.change_azimuth(M_PI/2);
+    BOOST_TEST(sp.get_x() == 0, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_y() == 2*sqrt(2), tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_h() == 2, tt::tolerance(1e-6));
+
+    sp.change_azimuth(M_PI);
+    BOOST_TEST(sp.get_x() == -2*sqrt(2), tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_y() == 0, tt::tolerance(1e-6));
+    BOOST_TEST(sp.get_h() == 2, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_CASE(PointSpheric_move_target) {
     PointSpheric sp(center, target1);
     sp.move_target(sp.get_x() + 1, sp.get_y() + 2, sp.get_h() + 3);
