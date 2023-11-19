@@ -2,5 +2,6 @@
     <qresource prefix="/map">
         <file>map.qrc</file>
         <file>map.jpg</file>
+        <file>map.PNG</file>
     </qresource>
 </RCC>
