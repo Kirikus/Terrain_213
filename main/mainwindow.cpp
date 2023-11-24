@@ -64,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow() { delete ui; }
 
-void MainWindow::on_apply_reset_button_clicked(QAbstractButton *button)
 
 void MainWindow::on_addRLS_clicked()
 {

@@ -18,7 +18,6 @@ class MainWindow : public QMainWindow {
   ~MainWindow();
 
   private slots:
-  void on_apply_reset_button_clicked(QAbstractButton *button);
     void on_addRLS_clicked();
 
   private:

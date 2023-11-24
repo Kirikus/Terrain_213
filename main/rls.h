@@ -14,7 +14,6 @@ class RLS : public QWidget
 public:
     explicit RLS(QWidget *parent = nullptr);
     ~RLS();
-    void reset_data(); // reset all input data and configuration to default
 
 private:
     Ui::RLS *ui;
