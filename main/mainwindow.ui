@@ -163,83 +163,6 @@
       <property name="tabBarAutoHide">
        <bool>true</bool>
       </property>
-      <widget class="QWidget" name="RLS_1">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <attribute name="title">
-        <string>РЛС 1</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_16">
-        <item row="0" column="0">
-         <widget class="RLS" name="RLS_data_1" native="true">
-          <layout class="QGridLayout" name="gridLayout_2"/>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="RLS_2">
-       <attribute name="title">
-        <string>РЛС 2</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <widget class="RLS" name="RLS_data_2" native="true">
-          <layout class="QGridLayout" name="gridLayout_13"/>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="RLS_3">
-       <attribute name="title">
-        <string>РЛС 3</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0">
-         <widget class="RLS" name="RLS_data_3" native="true">
-          <layout class="QGridLayout" name="gridLayout_3"/>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="RLS_4">
-       <attribute name="title">
-        <string>РЛС 4</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_7">
-        <item row="0" column="0">
-         <widget class="RLS" name="RLS_data_4" native="true">
-          <layout class="QGridLayout" name="gridLayout_12"/>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="RLS_5">
-       <attribute name="title">
-        <string>РЛС 5</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_8">
-        <item row="0" column="0">
-         <widget class="RLS" name="RLS_data_5" native="true">
-          <layout class="QGridLayout" name="gridLayout_11"/>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="RLS_6">
-       <attribute name="title">
-        <string>РЛС 6</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_9">
-        <item row="0" column="0">
-         <widget class="RLS" name="RLS_data_6" native="true">
-          <layout class="QGridLayout" name="gridLayout_10"/>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-    </item>
     <item row="0" column="1" rowspan="8">
      <widget class="QTabWidget" name="maps">
       <property name="sizePolicy">
@@ -315,12 +238,6 @@
   </action>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>RLS</class>
-   <extends>QWidget</extends>
-   <header location="global">rls.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
