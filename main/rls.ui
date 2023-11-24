@@ -29,7 +29,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Положение</string>
+      <string>Положение РЛС</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="5" column="5" rowspan="3">
@@ -327,7 +327,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Параметры</string>
+      <string>Параметры РЛС</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
@@ -430,7 +430,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="NS_button_group"/>
   <buttongroup name="EW_button_group"/>
+  <buttongroup name="NS_button_group"/>
  </buttongroups>
 </ui>
