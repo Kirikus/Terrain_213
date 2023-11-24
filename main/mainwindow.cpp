@@ -88,3 +88,13 @@ void MainWindow::on_RLS_widgets_tabCloseRequested(int index)
     ui->RLS_widgets->removeTab(index);
 }
 
+
+void MainWindow::on_apply_button_clicked(QAbstractButton *button)
+{
+    for (int i = 0; i < ui->RLS_widgets->count(); ++i)
+    {
+        RLS* rls = (RLS*)ui->RLS_widgets->widget(0);
+        this->_rls_info[i] = rls->get_all_data();
+    }
+}
+
