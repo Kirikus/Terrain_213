@@ -73,12 +73,8 @@ void MainWindow::on_addRLS_clicked()
 }
 
 
+void MainWindow::on_RLS_widgets_tabCloseRequested(int index)
 {
-    ui->RLS_data_1->reset_data();
-    ui->RLS_data_2->reset_data();
-    ui->RLS_data_3->reset_data();
-    ui->RLS_data_4->reset_data();
-    ui->RLS_data_5->reset_data();
-    ui->RLS_data_6->reset_data();
+    ui->RLS_widgets->removeTab(index);
 }
 

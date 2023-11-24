@@ -20,8 +20,10 @@ class MainWindow : public QMainWindow {
   private slots:
     void on_addRLS_clicked();
 
-  private:
-  Ui::MainWindow *ui;
+    void on_RLS_widgets_tabCloseRequested(int index);
+
+private:
+    Ui::MainWindow *ui;
     size_t _rls_index = 0;  // index of last RLS in RLS_widget
 
 };
