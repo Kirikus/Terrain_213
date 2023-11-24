@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
   private slots:
-    void on_addRLS_clicked();
+    void on_add_RLS_clicked();
 
     void on_RLS_widgets_tabCloseRequested(int index);
 

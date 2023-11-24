@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    this->on_addRLS_clicked(); // add defualt 1 RLS
+    this->on_add_RLS_clicked(); // add defualt 1 RLS
     this->_plot_image();
     this->_plot_angle_map();
 }
@@ -75,7 +75,7 @@ void MainWindow::_plot_angle_map()
 MainWindow::~MainWindow() { delete ui; }
 
 
-void MainWindow::on_addRLS_clicked()
+void MainWindow::on_add_RLS_clicked()
 {
     RLS *NewRls = new RLS;
     std::string name = "РЛС " + std::to_string(++(this->_rls_index));
