@@ -14,8 +14,8 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
   private slots:
     void on_addRLS_clicked();
@@ -26,5 +26,7 @@ private:
     Ui::MainWindow *ui;
     size_t _rls_index = 0;  // index of last RLS in RLS_widget
 
+    void _plot_image();
+    void _plot_angle_map();
 };
 #endif  // MAINWINDOW_H

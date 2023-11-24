@@ -12,10 +12,20 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    QPixmap pix(":map/map.jpg");
+    this->on_addRLS_clicked(); // add defualt 1 RLS
+    this->_plot_image();
+    this->_plot_angle_map();
+}
+
+void MainWindow::_plot_image()
+{
+    QPixmap pix(":map/map.PNG");
     ui->visibility_map->setBackground(pix);
     ui->visibility_map->setBackgroundScaledMode(Qt::IgnoreAspectRatio);
+}
 
+void MainWindow::_plot_angle_map()
+{
     ui->visibility_map->addGraph();
     ui->visibility_map->xAxis->setRange(-2, 2);
     ui->visibility_map->yAxis->setRange(-2, 2);
