@@ -19,8 +19,11 @@ class MainWindow : public QMainWindow {
 
   private slots:
   void on_apply_reset_button_clicked(QAbstractButton *button);
+    void on_addRLS_clicked();
 
   private:
   Ui::MainWindow *ui;
+    size_t _rls_index = 0;  // index of last RLS in RLS_widget
+
 };
 #endif  // MAINWINDOW_H

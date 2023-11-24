@@ -1,7 +1,9 @@
 #include "mainwindow.h"
+#include "rls.h"
 
 #include <cmath>
 #include <iostream>
+#include <string.h>
 
 #include "./ui_mainwindow.h"
 #include "qcustomplot.h"
@@ -63,6 +65,15 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::on_apply_reset_button_clicked(QAbstractButton *button)
+
+void MainWindow::on_addRLS_clicked()
+{
+    RLS *NewRls = new RLS;
+    std::string name = "РЛС " + std::to_string(++(this->_rls_index));
+    ui->RLS_widgets->addTab(NewRls, QString::fromStdString(name));
+}
+
+
 {
     ui->RLS_data_1->reset_data();
     ui->RLS_data_2->reset_data();
