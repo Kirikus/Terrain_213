@@ -71,6 +71,23 @@ public:
 
     double h(PointSpheric p) {return 0;}
 };
+
+class Map1d
+{
+    Map data;
+    PointCartesian rls;
+    PointCartesian target;
+
+    Map1d(Map m, PointCartesian rls, PointCartesian target)
+        :data(m), rls(rls), target(target)
+    {}
+
+    double height(double new_d)
+    {
+        PointSpheric p(rls, target);
+        p.change_d(new_d);
+        return data.h(p);
+    }
 };
 
 #endif // MAP_H
