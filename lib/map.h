@@ -23,4 +23,10 @@ protected:
     virtual complex dielectricPermittivity(PointSpheric p) = 0;
 };
 
+class None: Vegetation
+{
+public:
+    complex vegetation(PointSpheric p) override;
+};
+
 #endif // MAP_H
