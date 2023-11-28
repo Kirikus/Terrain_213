@@ -69,7 +69,8 @@ public:
         :elevation(e), vegetation(v), dielectricPermittivity(d)
     {}
 
-    double h(PointSpheric p);
+    double h(PointSpheric p) {return 0;}
+};
 };
 
 #endif // MAP_H
