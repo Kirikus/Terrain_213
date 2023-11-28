@@ -3,4 +3,5 @@
 
 #include "point.h"
 #include <complex>
+using complex = std::complex<double>;
 #endif // MAP_H
