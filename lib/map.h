@@ -36,4 +36,12 @@ public:
     complex dielectricPermittivity(PointSpheric p) override;
 };
 
+class GeoData: Elevation, Vegetation, DielectricPermittivity
+{
+public:
+    double h(PointSpheric p) override {return p.get_h();}
+    complex vegetation(PointSpheric p) override;
+    complex dielectricPermittivity(PointSpheric p) override;
+};
+
 #endif // MAP_H
