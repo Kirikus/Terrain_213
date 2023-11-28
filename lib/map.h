@@ -11,4 +11,10 @@ protected:
     virtual double h(PointSpheric p) = 0;
 };
 
+class Vegetation
+{
+protected:
+    virtual complex vegetation(PointSpheric p) = 0;
+};
+
 #endif // MAP_H
