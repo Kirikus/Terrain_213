@@ -44,4 +44,10 @@ public:
     complex dielectricPermittivity(PointSpheric p) override;
 };
 
+class Mountain: Elevation
+{
+public:
+    double h(PointSpheric p) override {return p.get_h();}
+};
+
 #endif // MAP_H
