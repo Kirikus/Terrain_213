@@ -57,4 +57,19 @@ public:
 };
 
 
+class Map
+{
+private:
+    Elevation* elevation;
+    Vegetation* vegetation;
+    DielectricPermittivity* dielectricPermittivity;
+
+public:
+    Map(Elevation* e, Vegetation* v, DielectricPermittivity* d)
+        :elevation(e), vegetation(v), dielectricPermittivity(d)
+    {}
+
+    double h(PointSpheric p);
+};
+
 #endif // MAP_H
