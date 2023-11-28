@@ -50,4 +50,11 @@ public:
     double h(PointSpheric p) override {return p.get_h();}
 };
 
+class Plain: Elevation
+{
+public:
+    double h(PointSpheric p) override {return p.get_h();}
+};
+
+
 #endif // MAP_H
