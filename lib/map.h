@@ -29,4 +29,11 @@ public:
     complex vegetation(PointSpheric p) override;
 };
 
+class Constant: Vegetation, DielectricPermittivity
+{
+public:
+    complex vegetation(PointSpheric p) override;
+    complex dielectricPermittivity(PointSpheric p) override;
+};
+
 #endif // MAP_H
