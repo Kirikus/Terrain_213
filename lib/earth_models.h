@@ -1,25 +1,25 @@
 #ifndef EARTH_MODELS_H
 #define EARTH_MODELS_H
 
-class EarthModel
+class ModelEarth
 {
     virtual double find_r() = 0;
     virtual double find_phi() = 0;
 };
 
-class FlatModel: EarthModel
+class ModelFlat: ModelEarth
 {
     virtual double find_r() override {return 0;};
     virtual double find_phi() override {return 0;};
 };
 
-class SphericModel: EarthModel
+class ModelSpheric: ModelEarth
 {
     virtual double find_r() override {return 0;};
     virtual double find_phi() override {return 0;};
 };
 
-class EffectiveRadiusModel: EarthModel
+class ModelEffectiveRadius: ModelEarth
 {
     virtual double find_r() override {return 0;};
     virtual double find_phi() override {return 0;};
