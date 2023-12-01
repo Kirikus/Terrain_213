@@ -33,6 +33,7 @@ public:
     virtual double find_phi(PointCartesian center, PointCartesian target) override {return 0;};
 
     double r_e = 6378*1000; //temporary variable, while there is no Data class
+    double k = 4./3; //convenient coefficient for approximation
 };
 
 #endif // EARTH_MODELS_H
