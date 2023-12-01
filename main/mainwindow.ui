@@ -152,7 +152,7 @@
      </widget>
     </item>
     <item row="4" column="0">
-     <widget class="QPushButton" name="addRLS">
+     <widget class="QPushButton" name="add_RLS">
       <property name="text">
        <string>Добавить РЛС</string>
       </property>
