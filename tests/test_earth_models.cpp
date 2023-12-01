@@ -95,4 +95,17 @@ BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_long_distance) {
     BOOST_TEST(ere.find_phi(center, target) == phi, tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(test_ModelFlat_const_d) {
+    ModelFlat fe;
+
+    PointCartesian center(2, 2, 4);
+    PointCartesian target(2, 2, 8);
+
+    double r = 4;
+    double phi = M_PI/2;
+
+    BOOST_TEST(fe.find_r(center, target) == r, tt::tolerance(1e-6));
+    BOOST_TEST(fe.find_phi(center, target) == phi, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
