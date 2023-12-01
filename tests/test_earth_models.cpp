@@ -2,7 +2,7 @@
 
 #include <QApplication>
 
-#include "../lib/earth_models.h"
+#include "../lib/models_earth.h"
 
 #if !defined(WIN32)
 #define BOOST_TEST_DYN_LINK
