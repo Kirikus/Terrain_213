@@ -12,8 +12,8 @@ class ModelEarth
 class ModelFlat: ModelEarth
 {
 public:
-    virtual double find_phi(PointCartesian center, PointCartesian target) override {return 0;};
     virtual double find_r(PointCartesian center, PointCartesian target) override;
+    virtual double find_phi(PointCartesian center, PointCartesian target) override;
 };
 
 class ModelSpheric: ModelEarth

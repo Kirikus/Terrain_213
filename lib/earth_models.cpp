@@ -10,6 +10,17 @@ double ModelFlat::find_r(PointCartesian center, PointCartesian target)
     double r = sqrt(pow(x, 2) + pow(y, 2) + pow(h, 2));
     return r;
 }
+
+//This function calculates elevation angle between center and target
+double ModelFlat::find_phi(PointCartesian center, PointCartesian target)
+{
+    double h = target.get_h() - center.get_h();
+    double r = find_r(center, target);
+
+    double phi = asin(h/r);
+    return phi;
+}
+
 //This function calculates angle between two radii of earth
 double ModelSpheric::find_earth_angle(PointCartesian center, PointCartesian target)
 {
