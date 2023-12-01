@@ -40,4 +40,18 @@ BOOST_AUTO_TEST_CASE(test_ModelSpheric_short_distance) {
     BOOST_TEST(se.find_r(center, target) == r, tt::tolerance(1e-6));
     BOOST_TEST(se.find_phi(center, target) == phi, tt::tolerance(1e-6));
 }
+
+BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_short_distance) {
+    ModelEffectiveRadius ere;
+
+    PointCartesian center(2, 2, 4);
+    PointCartesian target(60, 60, 100);
+
+    double r = 126.269986;
+    double phi = 0.8637331;
+
+    BOOST_TEST(ere.find_r(center, target) == r, tt::tolerance(1e-6));
+    BOOST_TEST(ere.find_phi(center, target) == phi, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
