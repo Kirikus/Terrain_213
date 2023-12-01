@@ -11,3 +11,15 @@ double ModelSpheric::find_earth_angle(PointCartesian center, PointCartesian targ
     return earth_angle;
 }
 
+//This function calculates distance between center and target
+double ModelSpheric::find_r(PointCartesian center, PointCartesian target)
+{
+    double h_t = r_e + target.get_h(); //height relative to the center of the earth
+    double h_c = r_e + center.get_h();
+
+    double earth_angle = find_earth_angle(center, target);
+
+    double r = sqrt(pow(h_t, 2) + pow(h_c, 2) - 2*(h_t)*(h_c)*cos(earth_angle));
+    return r;
+}
+
