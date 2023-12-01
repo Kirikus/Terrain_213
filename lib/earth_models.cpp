@@ -30,6 +30,8 @@ double ModelSpheric::find_phi(PointCartesian center, PointCartesian target)
     double h_b = center.get_h();
     double r = find_r(center, target);
 
-    double phi = asin((h_a - h_b)*(2*r_e + h_a + h_b)/(2*r*(h_a + h_b)) - r/(2*(h_a + h_b)));
+    double phi = asin((h_a - h_b)*(2*r_e + h_a + h_b)/(2*r*(r_e + h_b)) - r/(2*(r_e + h_b)));
+    return phi;
+}
     return phi;
 }
