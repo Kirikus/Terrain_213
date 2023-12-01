@@ -23,3 +23,13 @@ double ModelSpheric::find_r(PointCartesian center, PointCartesian target)
     return r;
 }
 
+//This function calculates elevation angle between center and target
+double ModelSpheric::find_phi(PointCartesian center, PointCartesian target)
+{
+    double h_a = target.get_h();
+    double h_b = center.get_h();
+    double r = find_r(center, target);
+
+    double phi = asin((h_a - h_b)*(2*r_e + h_a + h_b)/(2*r*(h_a + h_b)) - r/(2*(h_a + h_b)));
+    return phi;
+}
