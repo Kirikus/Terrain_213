@@ -21,7 +21,7 @@ void MainWindow::_plot_image()
 {
     QPixmap pix(":map/map.PNG");
     ui->visibility_map->setBackground(pix);
-    ui->visibility_map->setBackgroundScaledMode(Qt::IgnoreAspectRatio);
+    ui->visibility_map->setBackgroundScaledMode(Qt::AspectRatioMode::KeepAspectRatioByExpanding);
 }
 
 void MainWindow::_plot_angle_map()
