@@ -42,7 +42,7 @@ double ModelSpheric::find_r(PointCartesian center, PointCartesian target)
 
     double earth_angle = find_earth_angle(center, target);
 
-    double r = std::sqrt(std::pow(h_t, 2) + std::pow(h_c, 2) - 2*(h_t)*(h_c)*std::cos(earth_angle));
+    double r = std::sqrt(std::pow(h_t, 2) + std::pow(h_c, 2) - 2*h_t*h_c*std::cos(earth_angle));
     return r;
 }
 
@@ -78,7 +78,7 @@ double ModelEffectiveRadius::find_r(PointCartesian center, PointCartesian target
 
     double earth_angle = find_earth_angle(center, target);
 
-    double r = std::sqrt(std::pow(h_t, 2) + std::pow(h_c, 2) - 2*(h_t)*(h_c)*std::cos(earth_angle));
+    double r = std::sqrt(std::pow(h_t, 2) + std::pow(h_c, 2) - 2*h_t*h_c*std::cos(earth_angle));
     return r;
 }
 
