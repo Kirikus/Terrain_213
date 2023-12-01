@@ -58,5 +58,14 @@ double ModelEffectiveRadius::find_r(PointCartesian center, PointCartesian target
     double r = sqrt(pow(h_t, 2) + pow(h_c, 2) - 2*(h_t)*(h_c)*cos(earth_angle));
     return r;
 }
+
+//This function calculates elevation angle between center and target
+double ModelEffectiveRadius::find_phi(PointCartesian center, PointCartesian target)
+{
+    double h_a = target.get_h();
+    double h_b = center.get_h();
+    double r = find_r(center, target);
+
+    double phi = asin((h_a - h_b)*(2*k*r_e + h_a + h_b)/(2*r*(k*r_e + h_b)) - r/(2*(k*r_e + h_b)));
     return phi;
 }
