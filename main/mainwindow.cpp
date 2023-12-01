@@ -15,7 +15,32 @@ MainWindow::MainWindow(QWidget *parent)
     this->on_add_RLS_clicked(); // add defualt 1 RLS
     this->_plot_image();
     this->_plot_angle_map();
+
+    connect(this, &MainWindow::resizeEvent, this, &MainWindow::handleResizeEvent);
+    this->_plot_size = ui->visibility_map->size();
 }
+
+
+void MainWindow::handleResizeEvent(QResizeEvent* event)
+{
+    Q_UNUSED(event); // Unused parameter
+
+    // Calculate the new plot size based on the aspect ratio of the customPlot
+    QSize newPlotSize = this->_calculate_new_plot_size(ui->visibility_map);
+
+    // Update the customPlot size and adjust the graph accordingly
+    ui->visibility_map->setFixedSize(newPlotSize);
+    // ... update the graph based on the new size ...
+}
+
+
+QSize MainWindow::_calculate_new_plot_size(QCustomPlot* plot)
+{
+    QSize current_size = plot->size();
+    return current_size * 2;
+}
+
+
 
 void MainWindow::_plot_image()
 {
