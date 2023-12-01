@@ -21,6 +21,8 @@ class ModelSpheric: ModelEarth
     virtual double find_r(PointCartesian center, PointCartesian target) override {return 0;};
     virtual double find_phi(PointCartesian center, PointCartesian target) override {return 0;};
 public:
+
+    double r_e = 6378*1000; //temporary variable, while there is no Data class
 };
 
 class ModelEffectiveRadius: ModelEarth
