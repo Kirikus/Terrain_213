@@ -7,7 +7,7 @@ double ModelFlat::find_r(PointCartesian center, PointCartesian target)
     double y = target.get_y() - center.get_y();
     double h = target.get_h() - center.get_h();
 
-    double r = sqrt(pow(x, 2) + pow(y, 2) + pow(h, 2));
+    double r = std::sqrt(std::pow(x, 2) + std::pow(y, 2) + std::pow(h, 2));
     return r;
 }
 
@@ -17,7 +17,7 @@ double ModelFlat::find_phi(PointCartesian center, PointCartesian target)
     double h = target.get_h() - center.get_h();
     double r = find_r(center, target);
 
-    double phi = asin(h/r);
+    double phi = std::asin(h/r);
     return phi;
 }
 
@@ -28,9 +28,9 @@ double ModelSpheric::find_earth_angle(PointCartesian center, PointCartesian targ
 {
     double x = center.get_x() - target.get_x();
     double y = center.get_y() - target.get_y();
-    double distance = hypot(x, y);
+    double distance = std::hypot(x, y);
 
-    double earth_angle = acos(1 - pow(distance, 2)/(2 * pow(r_e, 2)));
+    double earth_angle = std::acos(1 - std::pow(distance, 2)/(2 * std::pow(r_e, 2)));
     return earth_angle;
 }
 
@@ -42,7 +42,7 @@ double ModelSpheric::find_r(PointCartesian center, PointCartesian target)
 
     double earth_angle = find_earth_angle(center, target);
 
-    double r = sqrt(pow(h_t, 2) + pow(h_c, 2) - 2*(h_t)*(h_c)*cos(earth_angle));
+    double r = std::sqrt(std::pow(h_t, 2) + std::pow(h_c, 2) - 2*(h_t)*(h_c)*std::cos(earth_angle));
     return r;
 }
 
@@ -53,7 +53,7 @@ double ModelSpheric::find_phi(PointCartesian center, PointCartesian target)
     double h_b = center.get_h();
     double r = find_r(center, target);
 
-    double phi = asin((h_a - h_b)*(2*r_e + h_a + h_b)/(2*r*(r_e + h_b)) - r/(2*(r_e + h_b)));
+    double phi = std::asin((h_a - h_b)*(2*r_e + h_a + h_b)/(2*r*(r_e + h_b)) - r/(2*(r_e + h_b)));
     return phi;
 }
 
@@ -64,9 +64,9 @@ double ModelEffectiveRadius::find_earth_angle(PointCartesian center, PointCartes
 {
     double x = center.get_x() - target.get_x();
     double y = center.get_y() - target.get_y();
-    double distance = hypot(x, y);
+    double distance = std::hypot(x, y);
 
-    double earth_angle = acos(1 - pow(distance, 2)/(2 * pow(k*r_e, 2)));
+    double earth_angle = std::acos(1 - std::pow(distance, 2)/(2 * std::pow(k*r_e, 2)));
     return earth_angle;
 }
 
@@ -78,7 +78,7 @@ double ModelEffectiveRadius::find_r(PointCartesian center, PointCartesian target
 
     double earth_angle = find_earth_angle(center, target);
 
-    double r = sqrt(pow(h_t, 2) + pow(h_c, 2) - 2*(h_t)*(h_c)*cos(earth_angle));
+    double r = std::sqrt(std::pow(h_t, 2) + std::pow(h_c, 2) - 2*(h_t)*(h_c)*std::cos(earth_angle));
     return r;
 }
 
@@ -89,6 +89,6 @@ double ModelEffectiveRadius::find_phi(PointCartesian center, PointCartesian targ
     double h_b = center.get_h();
     double r = find_r(center, target);
 
-    double phi = asin((h_a - h_b)*(2*k*r_e + h_a + h_b)/(2*r*(k*r_e + h_b)) - r/(2*(k*r_e + h_b)));
+    double phi = std::asin((h_a - h_b)*(2*k*r_e + h_a + h_b)/(2*r*(k*r_e + h_b)) - r/(2*(k*r_e + h_b)));
     return phi;
 }
