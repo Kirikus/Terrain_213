@@ -108,4 +108,17 @@ BOOST_AUTO_TEST_CASE(test_ModelFlat_const_d) {
     BOOST_TEST(fe.find_phi(center, target) == phi, tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(test_ModelSpheric_const_d) {
+    ModelSpheric se;
+
+    PointCartesian center(2, 2, 4);
+    PointCartesian target(2, 2, 8);
+
+    double r = 4;
+    double phi = M_PI/2;
+
+    BOOST_TEST(se.find_r(center, target) == r, tt::tolerance(1e-6));
+    BOOST_TEST(se.find_phi(center, target) == phi, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
