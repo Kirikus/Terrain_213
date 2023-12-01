@@ -1,5 +1,5 @@
-#ifndef EARTH_MODELS_H
-#define EARTH_MODELS_H
+#ifndef MODELS_EARTH_H
+#define MODELS_EARTH_H
 
 #include "point.h"
 
@@ -37,4 +37,4 @@ public:
     double k = 4./3; //convenient coefficient for approximation
 };
 
-#endif // EARTH_MODELS_H
+#endif // MODELS_EARTH_H
