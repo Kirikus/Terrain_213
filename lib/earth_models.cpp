@@ -21,6 +21,8 @@ double ModelFlat::find_phi(PointCartesian center, PointCartesian target)
     return phi;
 }
 
+///-------------------------------------------------------
+
 //This function calculates angle between two radii of earth
 double ModelSpheric::find_earth_angle(PointCartesian center, PointCartesian target)
 {
