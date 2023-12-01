@@ -3,6 +3,9 @@
 
 #include "point.h"
 
+namespace EarthModels
+{
+
 class ModelEarth
 {
     virtual double find_r(PointCartesian center, PointCartesian target) = 0;
@@ -36,5 +39,7 @@ public:
     double r_e = 6378*1000; //temporary variable, while there is no Data class
     double k = 4./3; //convenient coefficient for approximation
 };
+
+}
 
 #endif // MODELS_EARTH_H

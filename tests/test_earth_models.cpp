@@ -10,11 +10,13 @@
 #include <boost/test/unit_test.hpp>
 
 namespace tt = boost::test_tools;
+namespace EM = EarthModels;
+
 
 BOOST_AUTO_TEST_SUITE(test_earth_models)
 
 BOOST_AUTO_TEST_CASE(test_ModelFlat_short_distance) {
-    ModelFlat fe;
+    EM::ModelFlat fe;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(60, 60, 100);
@@ -29,7 +31,7 @@ BOOST_AUTO_TEST_CASE(test_ModelFlat_short_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelSpheric_short_distance) {
-    ModelSpheric se;
+    EM::ModelSpheric se;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(60, 60, 100);
@@ -42,7 +44,7 @@ BOOST_AUTO_TEST_CASE(test_ModelSpheric_short_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_short_distance) {
-    ModelEffectiveRadius ere;
+    EM::ModelEffectiveRadius ere;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(60, 60, 100);
@@ -55,7 +57,7 @@ BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_short_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelFlat_long_distance) {
-    ModelFlat fe;
+    EM::ModelFlat fe;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(60000, 6000, 1000);
@@ -70,7 +72,7 @@ BOOST_AUTO_TEST_CASE(test_ModelFlat_long_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelSpheric_long_distance) {
-    ModelSpheric se;
+    EM::ModelSpheric se;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(60000, 6000, 1000);
@@ -83,7 +85,7 @@ BOOST_AUTO_TEST_CASE(test_ModelSpheric_long_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_long_distance) {
-    ModelEffectiveRadius ere;
+    EM::ModelEffectiveRadius ere;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(60000, 6000, 1000);
@@ -96,7 +98,7 @@ BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_long_distance) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelFlat_const_d) {
-    ModelFlat fe;
+    EM::ModelFlat fe;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(2, 2, 8);
@@ -109,7 +111,7 @@ BOOST_AUTO_TEST_CASE(test_ModelFlat_const_d) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelSpheric_const_d) {
-    ModelSpheric se;
+    EM::ModelSpheric se;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(2, 2, 8);
@@ -122,7 +124,7 @@ BOOST_AUTO_TEST_CASE(test_ModelSpheric_const_d) {
 }
 
 BOOST_AUTO_TEST_CASE(test_ModelEffectiveRadius_const_d) {
-    ModelEffectiveRadius ere;
+    EM::ModelEffectiveRadius ere;
 
     PointCartesian center(2, 2, 4);
     PointCartesian target(2, 2, 8);
