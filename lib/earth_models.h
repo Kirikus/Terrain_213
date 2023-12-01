@@ -1,6 +1,8 @@
 #ifndef EARTH_MODELS_H
 #define EARTH_MODELS_H
 
+#include "point.h"
+
 class ModelEarth
 {
     virtual double find_r() = 0;
