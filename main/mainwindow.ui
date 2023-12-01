@@ -133,7 +133,7 @@
      </spacer>
     </item>
     <item row="8" column="0">
-     <widget class="QDialogButtonBox" name="apply_reset_button">
+     <widget class="QDialogButtonBox" name="apply_button">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -147,7 +147,7 @@
        <bool>false</bool>
       </property>
       <property name="standardButtons">
-       <set>QDialogButtonBox::Apply|QDialogButtonBox::Reset</set>
+       <set>QDialogButtonBox::Apply</set>
       </property>
      </widget>
     </item>
