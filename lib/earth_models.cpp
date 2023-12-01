@@ -1,5 +1,15 @@
 #include "earth_models.h"
 
+//This function calculates distance between center and target
+double ModelFlat::find_r(PointCartesian center, PointCartesian target)
+{
+    double x = target.get_x() - center.get_x();
+    double y = target.get_y() - center.get_y();
+    double h = target.get_h() - center.get_h();
+
+    double r = sqrt(pow(x, 2) + pow(y, 2) + pow(h, 2));
+    return r;
+}
 //This function calculates angle between two radii of earth
 double ModelSpheric::find_earth_angle(PointCartesian center, PointCartesian target)
 {
