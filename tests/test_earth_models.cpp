@@ -68,4 +68,18 @@ BOOST_AUTO_TEST_CASE(test_ModelFlat_long_distance) {
     BOOST_TEST(fe.find_r(center, target) == r, tt::tolerance(1e-6));
     BOOST_TEST(fe.find_phi(center, target) == asin(h/r), tt::tolerance(1e-6));
 }
+
+BOOST_AUTO_TEST_CASE(test_ModelSpheric_long_distance) {
+    ModelSpheric se;
+
+    PointCartesian center(2, 2, 4);
+    PointCartesian target(60000, 6000, 1000);
+
+    double r = 60310.0352163;
+    double phi = 0.01178825;
+
+    BOOST_TEST(se.find_r(center, target) == r, tt::tolerance(1e-6));
+    BOOST_TEST(se.find_phi(center, target) == phi, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
