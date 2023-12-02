@@ -72,6 +72,13 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
     BOOST_TEST(h_d == 15, tt::tolerance(1e-6));
     BOOST_TEST(pd == 0, tt::tolerance(1e-6));
     BOOST_TEST(vege == 0, tt::tolerance(1e-6));
+
+    double h_d2 = map1d.height(10);
+    double h_d3 = map1d.height(5);
+    double h_d4 = map1d.height(2);
+    BOOST_TEST(h_d2 == 5, tt::tolerance(1e-6));
+    BOOST_TEST(h_d3 == 10, tt::tolerance(1e-6));
+    BOOST_TEST(h_d4 == 13, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
