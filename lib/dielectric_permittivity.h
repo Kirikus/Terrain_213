@@ -11,13 +11,13 @@ public:
     virtual double dielectricPermittivity(PointSpheric p) = 0;
 };
 
-class Constant: DielectricPermittivity
+class Constant: public DielectricPermittivity
 {
 public:
     double dielectricPermittivity(PointSpheric p) override;
 };
 
-class GeoData: DielectricPermittivity
+class GeoData: public DielectricPermittivity
 {
 public:
     double dielectricPermittivity(PointSpheric p) override;

@@ -11,19 +11,19 @@ public:
     virtual double vegetation(PointSpheric p) = 0;
 };
 
-class None: Vegetation
+class None: public Vegetation
 {
 public:
     double vegetation(PointSpheric p) override;
 };
 
-class Constant: Vegetation
+class Constant: public Vegetation
 {
 public:
     double vegetation(PointSpheric p) override;
 };
 
-class GeoData: Vegetation
+class GeoData: public Vegetation
 {
 public:
     double vegetation(PointSpheric p) override;

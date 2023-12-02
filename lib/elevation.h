@@ -11,19 +11,19 @@ public:
   virtual double h(PointSpheric p) = 0;
 };
 
-class GeoData: Elevation
+class GeoData: public Elevation
 {
 public:
     double h(PointSpheric p) override {return p.get_h();}
 };
 
-class Mountain: Elevation
+class Mountain: public Elevation
 {
 public:
     double h(PointSpheric p) override {return p.get_h();}
 };
 
-class Plain: Elevation
+class Plain: public Elevation
 {
 public:
     double h(PointSpheric p) override {return 0;}
