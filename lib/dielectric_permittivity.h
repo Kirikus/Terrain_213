@@ -18,7 +18,7 @@ public:
         :coeff(coeff)
     {}
 
-    double dielectricPermittivity(PointCartesian p) override {return coeff;};
+    double dielectricPermittivity(PointCartesian p) override {return coeff;}
 private:
     double coeff;
 };
@@ -26,7 +26,7 @@ private:
 class GeoData: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(PointCartesian p) override {return coeff;};
+    double dielectricPermittivity(PointCartesian p) override {return coeff;}
     double coeff; //todo
 };
 }
