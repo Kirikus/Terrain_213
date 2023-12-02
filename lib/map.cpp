@@ -1,6 +1,11 @@
 #include "map.h"
 #include "elevation.h"
 
+double Vegetation::GeoData::veg_func(PointCartesian p)
+{
+    return p.get_x() == 2 ? 1 : 0;
+}
+
 double Elevation::GeoData::relief_func(PointCartesian p)
 {
     return -sqrt(pow((p.get_x() - 20), 2) + pow(p.get_y(), 2)) + 15;

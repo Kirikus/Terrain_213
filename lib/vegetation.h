@@ -32,8 +32,9 @@ private:
 class GeoData: public Vegetation
 {
 public:
-    double vegetation(PointCartesian p) override {return coeff;}
-    double coeff; //todo
+    double vegetation(PointCartesian p) override {return veg_func(p);}
+private:
+    double veg_func(PointCartesian p); //todo
 };
 }
 
