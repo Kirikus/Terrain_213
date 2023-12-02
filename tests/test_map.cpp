@@ -69,6 +69,7 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
     double vege = map1d.vegetation(5);
     double pd = map1d.vegetation(5);
     double h_d = map1d.height(0);
+    BOOST_TEST(h_d == 15, tt::tolerance(1e-6));
     BOOST_TEST(pd == 0, tt::tolerance(1e-6));
     BOOST_TEST(vege == 0, tt::tolerance(1e-6));
 }
