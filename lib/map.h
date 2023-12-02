@@ -25,6 +25,7 @@ public:
 
     double h(PointSpheric p) {return elevation->h(p);}
     double v(PointSpheric p) {return vegetation->vegetation(p);}
+    double dp(PointSpheric p) {return dielectricPermittivity->dielectricPermittivity(p);}
 };
 
 class Map1d
@@ -39,6 +40,7 @@ class Map1d
 
     double height(double d);
     double vegetation(double d);
+    double dielectric_permittivity(double d);
 };
 
 #endif // MAP_H
