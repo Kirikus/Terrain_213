@@ -2,6 +2,20 @@
 #define POINT_H
 #include <cmath>
 
+class Point2d
+{
+public:
+    Point2d(double x, double y)
+        :x{x}, y{y}
+    {}
+
+    double get_x() {return x;}
+    double get_y() {return y;}
+private:
+    double x;
+    double y;
+};
+
 class Point
 {
 protected:
