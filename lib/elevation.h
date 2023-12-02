@@ -20,8 +20,10 @@ public:
 class Mountain: public Elevation
 {
 public:
-    double h(PointSpheric p) override {return p.get_h();}
-};
+    double h(PointSpheric p) override {return H - p.get_d()  * slope;}
+    double H;
+    double slope;
+}; //todo
 
 class Plain: public Elevation
 {
