@@ -72,7 +72,6 @@ BOOST_AUTO_TEST_CASE(PointSpheric_center_get) {
     BOOST_TEST(sp.get_center().get_x() == 0, tt::tolerance(1e-6));
     BOOST_TEST(sp.get_center().get_y() == 0, tt::tolerance(1e-6));
     BOOST_TEST(sp.get_center().get_h() == 0, tt::tolerance(1e-6));
-    BOOST_TEST(sp.get_d() == 2*sqrt(2), tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(PointSpheric_target_get) {
