@@ -23,9 +23,9 @@ public:
         :elevation(e), vegetation(v), dielectricPermittivity(d)
     {}
 
-    double h(PointCartesian p) {return elevation->h(p);}
-    double v(PointCartesian p) {return vegetation->vegetation(p);}
-    double dp(PointCartesian p) {return dielectricPermittivity->dielectricPermittivity(p);}
+    double h(Point2d p) {return elevation->h(p);}
+    double v(Point2d p) {return vegetation->vegetation(p);}
+    double dp(Point2d p) {return dielectricPermittivity->dielectricPermittivity(p);}
 };
 
 class Map1d

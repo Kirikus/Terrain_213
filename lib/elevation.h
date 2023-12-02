@@ -8,21 +8,21 @@ namespace Elevation
 class Elevation
 {
 public:
-  virtual double h(PointCartesian p) = 0;
+  virtual double h(Point2d p) = 0;
 };
 
 class GeoData: public Elevation
 {
 public:
-  double h(PointCartesian p) override {return relief_func(p);}
+  double h(Point2d p) override {return relief_func(p);}
 private:
-  double relief_func(PointCartesian p);
+  double relief_func(Point2d p);
 }; // todo
 
 class Mountain: public Elevation
 {
 public:
-  double h(PointCartesian p) override {return H - p.get_x()  * slope;}
+  double h(Point2d p) override {return H - p.get_x()  * slope;}
     double H;
     double slope;
 }; //todo
@@ -30,7 +30,7 @@ public:
 class Plain: public Elevation
 {
 public:
-    double h(PointCartesian p) override {return 0;}
+    double h(Point2d p) override {return 0;}
 };
 }
 
