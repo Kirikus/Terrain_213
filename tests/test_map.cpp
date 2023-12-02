@@ -26,6 +26,20 @@ BOOST_AUTO_TEST_CASE(test_DielectricPermittivity) {
     BOOST_TEST(const_dp.dielectricPermittivity(test1) == 4, tt::tolerance(1e-6));
     BOOST_TEST(const_dp.dielectricPermittivity(test2) == 4, tt::tolerance(1e-6));
 }
+
+BOOST_AUTO_TEST_CASE(test_Elevation) {
+    EL::Plain plain_el;
+    EL::GeoData geo_data_el;
+
+    Point2d test1(20, 3);
+    Point2d test2(16, 3);
+
+    BOOST_TEST(geo_data_el.h(test1) == 12, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_el.h(test2) == 10, tt::tolerance(1e-6));
+    BOOST_TEST(plain_el.h(test1) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(plain_el.h(test2) == 0, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_CASE(test_simple_map) {
     Point2d point1(2, 2);
     Point2d point2(2, 3);
