@@ -22,9 +22,9 @@ double FindScreeningAngle(PointCartesian rls, double azi, double R)
 
     while (sp.get_R() < R)
     {
-        double curr_h = fmax(ModelReliefFunction(sp.get_x() + dx, sp.get_y() + dy), 0);
+        double curr_h = fmax(ModelReliefFunction(sp.get_target().get_x() + dx, sp.get_target().get_y() + dy), 0);
 
-        sp.move_target(sp.get_x()+dx, sp.get_y()+dy, curr_h);
+        sp.move_target(sp.get_target().get_x() + dx, sp.get_target().get_y() + dy, curr_h);
 
         if (curr_h <= rls.get_h())
             continue;
