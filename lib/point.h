@@ -2,6 +2,20 @@
 #define POINT_H
 #include <cmath>
 
+class Point2d
+{
+public:
+    Point2d(double x, double y)
+        :x{x}, y{y}
+    {}
+
+    double get_x() {return x;}
+    double get_y() {return y;}
+private:
+    double x;
+    double y;
+};
+
 class Point
 {
 protected:
@@ -25,6 +39,9 @@ public:
     PointCartesian() = default;
     PointCartesian(double x, double y, double h)
         :x{x}, y{y}, h{h}
+    {}
+    PointCartesian(Point2d p, double h)
+        :x{p.get_x()}, y{p.get_y()}, h{h}
     {}
 
     virtual double get_x() override {return x;};
