@@ -26,7 +26,7 @@ public:
 class Plain: Elevation
 {
 public:
-    double h(PointSpheric p) override {return p.get_h();}
+    double h(PointSpheric p) override {return 0;}
 };
 }
 
