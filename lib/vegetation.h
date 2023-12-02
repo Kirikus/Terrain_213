@@ -20,7 +20,12 @@ public:
 class Constant: public Vegetation
 {
 public:
+    Constant(double coeff)
+        :coeff(coeff)
+    {}
+
     double vegetation(PointCartesian p) override {return coeff;}
+private:
     double coeff;
 };
 
