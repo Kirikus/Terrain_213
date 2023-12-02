@@ -1,5 +1,4 @@
 #include "map.h"
-#include "elevation.h"
 
 double Vegetation::GeoData::veg_func(PointCartesian p)
 {
