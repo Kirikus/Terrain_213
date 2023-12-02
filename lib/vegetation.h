@@ -7,7 +7,7 @@ namespace Vegetation
 {
 class Vegetation
 {
-protected:
+public:
     virtual double vegetation(PointSpheric p) = 0;
 };
 

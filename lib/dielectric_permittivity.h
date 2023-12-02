@@ -7,7 +7,7 @@ namespace DielectricPermittivity
 {
 class DielectricPermittivity
 {
-protected:
+public:
     virtual double dielectricPermittivity(PointSpheric p) = 0;
 };
 

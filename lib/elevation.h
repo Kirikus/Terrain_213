@@ -7,8 +7,8 @@ namespace Elevation
 {
 class Elevation
 {
-protected:
-    virtual double h(PointSpheric p) = 0;
+public:
+  virtual double h(PointSpheric p) = 0;
 };
 
 class GeoData: Elevation
