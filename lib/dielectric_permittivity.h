@@ -8,20 +8,20 @@ namespace DielectricPermittivity
 class DielectricPermittivity
 {
 public:
-    virtual double dielectricPermittivity(PointSpheric p) = 0;
+    virtual double dielectricPermittivity(PointCartesian p) = 0;
 };
 
 class Constant: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(PointSpheric p) override {return coeff;};
+    double dielectricPermittivity(PointCartesian p) override {return coeff;};
     double coeff;
 };
 
 class GeoData: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(PointSpheric p) override {return coeff;};
+    double dielectricPermittivity(PointCartesian p) override {return coeff;};
     double coeff; //todo
 };
 }
