@@ -14,7 +14,12 @@ public:
 class Constant: public DielectricPermittivity
 {
 public:
+    Constant(double coeff)
+        :coeff(coeff)
+    {}
+
     double dielectricPermittivity(PointCartesian p) override {return coeff;};
+private:
     double coeff;
 };
 
