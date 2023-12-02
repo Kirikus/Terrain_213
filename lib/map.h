@@ -10,7 +10,6 @@
 namespace EL = Elevation;
 namespace VG = Vegetation;
 namespace DP = DielectricPermittivity;
-using complex = std::complex<double>;
 
 class Map
 {
