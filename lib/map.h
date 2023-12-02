@@ -36,12 +36,7 @@ class Map1d
         :data(m), rls(rls), target(target)
     {}
 
-    double height(double new_d)
-    {
-        PointSpheric p(rls, target);
-        p.change_d(new_d);
-        return data->h(p);
-    }
+    double height(double new_d);
 };
 
 #endif // MAP_H
