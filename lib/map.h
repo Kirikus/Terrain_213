@@ -30,10 +30,11 @@ public:
 
 class Map1d
 {
+private:
     Map* data;
     PointCartesian rls;
     PointCartesian target;
-
+public:
     Map1d(Map* m, PointCartesian rls, PointCartesian target)
         :data(m), rls(rls), target(target)
     {}
