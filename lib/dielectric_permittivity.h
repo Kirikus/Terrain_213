@@ -26,8 +26,9 @@ private:
 class GeoData: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(PointCartesian p) override {return coeff;}
-    double coeff; //todo
+    double dielectricPermittivity(PointCartesian p) override {return dielectric_func(p);}
+private:
+    double dielectric_func(PointCartesian p);//todo
 };
 }
 

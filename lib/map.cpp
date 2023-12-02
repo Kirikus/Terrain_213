@@ -11,6 +11,11 @@ double Elevation::GeoData::relief_func(PointCartesian p)
     return -sqrt(pow((p.get_x() - 20), 2) + pow(p.get_y(), 2)) + 15;
 }
 
+double DielectricPermittivity::GeoData::dielectric_func(PointCartesian p)
+{
+    return p.get_y() == 3 ? 1 : 0;
+}
+
 double Map1d::height(double d)
 {
     PointSpheric p(rls, target);
