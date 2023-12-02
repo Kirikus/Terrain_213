@@ -27,7 +27,8 @@ public:
 class GeoData: public Vegetation
 {
 public:
-    double vegetation(PointSpheric p) override;
+    double vegetation(PointSpheric p) override {return coeff;}
+    double coeff; //todo
 };
 }
 

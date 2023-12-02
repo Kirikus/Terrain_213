@@ -21,7 +21,8 @@ public:
 class GeoData: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(PointSpheric p) override;
+    double dielectricPermittivity(PointSpheric p) override {return coeff;};
+    double coeff; //todo
 };
 }
 
