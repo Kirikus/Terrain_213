@@ -2,6 +2,7 @@
 #define ELEVATION_H
 
 #include "point.h"
+
 namespace Elevation
 {
 class Elevation
