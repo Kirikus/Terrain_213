@@ -2,70 +2,25 @@
 #define MAP_H
 
 #include "point.h"
+#include "elevation.h"
+#include "vegetation.h"
+#include "dielectric_permittivity.h"
 #include <complex>
+
+namespace EL = Elevation;
+namespace VG = Vegetation;
+namespace DP = DielectricPermittivity;
 using complex = std::complex<double>;
-
-class Elevation
-{
-protected:
-    virtual double h(PointSpheric p) = 0;
-};
-
-class Vegetation
-{
-protected:
-    virtual complex vegetation(PointSpheric p) = 0;
-};
-
-class DielectricPermittivity
-{
-protected:
-    virtual complex dielectricPermittivity(PointSpheric p) = 0;
-};
-
-class None: Vegetation
-{
-public:
-    complex vegetation(PointSpheric p) override;
-};
-
-class Constant: Vegetation, DielectricPermittivity
-{
-public:
-    complex vegetation(PointSpheric p) override;
-    complex dielectricPermittivity(PointSpheric p) override;
-};
-
-class GeoData: Elevation, Vegetation, DielectricPermittivity
-{
-public:
-    double h(PointSpheric p) override {return p.get_h();}
-    complex vegetation(PointSpheric p) override;
-    complex dielectricPermittivity(PointSpheric p) override;
-};
-
-class Mountain: Elevation
-{
-public:
-    double h(PointSpheric p) override {return p.get_h();}
-};
-
-class Plain: Elevation
-{
-public:
-    double h(PointSpheric p) override {return p.get_h();}
-};
-
 
 class Map
 {
 private:
-    Elevation* elevation;
-    Vegetation* vegetation;
-    DielectricPermittivity* dielectricPermittivity;
+    EL::Elevation* elevation;
+    VG::Vegetation* vegetation;
+    DP::DielectricPermittivity* dielectricPermittivity;
 
 public:
-    Map(Elevation* e, Vegetation* v, DielectricPermittivity* d)
+    Map(EL::Elevation* e, VG::Vegetation* v, DP::DielectricPermittivity* d)
         :elevation(e), vegetation(v), dielectricPermittivity(d)
     {}
 
