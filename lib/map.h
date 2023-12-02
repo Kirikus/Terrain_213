@@ -23,7 +23,7 @@ public:
         :elevation(e), vegetation(v), dielectricPermittivity(d)
     {}
 
-    double h(PointSpheric p) {return 0;}
+    double h(PointSpheric p) {return elevation->h(p);}
 };
 
 class Map1d
@@ -36,7 +36,7 @@ class Map1d
         :data(m), rls(rls), target(target)
     {}
 
-    double height(double new_d);
+    double height(double d);
 };
 
 #endif // MAP_H
