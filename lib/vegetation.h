@@ -20,7 +20,8 @@ public:
 class Constant: public Vegetation
 {
 public:
-    double vegetation(PointSpheric p) override;
+    double vegetation(PointSpheric p) override {return coeff;}
+    double coeff;
 };
 
 class GeoData: public Vegetation

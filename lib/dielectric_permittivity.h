@@ -14,7 +14,8 @@ public:
 class Constant: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(PointSpheric p) override;
+    double dielectricPermittivity(PointSpheric p) override {return coeff;};
+    double coeff;
 };
 
 class GeoData: public DielectricPermittivity
