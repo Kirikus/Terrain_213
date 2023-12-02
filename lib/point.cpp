@@ -38,7 +38,7 @@ void PointSpheric::change_r(double new_R)
     double x = cos(azimuth)*cos(phi)*R;
     double y = sin(azimuth)*cos(phi)*R;
     double h = sin(phi)*R;
-    move_target(x, y, h);
+    move_target(center.get_x() + x,center.get_y() + y,center.get_h() + h);
 }
 
 void PointSpheric::change_azimuth(double new_azimuth)
@@ -47,7 +47,7 @@ void PointSpheric::change_azimuth(double new_azimuth)
     double x = cos(azimuth)*cos(phi)*R;
     double y = sin(azimuth)*cos(phi)*R;
     double h = sin(phi)*R;
-    move_target(x, y, h);
+    move_target(center.get_x() + x,center.get_y() + y,center.get_h() + h);
 }
 
 void PointSpheric::change_phi(double new_phi)
@@ -56,7 +56,7 @@ void PointSpheric::change_phi(double new_phi)
     double x = cos(azimuth)*cos(phi)*R;
     double y = sin(azimuth)*cos(phi)*R;
     double h = sin(phi)*R;
-    move_target(x, y, h);
+    move_target(center.get_x() + x,center.get_y() + y,center.get_h() + h);
 }
 
 void PointSpheric::change_d(double new_d)
@@ -64,7 +64,7 @@ void PointSpheric::change_d(double new_d)
     double x = new_d*cos(azimuth);
     double y = new_d*sin(azimuth);
     double h = sin(phi)*R;
-    move_target(x, y, h);
+    move_target(center.get_x() + x,center.get_y() + y,center.get_h() + h);
 }
 
 void PointSpheric::move_target(double new_x, double new_y, double new_h)
