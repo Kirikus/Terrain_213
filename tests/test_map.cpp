@@ -53,4 +53,24 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
     BOOST_TEST(map.dp(point3) == 1, tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(test_Map1d) {
+    EL::GeoData plain;
+    VG::GeoData veg;
+    DP::GeoData dp;
+
+    Map map(&plain, &veg, &dp);
+
+    Point2d center(20, 0);
+    double h = map.h(center);
+    PointCartesian rls(center, h);
+    PointCartesian target(30, 20, 20);
+
+    Map1d map1d(&map, rls, target);
+    double vege = map1d.vegetation(5);
+    double pd = map1d.vegetation(5);
+    double h_d = map1d.height(0);
+    BOOST_TEST(pd == 0, tt::tolerance(1e-6));
+    BOOST_TEST(vege == 0, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
