@@ -14,8 +14,9 @@ public:
 class GeoData: public Elevation
 {
 public:
-    double h(PointSpheric p) override {return p.get_h();}
-};
+  double h(PointSpheric p) override {return 0;}
+  double relief_func(PointCartesian p);
+}; // todo
 
 class Mountain: public Elevation
 {
