@@ -40,6 +40,22 @@ BOOST_AUTO_TEST_CASE(test_Elevation) {
     BOOST_TEST(plain_el.h(test2) == 0, tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(test_Vegetation) {
+    VG::None non_veg;
+    VG::Constant constant_veg(2);
+    VG::GeoData geo_data_veg;
+
+    Point2d test1(2, 3);
+    Point2d test2(16, 3);
+
+    BOOST_TEST(non_veg.vegetation(test1) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(non_veg.vegetation(test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(constant_veg.vegetation(test1) == 2, tt::tolerance(1e-6));
+    BOOST_TEST(constant_veg.vegetation(test2) == 2, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_veg.vegetation(test1) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_veg.vegetation(test2) == 0, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_CASE(test_simple_map) {
     Point2d point1(2, 2);
     Point2d point2(2, 3);
