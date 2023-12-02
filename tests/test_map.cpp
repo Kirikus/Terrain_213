@@ -14,6 +14,18 @@ namespace DP = DielectricPermittivity;
 
 BOOST_AUTO_TEST_SUITE(test_map)
 
+BOOST_AUTO_TEST_CASE(test_DielectricPermittivity) {
+    DP::Constant const_dp(4);
+    DP::GeoData Geo_data_dp;
+
+    Point2d test1(3, 3);
+    Point2d test2(4, 2);
+
+    BOOST_TEST(Geo_data_dp.dielectricPermittivity(test1) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.dielectricPermittivity(test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.dielectricPermittivity(test1) == 4, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.dielectricPermittivity(test2) == 4, tt::tolerance(1e-6));
+}
 BOOST_AUTO_TEST_CASE(test_simple_map) {
     Point2d point1(2, 2);
     Point2d point2(2, 3);
