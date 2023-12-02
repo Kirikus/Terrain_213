@@ -14,7 +14,7 @@ namespace DP = DielectricPermittivity;
 
 BOOST_AUTO_TEST_SUITE(test_map)
 
-BOOST_AUTO_TEST_CASE(simple_map) {
+BOOST_AUTO_TEST_CASE(test_simple_map) {
     PointCartesian point1(2, 2, 0);
     PointCartesian point2(2, 2, 2);
 
