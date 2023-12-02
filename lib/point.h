@@ -40,6 +40,9 @@ public:
     PointCartesian(double x, double y, double h)
         :x{x}, y{y}, h{h}
     {}
+    PointCartesian(Point2d p, double h)
+        :x{p.get_x()}, y{p.get_y()}, h{h}
+    {}
 
     virtual double get_x() override {return x;};
     virtual double get_y() override {return y;};
