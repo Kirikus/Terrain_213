@@ -24,6 +24,7 @@ public:
     {}
 
     double h(PointSpheric p) {return elevation->h(p);}
+    double v(PointSpheric p) {return vegetation->vegetation(p);}
 };
 
 class Map1d
@@ -37,6 +38,7 @@ class Map1d
     {}
 
     double height(double d);
+    double vegetation(double d);
 };
 
 #endif // MAP_H
