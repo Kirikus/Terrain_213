@@ -14,7 +14,7 @@ public:
 class None: public Vegetation
 {
 public:
-    double vegetation(PointSpheric p) override;
+    double vegetation(PointSpheric p) override {return 0;}
 };
 
 class Constant: public Vegetation
