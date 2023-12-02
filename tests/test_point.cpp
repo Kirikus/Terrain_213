@@ -13,11 +13,26 @@ namespace tt = boost::test_tools;
 
 BOOST_AUTO_TEST_SUITE(test_point)
 
+BOOST_AUTO_TEST_CASE(Point2d_tests) {
+    Point2d p(1.5, 1);
+    BOOST_TEST(p.get_x() == 1.5, tt::tolerance(1e-6));
+    BOOST_TEST(p.get_y() == 1, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_CASE(PointCartesian_common_creation) {
     PointCartesian pc_test(1.5, 98, 100.21);
     BOOST_TEST(pc_test.get_x() == 1.5, tt::tolerance(1e-6));
     BOOST_TEST(pc_test.get_y() == 98, tt::tolerance(1e-6));
     BOOST_TEST(pc_test.get_h() == 100.21, tt::tolerance(1e-6));
+}
+
+BOOST_AUTO_TEST_CASE(PointCartesian_Point2d_creation) {
+    Point2d p(1, 98);
+    double h = 20;
+    PointCartesian pc(p, h);
+    BOOST_TEST(pc.get_x() == 1, tt::tolerance(1e-6));
+    BOOST_TEST(pc.get_y() == 98, tt::tolerance(1e-6));
+    BOOST_TEST(pc.get_h() == 20, tt::tolerance(1e-6));
 }
 
 PointCartesian center(0, 0, 0);
