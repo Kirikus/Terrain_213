@@ -40,6 +40,7 @@ public:
     double get_azimuth() {return azimuth;};
     double get_d() {return R*cos(phi);}
     PointCartesian get_center() {return center;}
+    PointCartesian get_target() {return target;}
 
     virtual double get_x() override {return target.get_x() - center.get_x();};
     virtual double get_y() override {return target.get_y() - center.get_y();};
