@@ -14,7 +14,7 @@ public:
 class GeoData: public Elevation
 {
 public:
-  double h(PointSpheric p) override {return 0;}
+  double h(PointSpheric p) override {return relief_func();}
   double relief_func(PointCartesian p);
 }; // todo
 

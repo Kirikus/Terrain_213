@@ -1,4 +1,10 @@
 #include "map.h"
+#include "elevation.h"
+
+double Elevation::GeoData::relief_func(PointCartesian p)
+{
+    return -sqrt(pow((p.get_x() - 20), 2) + pow(p.get_y(), 2)) + 15;
+}
 
 double Map1d::height(double d)
 {
