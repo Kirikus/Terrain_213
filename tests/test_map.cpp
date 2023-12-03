@@ -96,11 +96,11 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
 }
 
 BOOST_AUTO_TEST_CASE(test_Map1d) {
-    EL::GeoData plain;
+    EL::GeoData geo;
     VG::GeoData veg;
     DP::GeoData dp;
 
-    Map map(&plain, &veg, &dp);
+    Map map(&geo, &veg, &dp);
 
     Point2d center(20, 0);
     double h = map.h(center);
