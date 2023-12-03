@@ -97,10 +97,12 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
 
 BOOST_AUTO_TEST_CASE(test_Map1d) {
     EL::GeoData geo;
+    EL::Plain plain;
     VG::GeoData veg;
     DP::GeoData dp;
 
     Map map(&geo, &veg, &dp);
+    Map map2(&plain, &veg, &dp);
 
     Point2d center(20, 0);
     double h = map.h(center);
@@ -108,6 +110,8 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
     PointCartesian target(30, 20, 20);
 
     Map1d map1d(&map, rls, target);
+    Map1d map1d2(&map2, rls, target);
+
     double vege = map1d.vegetation(5);
     double pd = map1d.vegetation(5);
     double h_d = map1d.height(0);
@@ -121,6 +125,9 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
     BOOST_TEST(h_d2 == 5, tt::tolerance(1e-6));
     BOOST_TEST(h_d3 == 10, tt::tolerance(1e-6));
     BOOST_TEST(h_d4 == 13, tt::tolerance(1e-6));
+
+    double h_d5 = map1d2.height(5);
+    BOOST_TEST(h_d5 == 0, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
