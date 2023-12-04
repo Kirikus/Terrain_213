@@ -15,38 +15,29 @@ MainWindow::MainWindow(QWidget *parent)
     this->on_add_RLS_clicked(); // add defualt 1 RLS
     this->_plot_image();
     this->_plot_angle_map();
-
-    connect(this, &MainWindow::resizeEvent, this, &MainWindow::handleResizeEvent);
-    this->_plot_size = ui->visibility_map->size();
+    ui->visibility_map->yAxis->setScaleRatio(ui->visibility_map->xAxis, 1.0);
+    ui->visibility_map->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
+                                        QCP::iSelectPlottables);
 }
 
-
-void MainWindow::handleResizeEvent(QResizeEvent* event)
-{
-    Q_UNUSED(event); // Unused parameter
-
-    // Calculate the new plot size based on the aspect ratio of the customPlot
-    QSize newPlotSize = this->_calculate_new_plot_size(ui->visibility_map);
-
-    // Update the customPlot size and adjust the graph accordingly
-    ui->visibility_map->setFixedSize(newPlotSize);
-    // ... update the graph based on the new size ...
+void MainWindow::resizeEvent(QResizeEvent *) {
+    QCPAxis *x, *y;
+    x = ui->visibility_map->axisRect()->axis(QCPAxis::atBottom);
+    y = ui->visibility_map->axisRect()->axis(QCPAxis::atLeft);
+    y->setScaleRatio(x, 1.0);
+    ui->visibility_map->replot();
 }
-
-
-QSize MainWindow::_calculate_new_plot_size(QCustomPlot* plot)
-{
-    QSize current_size = plot->size();
-    return current_size * 2;
-}
-
-
 
 void MainWindow::_plot_image()
 {
     QPixmap pix(":map/map.PNG");
-    ui->visibility_map->setBackground(pix);
-    ui->visibility_map->setBackgroundScaledMode(Qt::AspectRatioMode::KeepAspectRatioByExpanding);
+    QCPItemPixmap *MyImage = new QCPItemPixmap(ui->visibility_map);
+    MyImage->setPixmap(pix);
+    MyImage->topLeft->setType(QCPItemPosition::ptPlotCoords);
+    MyImage->topLeft->setCoords(-3. * pix.width()/pix.height(), 3);
+    MyImage->bottomRight->setType(QCPItemPosition::ptPlotCoords);
+    MyImage->bottomRight->setCoords(3. * pix.width()/pix.height(), -3);
+    MyImage->setScaled(true, Qt::AspectRatioMode::IgnoreAspectRatio);
 }
 
 void MainWindow::_plot_angle_map()

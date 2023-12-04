@@ -23,7 +23,8 @@ class MainWindow : public QMainWindow {
     void on_add_RLS_clicked();
     void on_apply_button_clicked(QAbstractButton *button);
 
-    void handleResizeEvent(QResizeEvent* event);
+protected:
+    virtual void resizeEvent(QResizeEvent *);
 
 private:
     Ui::MainWindow *ui;
@@ -33,7 +34,6 @@ private:
 
     void _plot_image();
     void _plot_angle_map();
-    QSize _calculate_new_plot_size(QCustomPlot* plot);
 };
 
 #endif  // MAINWINDOW_H
