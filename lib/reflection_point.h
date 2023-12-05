@@ -6,6 +6,7 @@
 
 namespace ReflectionPoint
 {
+double FindDerivative(PointSpheric rp, Map* map);
 }
 
 #endif // REFLECTION_POINT_H
