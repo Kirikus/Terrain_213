@@ -82,4 +82,13 @@ private:
     double phi; //in radians
 };
 
+struct PointScreenAngle
+{
+public:
+    Point2d point2d;
+    double screening_angle;
+
+    PointScreenAngle(Point2d point, double angle) : point2d{point}, screening_angle(angle) {};
+};
+
 #endif // POINT_H
