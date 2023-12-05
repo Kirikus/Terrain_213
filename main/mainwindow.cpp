@@ -108,8 +108,33 @@ void MainWindow::on_apply_button_clicked(QAbstractButton *button)
     for (int i = 0; i < ui->RLS_widgets->count(); ++i)
     {
         RLS* rls = (RLS*)ui->RLS_widgets->widget(0);
-        rls->get_all_data();
-        std::cout << "Calculation" << std::endl;
+        RLS::Data data = rls->get_all_data();
+        std::vector<PointScreenAngle> contour_points = _screen_angle_search(data);
+
     }
 }
 
+std::vector<PointScreenAngle> MainWindow::_screen_angle_search(RLS::Data data)
+{
+    double angle_iter = 1000;  // count of iteration in angle loop
+    double R_iter = 100;  // count of iteration in radius loop
+
+    PointCartesian rls_position = PointCartesian();  // rls in (0, 0, 0) by default
+    PointSpheric current_point = PointSpheric(rls_position, PointCartesian());
+
+    std::vector<PointScreenAngle> contour_points;  // points for drawing visibility angle map
+
+    for (double azimuth = 0; azimuth < 2 * M_PI; azimuth += 2 * M_PI / angle_iter)
+    {
+        current_point.change_azimuth(azimuth);
+        for (double R = 0; R <= data.radius; R += R_iter)
+        {
+            current_point.change_r(R);
+            double screening_angle = FindScreeningAngle(rls_position, azimuth, R);
+            Point2d point2d = Point2d(current_point.get_x(), current_point.get_y());
+            contour_points.push_back(PointScreenAngle(point2d, screening_angle));
+        }
+    }
+
+    return contour_points;
+}
