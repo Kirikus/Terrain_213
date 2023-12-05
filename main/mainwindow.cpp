@@ -1,12 +1,10 @@
 #include "mainwindow.h"
-#include "rls.h"
 
 #include <cmath>
 #include <iostream>
-#include <string.h>
 
 #include "./ui_mainwindow.h"
-#include "qcustomplot.h"
+#include "../lib/screenangle.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {

@@ -3,7 +3,10 @@
 
 #include <QMainWindow>
 #include <QAbstractButton>
+
 #include <qcustomplot.h>
+#include <rls.h>
+#include "../lib/point.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
