@@ -6,11 +6,11 @@ double ModelReliefFunction(double x, double y)
     return -sqrt(pow((x - 20), 2) + pow(y, 2)) + 15;
 }
 
-//The FindScreeningAngle function searches for the closing angle for a given approximate relief, returns the angle in radians
-//Accepts:
-//azi - azimuth angle (specified in radians);
-//R is the radius of the closing angle search (specified in meters).
-//Traversed by a continuous relief function
+// The FindScreeningAngle function searches for the closing angle for a given approximate relief, returns the angle in radians
+// Accepts:
+// azi - azimuth angle (specified in radians);
+// R is the radius of the closing angle search (specified in meters).
+// Traversed by a continuous relief function
 double FindScreeningAngle(PointCartesian rls, double azi, double R)
 {
     double dx = 0.001*cos(azi);
