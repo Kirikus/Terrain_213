@@ -68,4 +68,13 @@ BOOST_AUTO_TEST_CASE(test_GeoData_derivative) {
     BOOST_TEST(derivative == theory_derivative, tt::tolerance(1e-6));
 }
 
+
+BOOST_AUTO_TEST_CASE(test_simple_FindPhi) {
+    double k1 = 0;
+    double k2 = 2;
+    double k3 = -2;
+
+    BOOST_TEST(std::abs(RP::FindPhi(k1, k2)) == std::abs(RP::FindPhi(k1, k3)), tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
