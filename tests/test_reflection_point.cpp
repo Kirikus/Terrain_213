@@ -77,4 +77,38 @@ BOOST_AUTO_TEST_CASE(test_simple_FindPhi) {
     BOOST_TEST(std::abs(RP::FindPhi(k1, k2)) == std::abs(RP::FindPhi(k1, k3)), tt::tolerance(1e-6));
 }
 
+BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
+    DP::Constant const_dp(4);
+    VG::None non_veg;
+    EL::Plain plain;
+
+    Map map(&plain, &non_veg, &const_dp);
+
+    PointCartesian rls1(0, 0, 2);
+    PointCartesian target1(4, 0, 2);
+    PointSpheric sp1(rls1, target1);
+    PointCartesian reflection_point1 = RP::FindReflectionPoint(sp1, &map);
+
+    PointCartesian rls2(2*sqrt(2), 2*sqrt(2), 3);
+    PointCartesian target2(4*sqrt(2), 4*sqrt(2), 3);
+    PointSpheric sp2(rls2, target2);
+    PointCartesian reflection_point2 = RP::FindReflectionPoint(sp2, &map);
+
+    PointCartesian rls3(5, 5, 3);
+    PointCartesian target3(5, 1, 3);
+    PointSpheric sp3(rls3, target3);
+    PointCartesian reflection_point3 = RP::FindReflectionPoint(sp3, &map);
+
+    BOOST_TEST(reflection_point1.get_x() == 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point2.get_x() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2.get_y() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point3.get_x() == 5, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3.get_y() == 3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3.get_h() == 0, tt::tolerance(1e-4));
+}
 BOOST_AUTO_TEST_SUITE_END()
