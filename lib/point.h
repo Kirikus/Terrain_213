@@ -89,6 +89,9 @@ public:
     double screening_angle;
 
     PointScreenAngle(Point2d point, double angle) : point2d{point}, screening_angle(angle) {};
+    PointScreenAngle() : point2d(0, 0), screening_angle(-1) {};
+
+    bool empty() { return screening_angle == -1 ? true : false; }
 };
 
 #endif // POINT_H
