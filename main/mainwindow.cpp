@@ -109,12 +109,11 @@ void MainWindow::on_apply_button_clicked(QAbstractButton *button)
     {
         RLS* rls = (RLS*)ui->RLS_widgets->widget(0);
         RLS::Data data = rls->get_all_data();
-        std::vector<PointScreenAngle> contour_points = _screen_angle_search(data);
-
+        std::vector<std::vector<PointScreenAngle>> contour_points = _screen_angle_search(data);
     }
 }
 
-std::vector<PointScreenAngle> MainWindow::_screen_angle_search(RLS::Data data)
+std::vector<std::vector<PointScreenAngle>> MainWindow::_screen_angle_search(RLS::Data data)
 {
     double angle_iter = 1000;  // count of iteration in angle loop
     double R_iter = 100;  // count of iteration in radius loop
@@ -122,19 +121,33 @@ std::vector<PointScreenAngle> MainWindow::_screen_angle_search(RLS::Data data)
     PointCartesian rls_position = PointCartesian();  // rls in (0, 0, 0) by default
     PointSpheric current_point = PointSpheric(rls_position, PointCartesian());
 
-    std::vector<PointScreenAngle> contour_points;  // points for drawing visibility angle map
+    size_t count_of_contours = 3;
+    std::vector<std::vector<PointScreenAngle>> contours(count_of_contours);  // points of contours to draw visibility angle map
+    std::vector<double> angles = {(M_PI / 2) / 3, (M_PI / 2) / 3 * 2, M_PI / 2};  // angles for the i contour (<= angles[i])
+    std::vector<PointScreenAngle> max_points(count_of_contours); // current max points (with max screening angle) for the i contour
 
     for (double azimuth = 0; azimuth < 2 * M_PI; azimuth += 2 * M_PI / angle_iter)
     {
         current_point.change_azimuth(azimuth);
+
         for (double R = 0; R <= data.radius; R += R_iter)
         {
             current_point.change_r(R);
-            double screening_angle = FindScreeningAngle(rls_position, azimuth, R);
-            Point2d point2d = Point2d(current_point.get_x(), current_point.get_y());
-            contour_points.push_back(PointScreenAngle(point2d, screening_angle));
+            double screening_angle = FindScreeningAngle(current_point, R);
+
+            for (size_t i; i < angles.size(); ++i)  // find contour which fits this screening angle
+                if (screening_angle > angles[i])
+                {
+                    size_t index = i - 1;  // index of contour
+                    Point2d point2d = Point2d(current_point.get_x(), current_point.get_y());
+                    max_points[index] = PointScreenAngle(point2d, screening_angle);
+                }
         }
+
+        for (size_t i; i < max_points.size(); ++i)
+            if (!max_points[i].empty())
+                contours[i].push_back(max_points[i]);
     }
 
-    return contour_points;
+    return contours;
 }

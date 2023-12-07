@@ -37,7 +37,7 @@ private:
 
     void _plot_image();
     void _plot_angle_map();
-    std::vector<PointScreenAngle> _screen_angle_search(RLS::Data data);
+    std::vector<std::vector<PointScreenAngle>> _screen_angle_search(RLS::Data data);
 };
 
 #endif  // MAINWINDOW_H
