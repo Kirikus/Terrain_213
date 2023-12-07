@@ -121,20 +121,28 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
 
     PointCartesian rls1(0, 0, 0);
     PointCartesian rls2(20, 20, 0);
+    PointCartesian rls3(20, 0, 40);
     PointCartesian target1(20, 0, 40);
+    PointCartesian target2(0, 0, 0);
     PointSpheric sp1(rls1, target1);
     PointSpheric sp2(rls2, target1);
+    PointSpheric sp3(rls3, target2);
 
     PointCartesian reflection_point1 = RP::FindReflectionPoint(sp1, &map);
     PointCartesian reflection_point2 = RP::FindReflectionPoint(sp2, &map);
+    PointCartesian reflection_point3 = RP::FindReflectionPoint(sp3, &map);
 
     double reflection_x1 = 7.5;
     double reflection_y1 = 0;
     double reflection_h1 = 2.5;
 
-    double reflection_x2= 20;
+    double reflection_x2 = 20;
     double reflection_y2 = 12.5;
     double reflection_h2 = 2.5;
+
+    double reflection_x3 = reflection_x1;
+    double reflection_y3 = reflection_y1;
+    double reflection_h3 = reflection_h1;
 
     BOOST_TEST(reflection_point1.get_x() == reflection_x1, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1.get_y() == reflection_y1, tt::tolerance(1e-4));
@@ -143,7 +151,11 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     BOOST_TEST(reflection_point2.get_x() == reflection_x2, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point2.get_y() == reflection_y2, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point2.get_h() == reflection_h2, tt::tolerance(1e-4));
-} //todo
+
+    BOOST_TEST(reflection_point3.get_x() == reflection_x3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3.get_y() == reflection_y3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3.get_h() == reflection_h3, tt::tolerance(1e-4));
+}
 
 
 BOOST_AUTO_TEST_SUITE_END()
