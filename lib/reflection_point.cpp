@@ -17,3 +17,7 @@ double RP::FindDerivative(PointSpheric rp, Map* map)
     return derivative;
 }
 
+double RP::FindPhi(double k1, double k2)
+{
+    return std::atan((k2 - k1) / (1 + k1 * k2));
+}

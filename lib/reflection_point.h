@@ -7,6 +7,7 @@
 namespace ReflectionPoint
 {
 double FindDerivative(PointSpheric rp, Map* map);
+double FindPhi(double k1, double k2);
 }
 
 #endif // REFLECTION_POINT_H
