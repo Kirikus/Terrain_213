@@ -1,0 +1,7 @@
+#ifndef ELEVATION_REFLECTION_MULTIPLIER_H
+#define ELEVATION_REFLECTION_MULTIPLIER_H
+
+#include <cmath>
+#include <complex>
+
+#endif // ELEVATION_REFLECTION_MULTIPLIER_H
