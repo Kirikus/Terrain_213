@@ -47,6 +47,10 @@ public:
     virtual double get_x() override {return x;};
     virtual double get_y() override {return y;};
     virtual double get_h() override {return h;};
+
+    void change_x(const double x) { this->x = x; }
+    void change_y(const double y) { this->y = y; }
+    void change_z(const double h) { this->h = h; }
 };
 
 class PointSpheric : Point
