@@ -114,7 +114,8 @@ std::vector<std::vector<Point2d>> MainWindow::_screen_angle_search(RLS::Data dat
     double R_iter = 10;  // count of iteration in radius loop
     double R_step = data.radius / R_iter;  // step for in cycle
 
-    PointCartesian rls_position = PointCartesian(0, 0, 0);  // rls in (0, 0, 0) by default
+    PointCartesian rls_position = data.position;
+    std::cout << data.position.get_x() << std::endl;
     PointSpheric current_point = PointSpheric(rls_position, PointCartesian(1, 1, 1));
 
     size_t n = 2;  // count_of_contours
