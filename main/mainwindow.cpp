@@ -61,18 +61,23 @@ void MainWindow::_plot_angle_map(std::vector<std::vector<Point2d>> contours)
             data[i] = QCPCurveData(i, x, y);
         }
 
-        QCPCurve *contour_curve = new QCPCurve(ui->visibility_map->xAxis, ui->visibility_map->yAxis);
-        contour_curve->data()->set(data, true);
-        contour_curve->setPen(QPen(counter));
+        contour_curves.push_back(new QCPCurve(ui->visibility_map->xAxis, ui->visibility_map->yAxis));
+        contour_curves.back()->data()->set(data, true);
+        contour_curves.back()->setPen(QPen(counter));
         if (counter == 1)
-            contour_curve->setBrush(QBrush(QColor(0, 0, 255, 40)));
+            contour_curves.back()->setBrush(QBrush(QColor(0, 0, 255, 40)));
         else
-            contour_curve->setBrush(QBrush(QColor(0, 255, 255, 40)));
+            contour_curves.back()->setBrush(QBrush(QColor(0, 255, 255, 40)));
         counter++;
     }
 }
 
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow()
+{
+    for (auto contour : contour_curves)
+        delete contour;
+    delete ui;
+}
 
 
 void MainWindow::on_add_RLS_clicked()
@@ -91,6 +96,10 @@ void MainWindow::on_RLS_widgets_tabCloseRequested(int index)
 
 void MainWindow::on_apply_button_clicked(QAbstractButton *button)
 {
+    if (!contour_curves.empty())  // it's replot
+        for (auto contour : contour_curves)
+            delete contour;
+
     for (int i = 0; i < ui->RLS_widgets->count(); ++i)
     {
         RLS* rls = (RLS*)ui->RLS_widgets->widget(0);
