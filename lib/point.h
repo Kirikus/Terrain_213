@@ -77,9 +77,9 @@ private:
     PointCartesian center;
     PointCartesian target;
 
-    double azimuth; //in radians
-    double R; //in meters
-    double phi; //in radians
+    double azimuth{0}; //in radians
+    double R{0}; //in meters
+    double phi{0}; //in radians
 };
 
 struct PointScreenAngle
