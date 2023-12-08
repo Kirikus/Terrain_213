@@ -28,13 +28,18 @@ void MainWindow::resizeEvent(QResizeEvent *) {
 
 void MainWindow::_plot_image()
 {
+    std::pair<double, double> axes_range = std::pair<double, double>(200, 200);  // range of Ox and Oy for default map image
+    ui->visibility_map->xAxis->setRange(-axes_range.first, axes_range.first);
+    ui->visibility_map->yAxis->setRange(-axes_range.second, axes_range.second);
+
+
     QPixmap pix(":map/map.PNG");
     QCPItemPixmap *MyImage = new QCPItemPixmap(ui->visibility_map);
     MyImage->setPixmap(pix);
     MyImage->topLeft->setType(QCPItemPosition::ptPlotCoords);
-    MyImage->topLeft->setCoords(-3. * pix.width()/pix.height(), 3);
+    MyImage->topLeft->setCoords(-axes_range.first * pix.width()/pix.height(), axes_range.second);
     MyImage->bottomRight->setType(QCPItemPosition::ptPlotCoords);
-    MyImage->bottomRight->setCoords(3. * pix.width()/pix.height(), -3);
+    MyImage->bottomRight->setCoords(axes_range.first * pix.width()/pix.height(), -axes_range.second);
     MyImage->setScaled(true, Qt::AspectRatioMode::IgnoreAspectRatio);
 }
 
