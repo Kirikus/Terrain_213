@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <map>
 
+#include "../lib/point.h"
+
 namespace Ui {
 class RLS;
 }
@@ -18,15 +20,8 @@ public:
 
     struct Data
     {
-        double latitude_degree;
-        double latitude_minutes;
-        double latitude_seconds;
+        PointCartesian position;
 
-        double longitude_degree;
-        double longitudee_minutes;
-        double longitude_seconds;
-
-        double high;
         double radius;
         double top_angle;
         double bottom_angle;
