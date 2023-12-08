@@ -36,8 +36,8 @@ private:
     QSize _plot_size;
 
     void _plot_image();
-    void _plot_angle_map(std::vector<std::vector<PointScreenAngle>> contour_points);
-    std::vector<std::vector<PointScreenAngle>> _screen_angle_search(RLS::Data data);
+    void _plot_angle_map(std::vector<std::vector<Point2d>> contour_points);
+    std::vector<std::vector<Point2d>> _screen_angle_search(RLS::Data data);
 };
 
 #endif  // MAINWINDOW_H
