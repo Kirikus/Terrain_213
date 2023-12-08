@@ -12,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->on_add_RLS_clicked(); // add defualt 1 RLS
     this->_plot_image();
-//    this->_plot_angle_map();
     ui->visibility_map->yAxis->setScaleRatio(ui->visibility_map->xAxis, 1.0);
     ui->visibility_map->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
                                         QCP::iSelectPlottables);
@@ -49,7 +48,7 @@ void MainWindow::_plot_angle_map(std::vector<std::vector<Point2d>> contours)
     ui->visibility_map->xAxis->setRange(-50, 50);
     ui->visibility_map->yAxis->setRange(-50, 50);
 
-    int counter = 1;
+    int counter = 1;  // to do
     for (auto contour : contours)
     {
         const size_t point_count = contour.size();
