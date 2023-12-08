@@ -36,7 +36,7 @@ private:
     QSize _plot_size;
 
     void _plot_image();
-    void _plot_angle_map();
+    void _plot_angle_map(std::vector<std::vector<PointScreenAngle>> contour_points);
     std::vector<std::vector<PointScreenAngle>> _screen_angle_search(RLS::Data data);
 };
 
