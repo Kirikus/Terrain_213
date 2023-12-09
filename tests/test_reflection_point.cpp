@@ -157,5 +157,43 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     BOOST_TEST(reflection_point3.get_h() == reflection_h3, tt::tolerance(1e-4));
 }
 
+BOOST_AUTO_TEST_CASE(test_plain_FindIncidenceAngle) {
+    DP::Constant const_dp(4);
+    VG::None non_veg;
+    EL::Plain plain;
+
+    Map map(&plain, &non_veg, &const_dp);
+
+    PointCartesian rls(0, 0, 2);
+    PointCartesian target(4, 0, 2);
+    PointSpheric sp1(rls, target);
+
+    PointCartesian reflection_point1 = RP::FindReflectionPoint(sp1, &map);
+
+    PointSpheric sp2(rls, reflection_point1);
+    double incidence_angle = ReflectionPoint::FindIncidenceAngle(sp2, &map);
+    double theory_angle = M_PI / 4;
+    BOOST_TEST(incidence_angle == theory_angle, tt::tolerance(1e-4));
+}
+
+BOOST_AUTO_TEST_CASE(test_GeoData_FindIncidenceAngle) {
+    DP::Constant const_dp(4);
+    VG::None non_veg;
+    EL::GeoData geo_data;
+
+    Map map(&geo_data, &non_veg, &const_dp);
+
+    PointCartesian rls(0, 0, 0);
+    PointCartesian target(20, 0, 40);
+    PointSpheric sp1(rls, target);
+
+    PointCartesian reflection_point1 = RP::FindReflectionPoint(sp1, &map);
+
+    PointSpheric sp2(rls, reflection_point1);
+    PointSpheric sp3(target, reflection_point1);
+    double incidence_angle1 = ReflectionPoint::FindIncidenceAngle(sp2, &map);
+    double incidence_angle2 = ReflectionPoint::FindIncidenceAngle(sp3, &map);
+    BOOST_TEST(incidence_angle1 == incidence_angle2, tt::tolerance(1e-4));
+}
 
 BOOST_AUTO_TEST_SUITE_END()
