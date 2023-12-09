@@ -116,7 +116,7 @@ std::vector<std::vector<Point2d>> MainWindow::_screen_angle_search(RLS::Data dat
 
     PointCartesian rls_position = data.position;
     std::cout << data.position.get_x() << std::endl;
-    PointSpheric current_point = PointSpheric(rls_position, PointCartesian(1, 1, 1));
+    PointSpheric current_point = PointSpheric(rls_position, PointCartesian(rls_position.get_x() + 1, rls_position.get_y() + 1, rls_position.get_h()));
 
     size_t n = 2;  // count_of_contours
     std::vector<std::vector<Point2d>> contours(n);  // points of contours to draw visibility angle map
@@ -136,7 +136,7 @@ std::vector<std::vector<Point2d>> MainWindow::_screen_angle_search(RLS::Data dat
             for (size_t i = 0; i < n; i++)
             {
                 if (screening_angle > angles[i])
-                    max_points[i] = PointScreenAngle(current_point.get_x(), current_point.get_y(), screening_angle);
+                    max_points[i] = PointScreenAngle(current_point.get_target().get_x(), current_point.get_target().get_y(), screening_angle);
             }
         }
 
@@ -150,7 +150,7 @@ std::vector<std::vector<Point2d>> MainWindow::_screen_angle_search(RLS::Data dat
             }
             else if (last_contour == -1)
             {
-                contours[i].push_back(Point2d(current_point.get_x(), current_point.get_y()));
+                contours[i].push_back(Point2d(current_point.get_target().get_x(), current_point.get_target().get_y()));
                 last_contour = i;
             }
             else
