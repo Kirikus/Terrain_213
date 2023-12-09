@@ -53,3 +53,14 @@ PointCartesian RP::FindReflectionPoint(PointSpheric sp, Map* map)
 
     return reflection_point;
 }
+
+double RP::FindIncidenceAngle(PointSpheric sp, Map* map)
+{
+    Point2d reflection_point2d(sp.get_target().get_x(), sp.get_target().get_y());
+
+    double derivative = FindDerivative(sp, map);
+    double h = map->h(reflection_point2d);
+    double k1 = (h - sp.get_center().get_h()) / sp.get_d();
+
+    return std::abs(FindPhi(derivative, k1));
+}
