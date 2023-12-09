@@ -14,10 +14,11 @@ namespace ReflectionCoefficients
 class ReflectionMultiplier
 {
 public:
-    complex reflection_multiplier();
     ReflectionMultiplier(ElevationReflectionMultiplier* ElevationCoeff, FrenelReflectionMultiplier* FrenelCoeff, VegetationReflectionMultiplier* VegetationCoeff)
         :ElevationCoeff(ElevationCoeff), FrenelCoeff(FrenelCoeff), VegetationCoeff(VegetationCoeff)
     {}
+
+    complex reflection_multiplier(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double sko, double a, double b);
 private:
     ElevationReflectionMultiplier* ElevationCoeff = nullptr;
     FrenelReflectionMultiplier* FrenelCoeff = nullptr;
