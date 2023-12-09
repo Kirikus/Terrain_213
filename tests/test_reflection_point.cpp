@@ -33,9 +33,9 @@ BOOST_AUTO_TEST_CASE(test_null_derivative) {
 BOOST_AUTO_TEST_CASE(test_GeoData_simple_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
-    EL::GeoData GeoData;
+    EL::GeoData geo_data;
 
-    Map map(&GeoData, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp);
 
     PointCartesian rls(0, 0, 0);
     PointCartesian reflection_point(16, 0, 11);
@@ -48,9 +48,9 @@ BOOST_AUTO_TEST_CASE(test_GeoData_simple_derivative) {
 BOOST_AUTO_TEST_CASE(test_GeoData_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
-    EL::GeoData GeoData;
+    EL::GeoData geo_data;
 
-    Map map(&GeoData, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp);
 
     double delta_d = 0.001;
     PointCartesian rls(0, 0, 0);
@@ -115,9 +115,9 @@ BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
 BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     DP::Constant const_dp(4);
     VG::None non_veg;
-    EL::GeoData GeoData;
+    EL::GeoData geo_data;
 
-    Map map(&GeoData, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp);
 
     PointCartesian rls1(0, 0, 0);
     PointCartesian rls2(20, 20, 0);
