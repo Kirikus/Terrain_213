@@ -131,7 +131,7 @@ std::vector<std::vector<Point2d>> MainWindow::_screen_angle_search(RLS::Data dat
         {
             current_point.change_r(R);
 
-            double screening_angle = FindScreeningAngle(current_point, 90);
+            double screening_angle = FindScreeningAngle(current_point, data.radius);
 
             for (size_t i = 0; i < n; i++)
             {
