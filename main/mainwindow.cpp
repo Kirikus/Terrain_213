@@ -117,7 +117,7 @@ void MainWindow::on_apply_button_clicked(QAbstractButton *button)
 std::vector<std::vector<Point2d>> MainWindow::_screen_angle_search(RLS::Data data)
 {
     double angle_iter = 1000;  // count of iteration in angle loop
-    double R_iter = 10;  // count of iteration in radius loop
+    double R_iter = 100;  // count of iteration in radius loop
     double R_step = data.radius / R_iter;  // step for in cycle
 
     PointCartesian rls_position = data.position;
