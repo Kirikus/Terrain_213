@@ -15,6 +15,13 @@ class ReflectionMultiplier
 {
 public:
     complex reflection_multiplier();
+    ReflectionMultiplier(ElevationReflectionMultiplier* ElevationCoeff, FrenelReflectionMultiplier* FrenelCoeff, VegetationReflectionMultiplier* VegetationCoeff)
+        :ElevationCoeff(ElevationCoeff), FrenelCoeff(FrenelCoeff), VegetationCoeff(VegetationCoeff)
+    {}
+private:
+    ElevationReflectionMultiplier* ElevationCoeff = nullptr;
+    FrenelReflectionMultiplier* FrenelCoeff = nullptr;
+    VegetationReflectionMultiplier* VegetationCoeff = nullptr;
 };
 }
 
