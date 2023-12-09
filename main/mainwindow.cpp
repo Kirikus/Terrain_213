@@ -30,6 +30,7 @@ void MainWindow::_plot_image()
     std::pair<double, double> axes_range = std::pair<double, double>(200, 200);  // range of Ox and Oy for default map image
     ui->visibility_map->xAxis->setRange(-axes_range.first, axes_range.first);
     ui->visibility_map->yAxis->setRange(-axes_range.second, axes_range.second);
+    ui->visibility_map->addGraph();
 
 
     QPixmap pix(":map/map.PNG");
@@ -44,9 +45,7 @@ void MainWindow::_plot_image()
 
 void MainWindow::_plot_angle_map(std::vector<std::vector<Point2d>> contours)
 {
-    ui->visibility_map->addGraph();
-    ui->visibility_map->xAxis->setRange(-50, 50);
-    ui->visibility_map->yAxis->setRange(-50, 50);
+    QVector<QCPCurve*> contour_curves;
 
     int counter = 1;  // to do
     for (auto contour : contours)
@@ -69,12 +68,15 @@ void MainWindow::_plot_angle_map(std::vector<std::vector<Point2d>> contours)
             contour_curves.back()->setBrush(QBrush(QColor(0, 255, 255, 40)));
         counter++;
     }
+
+    rls_contour_curves.push_back(contour_curves);
 }
 
 MainWindow::~MainWindow()
 {
-    for (auto contour : contour_curves)
-        delete contour;
+    for (auto rls : rls_contour_curves)
+        for (auto contour : rls)
+            delete contour;
     delete ui;
 }
 
@@ -95,13 +97,17 @@ void MainWindow::on_RLS_widgets_tabCloseRequested(int index)
 
 void MainWindow::on_apply_button_clicked(QAbstractButton *button)
 {
-    if (!contour_curves.empty())  // it's replot
-        for (auto contour : contour_curves)
-            delete contour;
+    if (!rls_contour_curves.empty())  // it's replot
+    {
+        for (auto rls : rls_contour_curves)
+            for (auto contour : rls)
+                delete contour;
+        rls_contour_curves.clear();
+    }
 
     for (int i = 0; i < ui->RLS_widgets->count(); ++i)
     {
-        RLS* rls = (RLS*)ui->RLS_widgets->widget(0);
+        RLS* rls = (RLS*)ui->RLS_widgets->widget(i);
         RLS::Data data = rls->get_all_data();
         std::vector<std::vector<Point2d>> contour_points = _screen_angle_search(data);
         _plot_angle_map(contour_points);

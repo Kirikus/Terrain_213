@@ -33,7 +33,7 @@ private:
     Ui::MainWindow *ui;
     size_t _rls_index = 0;  // index of last RLS in RLS_widget
 
-    QVector<QCPCurve*> contour_curves; // contours for screening angle map
+    QVector<QVector<QCPCurve*>> rls_contour_curves; // contours for screening angle map for each rls
 
     void _plot_image();
     void _plot_angle_map(std::vector<std::vector<Point2d>> contour_points);
