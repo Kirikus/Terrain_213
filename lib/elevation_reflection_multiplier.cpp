@@ -13,7 +13,6 @@ namespace RP = ReflectionCoefficients;
 
 double RP::ElevationReflectionMultiplier::frenel_coefficient(double incidence_angle, double wave_l, double sko)
 {
-    double teta = incidence_angle * 180 / M_PI;
-    double coef = exp((-1./2) * pow((4 * M_PI * sko * sin(teta) / wave_l), 2));
+    double coef = exp((-1./2) * pow((4 * M_PI * sko * sin(incidence_angle) / wave_l), 2));
     return coef;
 }

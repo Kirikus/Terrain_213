@@ -14,7 +14,6 @@ namespace RP = ReflectionCoefficients;
 
 double RP::VegetationReflectionMultiplier::vegetation_coeff(double incidence_angle, double a, double b, double wave_l)
 {
-    double teta = incidence_angle * 180 / M_PI;
-    double vegetation_coefficient = (1 - sqrt(a * wave_l)) * exp(-b * sin(teta) / wave_l) + sqrt(a * wave_l);
+    double vegetation_coefficient = (1 - std::sqrt(a * wave_l)) * std::exp(-b * std::sin(incidence_angle) / wave_l) + std::sqrt(a * wave_l);
     return vegetation_coefficient;
 }

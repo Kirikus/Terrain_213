@@ -18,9 +18,8 @@ complex RP::FrenelReflectionMultiplier::horizontal_polarization(Map* map, PointS
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
     double eps = map1d.dielectric_permittivity(sp.get_d());
-    double teta = incidence_angle * 180 / M_PI;
-    complex numerator = sin(teta) - sqrt(eps - pow(cos(teta), 2));
-    complex denumerator = sin(teta) + sqrt(eps - pow(cos(teta), 2));
+    complex numerator = std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
+    complex denumerator = std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     complex frenel_coeff = numerator / denumerator;
     return frenel_coeff;
 }
@@ -29,9 +28,8 @@ complex RP::FrenelReflectionMultiplier::vertical_polarization(Map* map, PointSph
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
     double eps = map1d.dielectric_permittivity(sp.get_d());
-    double teta = incidence_angle * 180 / M_PI;
-    complex numerator = eps * sin(teta) - sqrt(eps - pow(cos(teta), 2));
-    complex denumerator = eps * sin(teta) + sqrt(eps - pow(cos(teta), 2));
+    complex numerator = eps * std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
+    complex denumerator = eps * std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     complex frenel_coeff = numerator / denumerator;
     return frenel_coeff;
 }
