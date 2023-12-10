@@ -21,10 +21,10 @@ BOOST_AUTO_TEST_CASE(test_DielectricPermittivity) {
     Point2d test1(3, 3);
     Point2d test2(4, 2);
 
-    BOOST_TEST(Geo_data_dp.dielectricPermittivity(test1) == 1, tt::tolerance(1e-6));
-    BOOST_TEST(Geo_data_dp.dielectricPermittivity(test2) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(const_dp.dielectricPermittivity(test1) == 4, tt::tolerance(1e-6));
-    BOOST_TEST(const_dp.dielectricPermittivity(test2) == 4, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test1) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.dielectricPermittivity(&test1) == 4, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.dielectricPermittivity(&test2) == 4, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_Elevation) {
@@ -34,10 +34,10 @@ BOOST_AUTO_TEST_CASE(test_Elevation) {
     Point2d test1(20, 3);
     Point2d test2(16, 3);
 
-    BOOST_TEST(geo_data_el.h(test1) == 12, tt::tolerance(1e-6));
-    BOOST_TEST(geo_data_el.h(test2) == 10, tt::tolerance(1e-6));
-    BOOST_TEST(plain_el.h(test1) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(plain_el.h(test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_el.h(&test1) == 12, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_el.h(&test2) == 10, tt::tolerance(1e-6));
+    BOOST_TEST(plain_el.h(&test1) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(plain_el.h(&test2) == 0, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_Vegetation) {
@@ -48,12 +48,12 @@ BOOST_AUTO_TEST_CASE(test_Vegetation) {
     Point2d test1(2, 3);
     Point2d test2(16, 3);
 
-    BOOST_TEST(non_veg.vegetation(test1) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(non_veg.vegetation(test2) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(constant_veg.vegetation(test1) == 2, tt::tolerance(1e-6));
-    BOOST_TEST(constant_veg.vegetation(test2) == 2, tt::tolerance(1e-6));
-    BOOST_TEST(geo_data_veg.vegetation(test1) == 1, tt::tolerance(1e-6));
-    BOOST_TEST(geo_data_veg.vegetation(test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(non_veg.vegetation(&test1) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(non_veg.vegetation(&test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(constant_veg.vegetation(&test1) == 2, tt::tolerance(1e-6));
+    BOOST_TEST(constant_veg.vegetation(&test2) == 2, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_veg.vegetation(&test1) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(geo_data_veg.vegetation(&test2) == 0, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_simple_map) {
@@ -68,10 +68,10 @@ BOOST_AUTO_TEST_CASE(test_simple_map) {
     DP::Constant dp(1);
 
     Map map(&plain, &veg, &dp);
-    BOOST_TEST(h1 == map.h(point1), tt::tolerance(1e-6));
-    BOOST_TEST(h2 != map.h(point1), tt::tolerance(1e-6));
-    BOOST_TEST(map.v(point1) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(map.dp(point1) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
+    BOOST_TEST(h2 != map.h(&point1), tt::tolerance(1e-6));
+    BOOST_TEST(map.v(&point1) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(map.dp(&point1) == 1, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_GeoData) {
@@ -87,12 +87,12 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
     DP::GeoData dp;
 
     Map map(&plain, &veg, &dp);
-    BOOST_TEST(h1 == map.h(point1), tt::tolerance(1e-6));
-    BOOST_TEST(h2 == map.h(point2), tt::tolerance(1e-6));
-    BOOST_TEST(map.v(point2) == 1, tt::tolerance(1e-6));
-    BOOST_TEST(map.v(point3) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(map.dp(point2) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(map.dp(point3) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
+    BOOST_TEST(h2 == map.h(&point2), tt::tolerance(1e-6));
+    BOOST_TEST(map.v(&point2) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(map.v(&point3) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(map.dp(&point2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(map.dp(&point3) == 1, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_Map1d) {
@@ -105,7 +105,7 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
     Map map2(&plain, &veg, &dp);
 
     Point2d center(20, 0);
-    double h = map.h(center);
+    double h = map.h(&center);
     PointCartesian rls(center, h);
     PointCartesian target(30, 20, 20);
 

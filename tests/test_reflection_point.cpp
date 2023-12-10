@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(test_GeoData_derivative) {
     Point2d rp2d(17, 4);
     Point2d rp2d2(rp.get_target().get_x(), rp.get_target().get_y());
 
-    double theory_derivative = (map.h(rp2d2) - map.h(rp2d))/delta_d;
+    double theory_derivative = (map.h(&rp2d2) - map.h(&rp2d))/delta_d;
     rp.change_d(rp.get_d() - delta_d);
     double derivative = RP::FindDerivative(rp, &map);
 

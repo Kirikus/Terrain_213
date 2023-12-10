@@ -8,13 +8,13 @@ namespace Vegetation
 class Vegetation
 {
 public:
-    virtual double vegetation(Point2d p) = 0;
+    virtual double vegetation(Point* p) = 0;
 };
 
 class None: public Vegetation
 {
 public:
-    double vegetation(Point2d p) override {return 0;}
+    double vegetation(Point* p) override {return 0;}
 };
 
 class Constant: public Vegetation
@@ -24,7 +24,7 @@ public:
         :coeff(coeff)
     {}
 
-    double vegetation(Point2d p) override {return coeff;}
+    double vegetation(Point* p) override {return coeff;}
 private:
     double coeff;
 };
@@ -32,9 +32,9 @@ private:
 class GeoData: public Vegetation
 {
 public:
-    double vegetation(Point2d p) override {return veg_func(p);}
+    double vegetation(Point* p) override {return veg_func(p);}
 private:
-    double veg_func(Point2d p); //todo
+    double veg_func(Point* p); //todo
 };
 }
 
