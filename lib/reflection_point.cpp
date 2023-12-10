@@ -2,6 +2,13 @@
 
 namespace RP = ReflectionPoint;
 
+// This function considers the derivative of z(d) by definition
+// functions accepts:
+// 1) PointSpheric rp - the associated coordinates of the center and the relief point;
+// 2) Map* map - Pointer to the class of the map data.
+// function returns:
+// 1) The approximate value of the derivative at the point.
+
 double RP::FindDerivative(PointSpheric rp, Map* map)
 {
     double delta_d = 0.001;
@@ -17,18 +24,36 @@ double RP::FindDerivative(PointSpheric rp, Map* map)
     return derivative;
 }
 
+// This function counts the angle between two straight lines
+// function accepts:
+// 1) k1 - the oblique coefficient of the first straight line;
+// 2) k2 - the oblique coefficient of the second straight line.
+// function returns:
+// 1) The angle between two straight lines in radians.
+
 double RP::FindPhi(double k1, double k2)
 {
     return std::atan((k2 - k1) / (1 + k1 * k2));
 }
 
+// This function finds the coordinates of the reflection point
+// function accepts:
+// 1) PointSpheric sp - the associated coordinates of the center and the target;
+// 2) Map* map - Pointer to the class of the map data.
+// function returns:
+// 1) PointCartesian reflection_point - the point of reflection if there is one;
+// 2) PointCartesian center - if there is no reflection point.
+
 PointCartesian RP::FindReflectionPoint(PointSpheric sp, Map* map)
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
-    double epsilon = 0.001;
     PointCartesian reflection_point(sp.get_center());
+
+    double epsilon = 0.001;
     double min_diff = 2 * M_PI;
-    for (double curr_d = 0.005; curr_d < sp.get_d();)
+
+    double step = 0.005;
+    for (double curr_d = step; curr_d < sp.get_d(); curr_d += step)
     {
         double h = map1d.height(curr_d);
         double x = sp.get_center().get_x() + curr_d * std::cos(sp.get_azimuth());
@@ -47,12 +72,17 @@ PointCartesian RP::FindReflectionPoint(PointSpheric sp, Map* map)
                 min_diff = std::abs(std::abs(FindPhi(derivative, k1)) - std::abs(FindPhi(derivative, k2)));
                 reflection_point = relief_dot;
             }
-
-        curr_d += 0.005;
     }
 
     return reflection_point;
 }
+
+// This function finds the angle of incidence at the reflection point
+// function accepts:
+// 1) PointSpheric sp - the associated coordinates of the center and the reflection point;
+// 2) Map* map - Pointer to the class of the map data.
+// function returns:
+// 1) The approximate value of the incidence angle at the point.
 
 double RP::FindIncidenceAngle(PointSpheric sp, Map* map)
 {
