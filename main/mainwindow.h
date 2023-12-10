@@ -33,7 +33,10 @@ private:
     Ui::MainWindow *ui;
     size_t _rls_index = 0;  // index of last RLS in RLS_widget
 
-    QVector<QVector<QCPCurve*>> rls_contour_curves; // contours for screening angle map for each rls
+    QVector<QVector<QCPCurve*>> rls_contour_curves;  // contours for screening angle map for each rls
+    QVector<QColor> colors{QColor("#F2E750"), QColor("#F2B807"), QColor("#F28705"), QColor("#C52104"), QColor("#710301")};  // colors for graphs in angle map
+    std::vector<double> angles = {(M_PI / 2) / 5, (M_PI / 2) / 5 * 2, (M_PI / 2) / 5 * 3, (M_PI / 2) / 5 * 4, (M_PI / 2)};  // angles for the i contour (<= angles[i])
+    /*std::vector<double> angles = {(M_PI / 2) / 5, (M_PI / 2)};*/  // angles for the i contour (<= angles[i])
 
     void _plot_image();
     void _plot_angle_map(std::vector<std::vector<Point2d>> contour_points);
