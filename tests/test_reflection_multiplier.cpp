@@ -90,4 +90,31 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
     BOOST_TEST(frm.vertical_polarization(&map, sp, incidence_angle).imag() == 0, tt::tolerance(1e-6));
 } //for imag todo
 
+BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
+    EL::Plain plain;
+    VG::None veg;
+    DP::Constant dp(2);
+    Map map(&plain, &veg, &dp);
+
+    PointCartesian rls(0, 0, 2);
+    PointCartesian target(4, 0, 2);
+    PointSpheric sp(rls, target);
+
+    RC::ElevationReflectionMultiplier erm;
+    RC::VegetationReflectionMultiplier vrm;
+    RC::FrenelReflectionMultiplier frm;
+    RC::ReflectionMultiplier rm(&erm, &frm, &vrm);
+
+    double a = 0.32;
+    double b = 3;
+    double incidence_angle = M_PI / 4;
+    double wave_l = 5 * std::pow(10, -5);
+    double sko = wave_l / (8 * std::sin(incidence_angle));
+    double frenel_coeff = erm.frenel_coefficient(incidence_angle, wave_l, sko / 2);// The Rayleigh criterion is used:
+    double vegetation_coeff = vrm.vegetation_coeff(incidence_angle, a, b, wave_l);
+    std::complex<double> polarization_coeff = frm.horizontal_polarization(&map, sp, incidence_angle);
+
+    BOOST_TEST(rm.reflection_multiplier(&map, sp, incidence_angle, wave_l, sko / 2, a, b) == frenel_coeff * vegetation_coeff * polarization_coeff, tt::tolerance(1e-6));
+}
+
 BOOST_AUTO_TEST_SUITE_END()
