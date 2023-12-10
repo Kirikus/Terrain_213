@@ -88,7 +88,7 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
 
     Map map(&plain, &veg, &dp);
     BOOST_TEST(h1 == map.h(point1), tt::tolerance(1e-6));
-    BOOST_TEST(h2 != map.h(point2), tt::tolerance(1e-6));
+    BOOST_TEST(h2 == map.h(point2), tt::tolerance(1e-6));
     BOOST_TEST(map.v(point2) == 1, tt::tolerance(1e-6));
     BOOST_TEST(map.v(point3) == 0, tt::tolerance(1e-6));
     BOOST_TEST(map.dp(point2) == 0, tt::tolerance(1e-6));

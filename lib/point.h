@@ -2,20 +2,6 @@
 #define POINT_H
 #include <cmath>
 
-class Point2d
-{
-public:
-    Point2d(double x, double y)
-        :x{x}, y{y}
-    {}
-
-    double get_x() {return x;}
-    double get_y() {return y;}
-private:
-    double x;
-    double y;
-};
-
 class Point
 {
 protected:
@@ -27,7 +13,23 @@ public:
     Point() = default;
 };
 
-class PointCartesian : Point
+class Point2d : public Point
+{
+public:
+    Point2d(double x, double y)
+        :x{x}, y{y}
+    {}
+
+    double get_x() override {return x;}
+    double get_y() override {return y;}
+    double get_h() override {return 0;}
+
+private:
+    double x; // in meters
+    double y; // in meters
+};
+
+class PointCartesian : public Point
 {
 private:
     double x; // in meters
@@ -53,7 +55,7 @@ public:
     void change_z(const double h) { this->h = h; }
 };
 
-class PointSpheric : Point
+class PointSpheric : public Point
 {
 public:
     double get_R() {return R;};

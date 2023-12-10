@@ -7,7 +7,7 @@ double Vegetation::GeoData::veg_func(Point2d p)
 
 double Elevation::GeoData::relief_func(Point2d p)
 {
-    return -sqrt(pow((p.get_x() - 20), 2) + pow(p.get_y(), 2)) + 15;
+    return fmax(-sqrt(pow((p.get_x() - 20), 2) + pow(p.get_y(), 2)) + 15, 0);
 }
 
 double DielectricPermittivity::GeoData::dielectric_func(Point2d p)
