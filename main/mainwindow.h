@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QAbstractButton>
+#include <qcustomplot.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -13,10 +15,25 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  MainWindow(QWidget *parent = nullptr);
-  ~MainWindow();
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
- private:
-  Ui::MainWindow *ui;
+  private slots:
+    void on_RLS_widgets_tabCloseRequested(int index);
+    void on_add_RLS_clicked();
+    void on_apply_button_clicked(QAbstractButton *button);
+
+protected:
+    virtual void resizeEvent(QResizeEvent *);
+
+private:
+    Ui::MainWindow *ui;
+    size_t _rls_index = 0;  // index of last RLS in RLS_widget
+
+    QSize _plot_size;
+
+    void _plot_image();
+    void _plot_angle_map();
 };
+
 #endif  // MAINWINDOW_H
