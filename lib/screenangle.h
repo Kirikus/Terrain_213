@@ -3,8 +3,9 @@
 
 #include "point.h"
 #include "map.h"
+#include "models_earth.h"
 #include <cmath>
 
-double FindScreeningAngle(Map* map, PointSpheric sp, double R);
+double FindScreeningAngle(Map* map, EarthModels::ModelEarth* model, PointSpheric sp, double R);
 
 #endif // SCREENANGLE_H
