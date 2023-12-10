@@ -4,13 +4,12 @@
 
 class Point
 {
-protected:
+public:
+    Point() = default;
+
     virtual double get_x() = 0;
     virtual double get_y() = 0;
     virtual double get_h() = 0;
-
-public:
-    Point() = default;
 };
 
 class Point2d : public Point
