@@ -17,6 +17,7 @@ BOOST_AUTO_TEST_CASE(Point2d_tests) {
     Point2d p(1.5, 1);
     BOOST_TEST(p.get_x() == 1.5, tt::tolerance(1e-6));
     BOOST_TEST(p.get_y() == 1, tt::tolerance(1e-6));
+    BOOST_TEST(p.get_h() == 0, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(PointCartesian_common_creation) {
