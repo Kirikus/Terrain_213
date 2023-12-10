@@ -5,15 +5,13 @@
 #include <complex>
 #include "map.h"
 
-using complex = std::complex<double>;
-
 namespace ReflectionCoefficients
 {
 class FrenelReflectionMultiplier
 {
 public:
-    complex horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle);
-    complex vertical_polarization(Map* map, PointSpheric sp, double incidence_angle);
+    std::complex<double> horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle);
+    std::complex<double> vertical_polarization(Map* map, PointSpheric sp, double incidence_angle);
 };
 }
 #endif // FRENEL_MULTIPLIER_H

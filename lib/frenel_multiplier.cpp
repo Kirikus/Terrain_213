@@ -14,22 +14,22 @@ namespace RP = ReflectionCoefficients;
 //  reflected from a smooth surface to the amplitude of the incident signal.
 //  formulas (2.6) on the page 42
 
-complex RP::FrenelReflectionMultiplier::horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle)
+std::complex<double> RP::FrenelReflectionMultiplier::horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle)
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
     double eps = map1d.dielectric_permittivity(sp.get_d());
-    complex numerator = std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
-    complex denumerator = std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
-    complex frenel_coeff = numerator / denumerator;
+    std::complex<double> numerator = std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
+    std::complex<double> denumerator = std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
+    std::complex<double> frenel_coeff = numerator / denumerator;
     return frenel_coeff;
 }
 
-complex RP::FrenelReflectionMultiplier::vertical_polarization(Map* map, PointSpheric sp, double incidence_angle)
+std::complex<double> RP::FrenelReflectionMultiplier::vertical_polarization(Map* map, PointSpheric sp, double incidence_angle)
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
     double eps = map1d.dielectric_permittivity(sp.get_d());
-    complex numerator = eps * std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
-    complex denumerator = eps * std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
-    complex frenel_coeff = numerator / denumerator;
+    std::complex<double> numerator = eps * std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
+    std::complex<double> denumerator = eps * std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
+    std::complex<double> frenel_coeff = numerator / denumerator;
     return frenel_coeff;
 }

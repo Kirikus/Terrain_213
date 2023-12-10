@@ -7,8 +7,6 @@
 #include "frenel_multiplier.h"
 #include "vegetation_reflection_multiplier.h"
 
-using complex = std::complex<double>;
-
 namespace ReflectionCoefficients
 {
 class ReflectionMultiplier
@@ -18,7 +16,7 @@ public:
         :ElevationCoeff(ElevationCoeff), FrenelCoeff(FrenelCoeff), VegetationCoeff(VegetationCoeff)
     {}
 
-    complex reflection_multiplier(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double sko, double a, double b);
+    std::complex<double> reflection_multiplier(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double sko, double a, double b);
 private:
     ElevationReflectionMultiplier* ElevationCoeff = nullptr;
     FrenelReflectionMultiplier* FrenelCoeff = nullptr;
