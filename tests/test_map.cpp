@@ -21,10 +21,10 @@ BOOST_AUTO_TEST_CASE(test_DielectricPermittivity) {
     Point2d test1(3, 3);
     Point2d test2(4, 2);
 
-    BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test1) == 1, tt::tolerance(1e-6));
-    BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test2) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(const_dp.dielectricPermittivity(&test1) == 4, tt::tolerance(1e-6));
-    BOOST_TEST(const_dp.dielectricPermittivity(&test2) == 4, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test1).real() == 1, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test2).real() == 0, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.dielectricPermittivity(&test1).real() == 4, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.dielectricPermittivity(&test2).real() == 4, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_Elevation) {
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(test_simple_map) {
     BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(h2 != map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(map.v(&point1) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(map.dp(&point1) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(map.dp(&point1).real() == 1, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_GeoData) {
@@ -91,8 +91,8 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
     BOOST_TEST(h2 == map.h(&point2), tt::tolerance(1e-6));
     BOOST_TEST(map.v(&point2) == 1, tt::tolerance(1e-6));
     BOOST_TEST(map.v(&point3) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(map.dp(&point2) == 0, tt::tolerance(1e-6));
-    BOOST_TEST(map.dp(&point3) == 1, tt::tolerance(1e-6));
+    BOOST_TEST(map.dp(&point2).real() == 0, tt::tolerance(1e-6));
+    BOOST_TEST(map.dp(&point3).real() == 1, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_Map1d) {
