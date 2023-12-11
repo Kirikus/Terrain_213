@@ -2,32 +2,33 @@
 #define POINT_H
 #include <cmath>
 
-class Point2d
+class Point
+{
+public:
+    Point() = default;
+
+    virtual double get_x() = 0;
+    virtual double get_y() = 0;
+    virtual double get_h() = 0;
+};
+
+class Point2d : public Point
 {
 public:
     Point2d(double x, double y)
         :x{x}, y{y}
     {}
 
-    double get_x() {return x;}
-    double get_y() {return y;}
+    double get_x() override {return x;}
+    double get_y() override {return y;}
+    double get_h() override {return 0;}
+
 private:
-    double x;
-    double y;
+    double x; // in meters
+    double y; // in meters
 };
 
-class Point
-{
-protected:
-    virtual double get_x() = 0;
-    virtual double get_y() = 0;
-    virtual double get_h() = 0;
-
-public:
-    Point() = default;
-};
-
-class PointCartesian : Point
+class PointCartesian : public Point
 {
 private:
     double x; // in meters
@@ -49,7 +50,7 @@ public:
     virtual double get_h() override {return h;};
 };
 
-class PointSpheric : Point
+class PointSpheric : public Point
 {
 public:
     double get_R() {return R;};

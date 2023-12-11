@@ -1,18 +1,46 @@
 #include "map.h"
 
-double Vegetation::GeoData::veg_func(Point2d p)
+// This function simulates vegetation
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// a number that determines the vegetation in the area:
+// 1 - grass (a = 3.2, b = 1)
+// 2 - shrub or dense herbaceous vegetation (a = 0.32, b = 3)
+// 3 - dense forest (a = 0.032, b = 5)
+
+int Vegetation::GeoData::veg_func(Point* p)
 {
-    return p.get_x() == 2 ? 1 : 0;
+    if (-10 <= p->get_x() && p->get_x() <= 10)
+        return 1;
+    if (-15 <= p->get_x() && p->get_x() <= -10 || 10 <= p->get_x() && p->get_x() <= 15)
+        return 2;
+    else
+        return 3;
 }
 
-double Elevation::GeoData::relief_func(Point2d p)
+// This function simulates relief
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// double h - the height of the relief point.
+
+double Elevation::GeoData::relief_func(Point* p)
 {
-    return -sqrt(pow((p.get_x() - 20), 2) + pow(p.get_y(), 2)) + 15;
+    return fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0);
 }
 
-double DielectricPermittivity::GeoData::dielectric_func(Point2d p)
+// This function simulates distribution of the dielectric constant over the terrain
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// complex dp - the complex value of the dielectric constant.
+
+std::complex<double> DielectricPermittivity::GeoData::dielectric_func(Point* p)
 {
-    return p.get_y() == 3 ? 1 : 0;
+    double real = fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0);
+    std::complex<double> dp(real, 0);
+    return dp;
 }
 
 double Map1d::height(double d)
@@ -20,24 +48,21 @@ double Map1d::height(double d)
     PointSpheric p(rls, target);
     p.change_d(d);
     PointCartesian targ = p.get_target();
-    Point2d point(targ.get_x(), targ.get_y());
-    return data->h(point);
+    return data->h(&targ);
 }
 
-double Map1d::vegetation(double d)
+int Map1d::vegetation(double d)
 {
     PointSpheric p(rls, target);
     p.change_d(d);
     PointCartesian targ = p.get_target();
-    Point2d point(targ.get_x(), targ.get_y());
-    return data->v(point);
+    return data->v(&targ);
 }
 
-double Map1d::dielectric_permittivity(double d)
+std::complex<double> Map1d::dielectric_permittivity(double d)
 {
     PointSpheric p(rls, target);
     p.change_d(d);
     PointCartesian targ = p.get_target();
-    Point2d point(targ.get_x(), targ.get_y());
-    return data->dp(point);
+    return data->dp(&targ);
 }
