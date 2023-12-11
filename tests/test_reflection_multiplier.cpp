@@ -76,9 +76,9 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
     EL::Plain plain;
     VG::None veg;
 
-    std::complex<double> eps
+    std::complex<double> eps;
     DP::Constant dp1(2); // For fresh water
-    Map map(&plain, &veg, &dp);
+    Map map(&plain, &veg, &dp1);
 
     PointCartesian rls(0, 0, 2);
     PointCartesian target(4, 0, 2);
