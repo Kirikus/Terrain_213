@@ -90,8 +90,9 @@ BOOST_AUTO_TEST_CASE(test_simple_map) {
     EL::Plain plain;
     VG::None veg;
     DP::Constant dp(1);
+    CD::Constant c(0);
 
-    Map map(&plain, &veg, &dp);
+    Map map(&plain, &veg, &dp, &c);
     BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(h2 != map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(map.v(&point1) == veg_none, tt::tolerance(1e-6));
@@ -112,8 +113,9 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
     EL::GeoData plain;
     VG::GeoData veg;
     DP::GeoData dp;
+    CD::Constant c(0);
 
-    Map map(&plain, &veg, &dp);
+    Map map(&plain, &veg, &dp, &c);
     BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(h2 == map.h(&point2), tt::tolerance(1e-6));
     BOOST_TEST(map.v(&point2) == veg_grass, tt::tolerance(1e-6));
@@ -128,9 +130,10 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
     EL::Plain plain;
     VG::GeoData veg;
     DP::GeoData dp;
+    CD::Constant c(0);
 
-    Map map(&geo, &veg, &dp);
-    Map map2(&plain, &veg, &dp);
+    Map map(&geo, &veg, &dp, &c);
+    Map map2(&plain, &veg, &dp, &c);
 
     Point2d center(20, 0);
     double h = map.h(&center);

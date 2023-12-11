@@ -24,8 +24,9 @@ BOOST_AUTO_TEST_CASE(test_null_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::Plain plain;
+    CD::Constant c(0);
 
-    Map map(&plain, &non_veg, &const_dp);
+    Map map(&plain, &non_veg, &const_dp, &c);
 
     PointCartesian rls(3, 3, 0);
     PointCartesian reflection_point(4, 2, 0);
@@ -39,8 +40,9 @@ BOOST_AUTO_TEST_CASE(test_GeoData_simple_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&geo_data, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     PointCartesian rls(0, 0, 0);
     PointCartesian reflection_point(16, 0, 11);
@@ -54,8 +56,9 @@ BOOST_AUTO_TEST_CASE(test_GeoData_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&geo_data, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     double delta_d = 0.001;
     PointCartesian rls(0, 0, 0);
@@ -86,8 +89,9 @@ BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::Plain plain;
+    CD::Constant c(0);
 
-    Map map(&plain, &non_veg, &const_dp);
+    Map map(&plain, &non_veg, &const_dp, &c);
 
     PointCartesian rls1(0, 0, 2);
     PointCartesian target1(4, 0, 2);
@@ -155,8 +159,9 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&geo_data, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     PointCartesian rls1(0, 0, 0);
     PointCartesian rls2(20, 20, 0);
@@ -236,8 +241,9 @@ BOOST_AUTO_TEST_CASE(test_plain_FindIncidenceAngle) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::Plain plain;
+    CD::Constant c(0);
 
-    Map map(&plain, &non_veg, &const_dp);
+    Map map(&plain, &non_veg, &const_dp, &c);
 
     PointCartesian rls(0, 0, 2);
     PointCartesian target(4, 0, 2);
@@ -262,8 +268,9 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindIncidenceAngle) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&geo_data, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     PointCartesian rls(0, 0, 0);
     PointCartesian target(20, 0, 40);

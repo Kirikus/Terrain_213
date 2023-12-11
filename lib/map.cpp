@@ -75,3 +75,11 @@ double Map1d::dielectric_permittivity(double d)
     PointCartesian targ = p.get_target();
     return data->dp(&targ);
 }
+
+double Map1d::conductivity(double d)
+{
+    PointSpheric p(rls, target);
+    p.change_d(d);
+    PointCartesian targ = p.get_target();
+    return data->c(&targ);
+}

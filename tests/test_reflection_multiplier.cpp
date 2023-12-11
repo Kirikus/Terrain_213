@@ -71,15 +71,20 @@ BOOST_AUTO_TEST_CASE(test_VegetationReflectionMultiplier) {
 }
 
 BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
-    RC::FrenelReflectionMultiplier frm;
+
 
     EL::Plain plain;
     VG::None veg;
 
-    std::complex<double> eps;
-    DP::Constant dp1(2); // For fresh water
-    Map map(&plain, &veg, &dp1);
 
+    std::complex<double> eps;
+
+    DP::Constant dp1(2); // For fresh water
+    CD::Constant c(0);
+    Map map(&plain, &veg, &dp1, &c);
+
+
+    RC::FrenelReflectionMultiplier frm;
     PointCartesian rls(0, 0, 2);
     PointCartesian target(4, 0, 2);
     PointSpheric sp(rls, target);
@@ -107,7 +112,9 @@ BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     EL::Plain plain;
     VG::None veg;
     DP::Constant dp(2);
-    Map map(&plain, &veg, &dp);
+    CD::Constant c(0);
+
+    Map map(&plain, &veg, &dp, &c);
 
     PointCartesian rls(0, 0, 2);
     PointCartesian target(4, 0, 2);
