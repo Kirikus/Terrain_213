@@ -2,33 +2,34 @@
 #define DIELECTRIC_PERMITTIVITY_H
 
 #include "point.h"
+#include <complex>
 
 namespace DielectricPermittivity
 {
 class DielectricPermittivity
 {
 public:
-    virtual double dielectricPermittivity(Point* p) = 0;
+    virtual std::complex<double> dielectricPermittivity(Point* p) = 0;
 };
 
 class Constant: public DielectricPermittivity
 {
 public:
-    Constant(double coeff)
+    Constant(std::complex<double> coeff)
         :coeff(coeff)
     {}
 
-    double dielectricPermittivity(Point* p) override {return coeff;}
+    std::complex<double> dielectricPermittivity(Point* p) override {return coeff;}
 private:
-    double coeff;
+    std::complex<double> coeff;
 };
 
 class GeoData: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(Point* p) override {return dielectric_func(p);}
+    std::complex<double> dielectricPermittivity(Point* p) override {return dielectric_func(p);}
 private:
-    double dielectric_func(Point* p);//todo
+    std::complex<double> dielectric_func(Point* p);//todo
 };
 }
 

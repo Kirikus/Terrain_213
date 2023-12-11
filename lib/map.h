@@ -24,8 +24,8 @@ public:
     {}
 
     double h(Point* p) {return elevation->h(p);}
-    double v(Point* p) {return vegetation->vegetation(p);}
-    double dp(Point* p) {return dielectricPermittivity->dielectricPermittivity(p);}
+    int v(Point* p) {return vegetation->vegetation(p);}
+    std::complex<double> dp(Point* p) {return dielectricPermittivity->dielectricPermittivity(p);}
 };
 
 class Map1d
@@ -40,8 +40,8 @@ public:
     {}
 
     double height(double d);
-    double vegetation(double d);
-    double dielectric_permittivity(double d);
+    int vegetation(double d);
+    std::complex<double> dielectric_permittivity(double d);
 };
 
 #endif // MAP_H

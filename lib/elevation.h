@@ -22,10 +22,15 @@ private:
 class Mountain: public Elevation
 {
 public:
-  double h(Point* p) override {return H - p->get_x()  * slope;}
+  Mountain(double H, double slope)
+        :H(H), slope(slope)
+    {}
+
+  double h(Point* p) override {return H - std::hypot(p->get_x(), p->get_y()) * slope;}
+private:
     double H;
     double slope;
-}; //todo
+};
 
 class Plain: public Elevation
 {
