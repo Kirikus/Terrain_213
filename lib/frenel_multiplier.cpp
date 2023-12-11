@@ -2,8 +2,7 @@
 
 namespace RP = ReflectionCoefficients;
 
-//  This functions calculate Frenel Refraction Coefficient for horizontal and
-//  vetcical polarization.
+//  This functions calculate Frenel Refraction Coefficient for different polarization.
 //  functions accept:
 //  1) pointer to the map;
 //  2) a spherical point whose target is a reflection point;
@@ -32,4 +31,18 @@ std::complex<double> RP::FrenelReflectionMultiplier::vertical_polarization(Map* 
     std::complex<double> denumerator = eps * std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     std::complex<double> frenel_coeff = numerator / denumerator;
     return frenel_coeff;
+}
+
+std::complex<double> RP::FrenelReflectionMultiplier::circular_polarization(Map* map, PointSpheric sp, double incidence_angle)
+{
+    std::complex<double> vertical = vertical_polarization(map, sp, incidence_angle);
+    std::complex<double> horizontal = horizontal_polarization(map, sp, incidence_angle);
+    return 0.5*(vertical + horizontal);
+}
+
+std::complex<double> RP::FrenelReflectionMultiplier::cross_polarization(Map* map, PointSpheric sp, double incidence_angle)
+{
+    std::complex<double> vertical = vertical_polarization(map, sp, incidence_angle);
+    std::complex<double> horizontal = horizontal_polarization(map, sp, incidence_angle);
+    return 0.5*(vertical - horizontal);
 }

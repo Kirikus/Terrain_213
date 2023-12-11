@@ -12,6 +12,8 @@ class FrenelReflectionMultiplier
 public:
     std::complex<double> horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle);
     std::complex<double> vertical_polarization(Map* map, PointSpheric sp, double incidence_angle);
+    std::complex<double> circular_polarization(Map* map, PointSpheric sp, double incidence_angle);
+    std::complex<double> cross_polarization(Map* map, PointSpheric sp, double incidence_angle);
 };
 }
 #endif // FRENEL_MULTIPLIER_H
