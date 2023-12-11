@@ -24,7 +24,7 @@ public:
     {}
 
     double h(Point* p) {return elevation->h(p);}
-    double v(Point* p) {return vegetation->vegetation(p);}
+    int v(Point* p) {return vegetation->vegetation(p);}
     std::complex<double> dp(Point* p) {return dielectricPermittivity->dielectricPermittivity(p);}
 };
 
@@ -40,7 +40,7 @@ public:
     {}
 
     double height(double d);
-    double vegetation(double d);
+    int vegetation(double d);
     std::complex<double> dielectric_permittivity(double d);
 };
 

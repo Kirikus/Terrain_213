@@ -1,8 +1,22 @@
 #include "map.h"
 
-double Vegetation::GeoData::veg_func(Point* p)
+// This function simulates vegetation
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// a number that determines the vegetation in the area:
+// 1 - grass (a = 3.2, b = 1)
+// 2 - shrub or dense herbaceous vegetation (a = 0.32, b = 3)
+// 3 - dense forest (a = 0.032, b = 5)
+
+int Vegetation::GeoData::veg_func(Point* p)
 {
-    return p->get_x() == 2 ? 1 : 0;
+    if (-10 <= p->get_x() && p->get_x() <= 10)
+        return 1;
+    if (-15 <= p->get_x() && p->get_x() <= -10 || 10 <= p->get_x() && p->get_x() <= 15)
+        return 2;
+    else
+        return 3;
 }
 
 double Elevation::GeoData::relief_func(Point* p)
@@ -12,7 +26,9 @@ double Elevation::GeoData::relief_func(Point* p)
 
 std::complex<double> DielectricPermittivity::GeoData::dielectric_func(Point* p)
 {
-    return p->get_y() == 3 ? 1 : 0;
+    double real = fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0);
+    std::complex<double> dp(real, 0);
+    return dp;
 }
 
 double Map1d::height(double d)
@@ -23,7 +39,7 @@ double Map1d::height(double d)
     return data->h(&targ);
 }
 
-double Map1d::vegetation(double d)
+int Map1d::vegetation(double d)
 {
     PointSpheric p(rls, target);
     p.change_d(d);
