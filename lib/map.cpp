@@ -19,10 +19,22 @@ int Vegetation::GeoData::veg_func(Point* p)
         return 3;
 }
 
+// This function simulates relief
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// double h - the height of the relief point.
+
 double Elevation::GeoData::relief_func(Point* p)
 {
     return fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0);
 }
+
+// This function simulates distribution of the dielectric constant over the terrain
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// complex dp - the complex value of the dielectric constant.
 
 std::complex<double> DielectricPermittivity::GeoData::dielectric_func(Point* p)
 {
