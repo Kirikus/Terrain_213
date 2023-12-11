@@ -15,7 +15,7 @@ public:
 class Constant: public DielectricPermittivity
 {
 public:
-    Constant(double coeff)
+    Constant(std::complex<double> coeff)
         :coeff(coeff)
     {}
 
