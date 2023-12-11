@@ -6,7 +6,9 @@ namespace RP = ReflectionCoefficients;
 //  functions accept:
 //  1) pointer to the map;
 //  2) a spherical point whose target is a reflection point;
-//  3) incidence angle in radians.
+//  3) incidence angle in radians;
+//  4) wave lenght in meters;
+//  5) conductivity in simens/meter.
 //  functions return:
 //  1) frenel coefficient, which
 //  describes the ratio of the amplitude of the signal,
