@@ -11,8 +11,13 @@
 namespace tt = boost::test_tools;
 namespace RC = ReflectionCoefficients;
 namespace RP = ReflectionPoint;
+namespace EM = EarthModels;
 
 BOOST_AUTO_TEST_SUITE(test_reflection_multipliers)
+
+EM::ModelFlat fm;
+EM::ModelSpheric spm;
+EM::ModelEffectiveRadius efrm;
 
 BOOST_AUTO_TEST_CASE(test_ElevationReflectionMultiplier) {
     RC::ElevationReflectionMultiplier erm;
@@ -75,7 +80,7 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
     PointCartesian target(4, 0, 2);
     PointSpheric sp(rls, target);
 
-    PointCartesian rp = RP::FindReflectionPoint(sp, &map);
+    PointCartesian rp = RP::FindReflectionPoint(sp, &map, &fm);
     PointSpheric rp_t(rp, target);
     double incidence_angle = rp_t.get_phi();
 
