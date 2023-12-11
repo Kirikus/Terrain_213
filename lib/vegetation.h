@@ -21,7 +21,6 @@ public:
 // 1 - grass (a = 3.2, b = 1)
 // 2 - shrub or dense herbaceous vegetation (a = 0.32, b = 3)
 // 3 - dense forest (a = 0.032, b = 5)
-
 class Constant: public Vegetation
 {
 public:
@@ -39,7 +38,7 @@ class GeoData: public Vegetation
 public:
     int vegetation(Point* p) override {return veg_func(p);}
 private:
-    int veg_func(Point* p); //todo
+    int veg_func(Point* p);
 };
 }
 
