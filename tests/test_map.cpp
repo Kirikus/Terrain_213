@@ -11,6 +11,7 @@ namespace tt = boost::test_tools;
 namespace EL = Elevation;
 namespace VG = Vegetation;
 namespace DP = DielectricPermittivity;
+namespace CD = Conductivity;
 
 BOOST_AUTO_TEST_SUITE(test_map)
 
@@ -27,6 +28,19 @@ BOOST_AUTO_TEST_CASE(test_DielectricPermittivity) {
     BOOST_TEST(Geo_data_dp.dielectricPermittivity(&test3).real() == 15, tt::tolerance(1e-6));
     BOOST_TEST(const_dp.dielectricPermittivity(&test1).real() == 4, tt::tolerance(1e-6));
     BOOST_TEST(const_dp.dielectricPermittivity(&test2).real() == 4, tt::tolerance(1e-6));
+BOOST_AUTO_TEST_CASE(test_Conductivity) {
+    CD::Constant const_dp(4);
+    CD::GeoData Geo_data_dp;
+
+    Point2d test1(3, 3);
+    Point2d test2(4, 2);
+    Point2d test3(20, 0);
+
+    BOOST_TEST(Geo_data_dp.conductivity(&test1) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.conductivity(&test2) == 0, tt::tolerance(1e-6));
+    BOOST_TEST(Geo_data_dp.conductivity(&test3) == 15, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.conductivity(&test1) == 4, tt::tolerance(1e-6));
+    BOOST_TEST(const_dp.conductivity(&test2) == 4, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_Elevation) {
