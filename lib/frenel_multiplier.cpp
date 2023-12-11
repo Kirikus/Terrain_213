@@ -13,36 +13,36 @@ namespace RP = ReflectionCoefficients;
 //  reflected from a smooth surface to the amplitude of the incident signal.
 //  formulas (2.6) on the page 42
 
-std::complex<double> RP::FrenelReflectionMultiplier::horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle)
+std::complex<double> RP::FrenelReflectionMultiplier::horizontal_polarization(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double conductivity)
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
-    std::complex<double> eps = map1d.dielectric_permittivity(sp.get_d());
+    std::complex<double> eps = (map1d.dielectric_permittivity(sp.get_d()), -60 * wave_l * conductivity);
     std::complex<double> numerator = std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     std::complex<double> denumerator = std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     std::complex<double> frenel_coeff = numerator / denumerator;
     return frenel_coeff;
 }
 
-std::complex<double> RP::FrenelReflectionMultiplier::vertical_polarization(Map* map, PointSpheric sp, double incidence_angle)
+std::complex<double> RP::FrenelReflectionMultiplier::vertical_polarization(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double conductivity)
 {
     Map1d map1d(map, sp.get_center(), sp.get_target());
-    std::complex<double> eps = map1d.dielectric_permittivity(sp.get_d());
+    std::complex<double> eps = (map1d.dielectric_permittivity(sp.get_d()), -60 * wave_l * conductivity);
     std::complex<double> numerator = eps * std::sin(incidence_angle) - std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     std::complex<double> denumerator = eps * std::sin(incidence_angle) + std::sqrt(eps - std::pow(std::cos(incidence_angle), 2));
     std::complex<double> frenel_coeff = numerator / denumerator;
     return frenel_coeff;
 }
 
-std::complex<double> RP::FrenelReflectionMultiplier::circular_polarization(Map* map, PointSpheric sp, double incidence_angle)
+std::complex<double> RP::FrenelReflectionMultiplier::circular_polarization(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double conductivity)
 {
-    std::complex<double> vertical = vertical_polarization(map, sp, incidence_angle);
-    std::complex<double> horizontal = horizontal_polarization(map, sp, incidence_angle);
+    std::complex<double> vertical = vertical_polarization(map, sp, incidence_angle, wave_l, conductivity);
+    std::complex<double> horizontal = horizontal_polarization(map, sp, incidence_angle, wave_l, conductivity);
     return 0.5*(vertical + horizontal);
 }
 
-std::complex<double> RP::FrenelReflectionMultiplier::cross_polarization(Map* map, PointSpheric sp, double incidence_angle)
+std::complex<double> RP::FrenelReflectionMultiplier::cross_polarization(Map* map, PointSpheric sp, double incidence_angle, double wave_l, double conductivity)
 {
-    std::complex<double> vertical = vertical_polarization(map, sp, incidence_angle);
-    std::complex<double> horizontal = horizontal_polarization(map, sp, incidence_angle);
+    std::complex<double> vertical = vertical_polarization(map, sp, incidence_angle, wave_l, conductivity);
+    std::complex<double> horizontal = horizontal_polarization(map, sp, incidence_angle, wave_l, conductivity);
     return 0.5*(vertical - horizontal);
 }
