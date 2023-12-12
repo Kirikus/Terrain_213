@@ -27,7 +27,7 @@ public:
     {}
 
     double h(Point* p) {return elevation->h(p);}
-    int v(Point* p) {return vegetation->vegetation(p);}
+    VG::VegetationType v(Point* p) {return vegetation->vegetation(p);}
     double dp(Point* p) {return dielectricPermittivity->dielectricPermittivity(p);}
     double c(Point* p) {return conductivity->conductivity(p);}
 };
@@ -44,7 +44,7 @@ public:
     {}
 
     double height(double d);
-    int vegetation(double d);
+    VG::VegetationType vegetation(double d);
     double dielectric_permittivity(double d);
     double conductivity(double d);
 };

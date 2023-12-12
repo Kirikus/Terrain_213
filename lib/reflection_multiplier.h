@@ -16,7 +16,7 @@ public:
         :ElevationCoeff(ElevationCoeff), FrenelCoeff(FrenelCoeff), VegetationCoeff(VegetationCoeff)
     {}
 
-    std::complex<double> reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double conductivity, double sko, double a, double b);
+    std::complex<double> reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double conductivity, double sko, Vegetation::VegetationType veg);
 private:
     ElevationReflectionMultiplier* ElevationCoeff = nullptr;
     FrenelReflectionMultiplier* FrenelCoeff = nullptr;

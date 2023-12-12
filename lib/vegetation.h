@@ -5,40 +5,50 @@
 
 namespace Vegetation
 {
+
+enum class VegetationType
+{
+    None = 0,
+    Grass = 1,
+    Shrub = 2,
+    Forest = 3
+};
+
 class Vegetation
 {
 public:
-    virtual int vegetation(Point* p) = 0;
+    virtual VegetationType vegetation(Point* p) = 0;
 };
 
 class None: public Vegetation
 {
 public:
-    int vegetation(Point* p) override {return 0;}
+    VegetationType vegetation(Point* p) override {return VegetationType::None;}
 };
 
 // coeff - the coefficient is from 1 to 3
 // 1 - grass (a = 3.2, b = 1)
 // 2 - shrub or dense herbaceous vegetation (a = 0.32, b = 3)
 // 3 - dense forest (a = 0.032, b = 5)
+
 class Constant: public Vegetation
 {
 public:
-    Constant(double coeff)
+    Constant(VegetationType  coeff)
         :coeff(coeff)
     {}
 
-    int vegetation(Point* p) override {return coeff;}
+    VegetationType vegetation(Point* p) override {return coeff;}
 private:
-    int coeff;
+    VegetationType coeff;
 };
 
 class GeoData: public Vegetation
 {
 public:
-    int vegetation(Point* p) override {return veg_func(p);}
+    VegetationType vegetation(Point* p) override {return veg_func(p);}
 private:
-    int veg_func(Point* p);
+    VegetationType veg_func(Point* p);
 };
 }
 

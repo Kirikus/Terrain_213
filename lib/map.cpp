@@ -9,14 +9,14 @@
 // 2 - shrub or dense herbaceous vegetation (a = 0.32, b = 3)
 // 3 - dense forest (a = 0.032, b = 5)
 
-int Vegetation::GeoData::veg_func(Point* p)
+VG::VegetationType Vegetation::GeoData::veg_func(Point* p)
 {
     if (-10 <= p->get_x() && p->get_x() <= 10)
-        return 1;
+        return VegetationType::Grass;
     if (-15 <= p->get_x() && p->get_x() <= -10 || 10 <= p->get_x() && p->get_x() <= 15)
-        return 2;
+        return VegetationType::Shrub;
     else
-        return 3;
+        return VegetationType::Forest;
 }
 
 // This function simulates relief
@@ -60,7 +60,7 @@ double Map1d::height(double d)
     return data->h(&targ);
 }
 
-int Map1d::vegetation(double d)
+VG::VegetationType Map1d::vegetation(double d)
 {
     PointSpheric p(rls, target);
     p.change_d(d);

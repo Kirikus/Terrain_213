@@ -60,23 +60,18 @@ BOOST_AUTO_TEST_CASE(test_Elevation) {
 
 BOOST_AUTO_TEST_CASE(test_Vegetation) {
     VG::None non_veg;
-    VG::Constant constant_veg(2);
+    VG::Constant constant_veg(Vegetation::VegetationType::Shrub);
     VG::GeoData geo_data_veg;
 
     Point2d test1(2, 3);
     Point2d test2(16, 3);
 
-    int veg_none = 0;
-    int veg_grass = 1;
-    int veg_shrub = 2;
-    int veg_forest = 3;
-
-    BOOST_TEST(non_veg.vegetation(&test1) == veg_none, tt::tolerance(1e-6));
-    BOOST_TEST(non_veg.vegetation(&test2) == veg_none, tt::tolerance(1e-6));
-    BOOST_TEST(constant_veg.vegetation(&test1) == veg_shrub, tt::tolerance(1e-6));
-    BOOST_TEST(constant_veg.vegetation(&test2) == veg_shrub, tt::tolerance(1e-6));
-    BOOST_TEST(geo_data_veg.vegetation(&test1) == veg_grass, tt::tolerance(1e-6));
-    BOOST_TEST(geo_data_veg.vegetation(&test2) == veg_forest, tt::tolerance(1e-6));
+    BOOST_CHECK(non_veg.vegetation(&test1) == Vegetation::VegetationType::None);
+    BOOST_CHECK(non_veg.vegetation(&test2) == Vegetation::VegetationType::None);
+    BOOST_CHECK(constant_veg.vegetation(&test1) == Vegetation::VegetationType::Shrub);
+    BOOST_CHECK(constant_veg.vegetation(&test2) == Vegetation::VegetationType::Shrub);
+    BOOST_CHECK(geo_data_veg.vegetation(&test1) == Vegetation::VegetationType::Grass);
+    BOOST_CHECK(geo_data_veg.vegetation(&test2) == Vegetation::VegetationType::Forest);
 }
 
 BOOST_AUTO_TEST_CASE(test_simple_map) {
@@ -95,7 +90,7 @@ BOOST_AUTO_TEST_CASE(test_simple_map) {
     Map map(&plain, &veg, &dp, &c);
     BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(h2 != map.h(&point1), tt::tolerance(1e-6));
-    BOOST_TEST(map.v(&point1) == veg_none, tt::tolerance(1e-6));
+    BOOST_CHECK(map.v(&point1) == Vegetation::VegetationType::None);
     BOOST_TEST(map.dp(&point1) == 1, tt::tolerance(1e-6));
 }
 
@@ -118,8 +113,8 @@ BOOST_AUTO_TEST_CASE(test_GeoData) {
     Map map(&plain, &veg, &dp, &c);
     BOOST_TEST(h1 == map.h(&point1), tt::tolerance(1e-6));
     BOOST_TEST(h2 == map.h(&point2), tt::tolerance(1e-6));
-    BOOST_TEST(map.v(&point2) == veg_grass, tt::tolerance(1e-6));
-    BOOST_TEST(map.v(&point3) == veg_grass, tt::tolerance(1e-6));
+    BOOST_CHECK(map.v(&point2) == Vegetation::VegetationType::Grass);
+    BOOST_CHECK(map.v(&point3) == Vegetation::VegetationType::Grass);
     BOOST_TEST(map.dp(&point2) == 0, tt::tolerance(1e-6));
     BOOST_TEST(map.dp(&point3) == 0, tt::tolerance(1e-6));
     BOOST_TEST(map.dp(&point4) == 15, tt::tolerance(1e-6));
@@ -145,12 +140,12 @@ BOOST_AUTO_TEST_CASE(test_Map1d) {
 
     int veg_forest = 3;
 
-    double vege = map1d.vegetation(5);
-    double pd = map1d.vegetation(5);
+    Vegetation::VegetationType vege = map1d.vegetation(5);
+    Vegetation::VegetationType pd = map1d.vegetation(5);
     double h_d = map1d.height(0);
     BOOST_TEST(h_d == 15, tt::tolerance(1e-6));
-    BOOST_TEST(pd == 3, tt::tolerance(1e-6));
-    BOOST_TEST(vege == veg_forest, tt::tolerance(1e-6));
+    BOOST_CHECK(pd == Vegetation::VegetationType::Forest);
+    BOOST_CHECK(vege == Vegetation::VegetationType::Forest);
 
     double h_d2 = map1d.height(10);
     double h_d3 = map1d.height(5);

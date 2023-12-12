@@ -19,6 +19,11 @@ EM::ModelFlat fm;
 EM::ModelSpheric spm;
 EM::ModelEffectiveRadius efrm;
 
+VG::VegetationType grass = VG::VegetationType::Grass;
+VG::VegetationType shrub = VG::VegetationType::Shrub;
+VG::VegetationType forest = VG::VegetationType::Forest;
+
+
 BOOST_AUTO_TEST_CASE(test_ElevationReflectionMultiplier) {
     // Initialization
     RC::ElevationReflectionMultiplier erm;
@@ -58,16 +63,16 @@ BOOST_AUTO_TEST_CASE(test_VegetationReflectionMultiplier) {
     double a3 = 0.032;
     double b3 = 5;
 
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a1, b1, wave_l1) <= 1, tt::tolerance(1e-6));
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a1, b1, wave_l2) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, grass, wave_l1) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, grass, wave_l2) <= 1, tt::tolerance(1e-6));
 
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a2, b2, wave_l1) <= 1, tt::tolerance(1e-6));
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a2, b2, wave_l2) <= 1, tt::tolerance(1e-6));
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a2, b2, wave_l3) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, shrub, wave_l1) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, shrub, wave_l2) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, shrub, wave_l3) <= 1, tt::tolerance(1e-6));
 
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a3, b3, wave_l1) <= 1, tt::tolerance(1e-6));
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a3, b3, wave_l2) <= 1, tt::tolerance(1e-6));
-    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, a3, b3, wave_l3) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, shrub, wave_l1) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, shrub, wave_l2) <= 1, tt::tolerance(1e-6));
+    BOOST_TEST(vrm.vegetation_coeff(incidence_angle, shrub, wave_l3) <= 1, tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
@@ -143,10 +148,10 @@ BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     double cond1 = 15;
     double sko = wave_l / (8 * std::sin(incidence_angle));
     double frenel_coeff = erm.frenel_coefficient(incidence_angle, wave_l, sko / 2);// The Rayleigh criterion is used:
-    double vegetation_coeff = vrm.vegetation_coeff(incidence_angle, a, b, wave_l);
+    double vegetation_coeff = vrm.vegetation_coeff(incidence_angle, shrub, wave_l);
     std::complex<double> polarization_coeff = frm.horizontal_polarization(&map, sp, incidence_angle, wave_l, cond1);
 
-    BOOST_TEST(std::abs(rm.reflection_multiplier(&map, sp, horizontal, incidence_angle, wave_l, cond1, sko / 2, a, b)) == std::abs(frenel_coeff * vegetation_coeff * polarization_coeff), tt::tolerance(1e-6));
+    BOOST_TEST(std::abs(rm.reflection_multiplier(&map, sp, horizontal, incidence_angle, wave_l, cond1, sko / 2, shrub)) == std::abs(frenel_coeff * vegetation_coeff * polarization_coeff), tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
