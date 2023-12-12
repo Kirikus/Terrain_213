@@ -89,14 +89,14 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
 
     // Reflection dot receiving
     PointCartesian rls(0, 0, 2);
-    PointCartesian target(50, 0, 2);
+    PointCartesian target(25, 0, 2);
     PointSpheric sp(rls, target);
     PointCartesian rp = RP::FindReflectionPoint(sp, &map, &fm);
     PointSpheric rp_t(rp, target);
     double incidence_angle = rp_t.get_phi();
 
     // Setting the signal parameters
-    double wave_l = 1;
+    double wave_l = 1; // VHF
     double cond1 = 15; // For fresh water
     double cond2 = 0.005; // For poor soil
 
@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
 
     // Vertical polarization
     BOOST_TEST(std::abs(frm.vertical_polarization(&map, rp_t, incidence_angle, wave_l, cond1)) <= theory1, tt::tolerance(1e-6));
-    BOOST_TEST(std::abs(frm.vertical_polarization(&map, rp_t, incidence_angle, wave_l, cond1)) <= theory1, tt::tolerance(1e-6));
+    BOOST_TEST(std::abs(frm.vertical_polarization(&map, rp_t, incidence_angle, wave_l, cond2)) <= theory1, tt::tolerance(1e-6));
 
     // Circular polarization
     BOOST_TEST(std::abs(frm.circular_polarization(&map, rp_t, incidence_angle, wave_l, cond1)) <= theory1, tt::tolerance(1e-6));
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
     // Cross polarization
     BOOST_TEST(std::abs(frm.cross_polarization(&map, rp_t, incidence_angle, wave_l, cond1)) <= theory1, tt::tolerance(1e-6));
     BOOST_TEST(std::abs(frm.cross_polarization(&map, rp_t, incidence_angle, wave_l, cond1)) <= theory1, tt::tolerance(1e-6));
-} // TODO! BAD THEORY
+} // TODO
 
 BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     // Map initialization
@@ -147,9 +147,9 @@ BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     double wave_l = 1;
     double cond1 = 15;
     double sko = wave_l / (8 * std::sin(incidence_angle));
-    double frenel_coeff = erm.frenel_coefficient(incidence_angle, wave_l, sko / 2);// The Rayleigh criterion is used:
-    double vegetation_coeff = vrm.vegetation_coeff(incidence_angle, shrub, wave_l);
-    std::complex<double> polarization_coeff = frm.horizontal_polarization(&map, sp, incidence_angle, wave_l, cond1);
+    double frenel_coeff = erm.frenel_coefficient(incidence_angle, wave_l, sko / 2); // The Rayleigh criterion is used:
+    double vegetation_coeff = vrm.vegetation_coeff(incidence_angle, shrub, wave_l); // Shrub vegetation is used
+    std::complex<double> polarization_coeff = frm.horizontal_polarization(&map, sp, incidence_angle, wave_l, cond1); // Horizontal polarization is used
 
     BOOST_TEST(std::abs(rm.reflection_multiplier(&map, sp, horizontal, incidence_angle, wave_l, cond1, sko / 2, shrub)) == std::abs(frenel_coeff * vegetation_coeff * polarization_coeff), tt::tolerance(1e-6));
 }
