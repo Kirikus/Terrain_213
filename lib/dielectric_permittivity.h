@@ -9,27 +9,27 @@ namespace DielectricPermittivity
 class DielectricPermittivity
 {
 public:
-    virtual std::complex<double> dielectricPermittivity(Point* p) = 0;
+    virtual double dielectricPermittivity(Point* p) = 0;
 };
 
 class Constant: public DielectricPermittivity
 {
 public:
-    Constant(std::complex<double> coeff)
+    Constant(double coeff)
         :coeff(coeff)
     {}
 
-    std::complex<double> dielectricPermittivity(Point* p) override {return coeff;}
+    double dielectricPermittivity(Point* p) override {return coeff;}
 private:
-    std::complex<double> coeff;
+    double coeff;
 };
 
 class GeoData: public DielectricPermittivity
 {
 public:
-    std::complex<double> dielectricPermittivity(Point* p) override {return dielectric_func(p);}
+    double dielectricPermittivity(Point* p) override {return dielectric_func(p);}
 private:
-    std::complex<double> dielectric_func(Point* p);//todo
+    double dielectric_func(Point* p);//todo
 };
 }
 

@@ -14,14 +14,16 @@ namespace EL = Elevation;
 namespace VG = Vegetation;
 namespace DP = DielectricPermittivity;
 namespace EM = EarthModels;
+namespace CD = Conductivity;
 
 BOOST_AUTO_TEST_SUITE(ScreeningAngleSearch_tests)
 
 EL::GeoData geo;
 VG::None veg;
 DP::Constant dp(1);
+CD::Constant c(0);
 
-Map map(&geo, &veg, &dp);
+Map map(&geo, &veg, &dp, &c);
 
 EM::ModelFlat model1;
 EM::ModelSpheric model2;

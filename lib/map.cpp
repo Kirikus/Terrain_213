@@ -9,14 +9,14 @@
 // 2 - shrub or dense herbaceous vegetation (a = 0.32, b = 3)
 // 3 - dense forest (a = 0.032, b = 5)
 
-int Vegetation::GeoData::veg_func(Point* p)
+VG::VegetationType Vegetation::GeoData::veg_func(Point* p)
 {
     if (-10 <= p->get_x() && p->get_x() <= 10)
-        return 1;
+        return VegetationType::Grass;
     if (-15 <= p->get_x() && p->get_x() <= -10 || 10 <= p->get_x() && p->get_x() <= 15)
-        return 2;
+        return VegetationType::Shrub;
     else
-        return 3;
+        return VegetationType::Forest;
 }
 
 // This function simulates relief
@@ -27,7 +27,7 @@ int Vegetation::GeoData::veg_func(Point* p)
 
 double Elevation::GeoData::relief_func(Point* p)
 {
-    return fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0);
+    return fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0); // Plug
 }
 
 // This function simulates distribution of the dielectric constant over the terrain
@@ -36,11 +36,20 @@ double Elevation::GeoData::relief_func(Point* p)
 // function returns:
 // complex dp - the complex value of the dielectric constant.
 
-std::complex<double> DielectricPermittivity::GeoData::dielectric_func(Point* p)
+double DielectricPermittivity::GeoData::dielectric_func(Point* p)
 {
-    double real = fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0);
-    std::complex<double> dp(real, 0);
-    return dp;
+    return fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0); // Plig
+}
+
+// This function simulates distribution of the cunductivity over the terrain
+// function accepts:
+// 1) Point* p - a pointer to the point where we are looking at vegetation.
+// function returns:
+// double cond - the value of the conductivity.
+
+double Conductivity::GeoData::conductivity_func(Point* p)
+{
+    return fmax(-sqrt(pow((p->get_x() - 20), 2) + pow(p->get_y(), 2)) + 15, 0); // Plug
 }
 
 double Map1d::height(double d)
@@ -51,7 +60,7 @@ double Map1d::height(double d)
     return data->h(&targ);
 }
 
-int Map1d::vegetation(double d)
+VG::VegetationType Map1d::vegetation(double d)
 {
     PointSpheric p(rls, target);
     p.change_d(d);
@@ -59,10 +68,18 @@ int Map1d::vegetation(double d)
     return data->v(&targ);
 }
 
-std::complex<double> Map1d::dielectric_permittivity(double d)
+double Map1d::dielectric_permittivity(double d)
 {
     PointSpheric p(rls, target);
     p.change_d(d);
     PointCartesian targ = p.get_target();
     return data->dp(&targ);
+}
+
+double Map1d::conductivity(double d)
+{
+    PointSpheric p(rls, target);
+    p.change_d(d);
+    PointCartesian targ = p.get_target();
+    return data->c(&targ);
 }
