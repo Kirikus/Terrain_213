@@ -26,10 +26,10 @@ public:
         :elevation(e), vegetation(v), dielectricPermittivity(d), conductivity(c)
     {}
 
-    double h(Point* p) {return elevation->h(p);}
-    VG::VegetationType v(Point* p) {return vegetation->vegetation(p);}
-    double dp(Point* p) {return dielectricPermittivity->dielectricPermittivity(p);}
-    double c(Point* p) {return conductivity->conductivity(p);}
+    double h(Point* p) const {return elevation->h(p);}
+    VG::VegetationType v(Point* p) const {return vegetation->vegetation(p);}
+    double dp(Point* p) const {return dielectricPermittivity->dielectricPermittivity(p);}
+    double c(Point* p) const {return conductivity->conductivity(p);}
 };
 
 class Map1d
