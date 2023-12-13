@@ -6,6 +6,7 @@
 #define BOOST_TEST_DYN_LINK
 #endif
 #include <boost/test/unit_test.hpp>
+#include "qcustomplot.h"
 
 namespace tt = boost::test_tools;
 namespace EL = Elevation;
@@ -93,8 +94,9 @@ BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
 
     Map map(&plain, &non_veg, &const_dp, &c);
 
+    // y - const = 0, z = 2
     PointCartesian rls1(0, 0, 2);
-    PointCartesian target1(4, 0, 2);
+    PointCartesian target1(8, 0, 2);
     PointSpheric sp1(rls1, target1);
     PointCartesian reflection_point1_fm = RP::FindReflectionPoint(sp1, &map, &fm);
     PointCartesian reflection_point1_spm = RP::FindReflectionPoint(sp1, &map, &spm);
@@ -114,15 +116,15 @@ BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
     PointCartesian reflection_point3_spm = RP::FindReflectionPoint(sp3, &map, &spm);
     PointCartesian reflection_point3_efrm = RP::FindReflectionPoint(sp3, &map, &efrm);
 
-    BOOST_TEST(reflection_point1_fm.get_x() == 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_x() == target1.get_x() / 2, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1_fm.get_y() == 0, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1_fm.get_h() == 0, tt::tolerance(1e-4));
 
-    BOOST_TEST(reflection_point1_spm.get_x() == 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_x() == target1.get_x() / 2, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1_spm.get_y() == 0, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1_spm.get_h() == 0, tt::tolerance(1e-4));
 
-    BOOST_TEST(reflection_point1_efrm.get_x() == 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_x() == target1.get_x() / 2, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1_efrm.get_y() == 0, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point1_efrm.get_h() == 0, tt::tolerance(1e-4));
 
@@ -153,6 +155,73 @@ BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
     BOOST_TEST(reflection_point3_efrm.get_x() == 5, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point3_efrm.get_y() == 3, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point3_efrm.get_h() == 0, tt::tolerance(1e-4));
+
+    // Plot derivative graphic
+    Map1d map1d(&map, rls1, target1);
+    int argc = 1;
+    char *argv[] = {"Simple derivative test"};
+    QApplication a(argc, argv);
+
+    QCustomPlot customPlot = QCustomPlot();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.graph(0)->setPen(QPen(Qt::blue));
+    const double h_min = 0, h_max = 10;
+    const double step = 0.1;
+
+    // fill relief dots
+    QVector<double> x, y;
+    for (double d = 0; d < sp1.get_d(); d += step) {
+        y.push_back(map1d.height(d));
+        x.push_back(d);
+    }
+
+    PointSpheric center_refl(sp1.get_center(), reflection_point1_fm);
+
+    double d_center = 0;
+    double d_reflection = center_refl.get_d();
+    double d_target = sp1.get_d();
+
+    // from center to reflection point
+    QVector<double> x1, y1;
+    x1.push_back(d_center);
+    x1.push_back(d_reflection);
+    y1.push_back(sp1.get_center().get_h());
+    y1.push_back(reflection_point1_fm.get_h());
+
+    // from reflection point to target
+    QVector<double> x2, y2;
+    x2.push_back(d_reflection);
+    x2.push_back(d_target);
+    y2.push_back(reflection_point1_fm.get_h());
+    y2.push_back(sp1.get_target().get_h());
+
+    // add subgrid
+    customPlot.xAxis->grid()->setSubGridVisible(true);
+    customPlot.yAxis->grid()->setSubGridVisible(true);
+
+    // add labels
+    customPlot.xAxis->setLabel("distance, m");
+    customPlot.yAxis->setLabel("height, m");
+
+    customPlot.graph(0)->setData(x, y);
+    customPlot.graph(1)->setData(x1, y1);
+    customPlot.graph(2)->setData(x2, y2);
+
+    customPlot.graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+    customPlot.graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+
+    customPlot.graph(0)->rescaleAxes();
+
+
+    customPlot.setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
+                               QCP::iSelectPlottables);
+
+    customPlot.show();
+    customPlot.resize(640, 480);
+
+    a.exec();
 }
 
 BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
@@ -235,6 +304,73 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     BOOST_TEST(reflection_point3_efrm.get_x() == reflection_x3, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point3_efrm.get_y() == reflection_y3, tt::tolerance(1e-4));
     BOOST_TEST(reflection_point3_efrm.get_h() == reflection_h3, tt::tolerance(1e-4));
+
+    // Plot derivative graphic
+    Map1d map1d(&map, rls1, target1);
+    int argc = 1;
+    char *argv[] = {"Derivative test"};
+    QApplication a(argc, argv);
+
+    QCustomPlot customPlot = QCustomPlot();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.graph(0)->setPen(QPen(Qt::blue));
+    const double h_min = 0, h_max = 10;
+    const double step = 0.1;
+
+    // fill relief dots
+    QVector<double> x, y;
+    for (double d = 0; d < sp2.get_d(); d += step) {
+        y.push_back(map1d.height(d));
+        x.push_back(d);
+    }
+
+    PointSpheric center_refl(sp2.get_center(), reflection_point2_fm);
+
+    double d_center = 0;
+    double d_reflection = center_refl.get_d();
+    double d_target = sp2.get_d();
+
+    // from center to reflection point
+    QVector<double> x1, y1;
+    x1.push_back(d_center);
+    x1.push_back(d_reflection);
+    y1.push_back(sp2.get_center().get_h());
+    y1.push_back(reflection_point1_fm.get_h());
+
+    // from reflection point to target
+    QVector<double> x2, y2;
+    x2.push_back(d_reflection);
+    x2.push_back(d_target);
+    y2.push_back(reflection_point1_fm.get_h());
+    y2.push_back(sp2.get_target().get_h());
+
+    // add subgrid
+    customPlot.xAxis->grid()->setSubGridVisible(true);
+    customPlot.yAxis->grid()->setSubGridVisible(true);
+
+    // add labels
+    customPlot.xAxis->setLabel("distance, m");
+    customPlot.yAxis->setLabel("height, m");
+
+    customPlot.graph(0)->setData(x, y);
+    customPlot.graph(1)->setData(x1, y1);
+    customPlot.graph(2)->setData(x2, y2);
+
+    customPlot.graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+    customPlot.graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+
+    customPlot.graph(0)->rescaleAxes();
+
+
+    customPlot.setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
+                               QCP::iSelectPlottables);
+
+    customPlot.show();
+    customPlot.resize(640, 480);
+
+    a.exec();
 }
 
 BOOST_AUTO_TEST_CASE(test_plain_FindIncidenceAngle) {
