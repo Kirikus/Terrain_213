@@ -6,21 +6,28 @@
 #define BOOST_TEST_DYN_LINK
 #endif
 #include <boost/test/unit_test.hpp>
+#include "qcustomplot.h"
 
 namespace tt = boost::test_tools;
 namespace EL = Elevation;
 namespace VG = Vegetation;
 namespace DP = DielectricPermittivity;
 namespace RP = ReflectionPoint;
+namespace EM = EarthModels;
 
 BOOST_AUTO_TEST_SUITE(test_reflection_point)
+
+EM::ModelFlat fm;
+EM::ModelSpheric spm;
+EM::ModelEffectiveRadius efrm;
 
 BOOST_AUTO_TEST_CASE(test_null_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::Plain plain;
+    CD::Constant c(0);
 
-    Map map(&plain, &non_veg, &const_dp);
+    Map map(&plain, &non_veg, &const_dp, &c);
 
     PointCartesian rls(3, 3, 0);
     PointCartesian reflection_point(4, 2, 0);
@@ -33,9 +40,10 @@ BOOST_AUTO_TEST_CASE(test_null_derivative) {
 BOOST_AUTO_TEST_CASE(test_GeoData_simple_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
-    EL::GeoData GeoData;
+    EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&GeoData, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     PointCartesian rls(0, 0, 0);
     PointCartesian reflection_point(16, 0, 11);
@@ -48,9 +56,10 @@ BOOST_AUTO_TEST_CASE(test_GeoData_simple_derivative) {
 BOOST_AUTO_TEST_CASE(test_GeoData_derivative) {
     DP::Constant const_dp(4);
     VG::None non_veg;
-    EL::GeoData GeoData;
+    EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&GeoData, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     double delta_d = 0.001;
     PointCartesian rls(0, 0, 0);
@@ -61,7 +70,7 @@ BOOST_AUTO_TEST_CASE(test_GeoData_derivative) {
     Point2d rp2d(17, 4);
     Point2d rp2d2(rp.get_target().get_x(), rp.get_target().get_y());
 
-    double theory_derivative = (map.h(rp2d2) - map.h(rp2d))/delta_d;
+    double theory_derivative = (map.h(&rp2d2) - map.h(&rp2d))/delta_d;
     rp.change_d(rp.get_d() - delta_d);
     double derivative = RP::FindDerivative(rp, &map);
 
@@ -81,43 +90,147 @@ BOOST_AUTO_TEST_CASE(test_simple_FindReflectionPoint) {
     DP::Constant const_dp(4);
     VG::None non_veg;
     EL::Plain plain;
+    CD::Constant c(0);
 
-    Map map(&plain, &non_veg, &const_dp);
+    Map map(&plain, &non_veg, &const_dp, &c);
 
+    // y - const = 0, z = 2
     PointCartesian rls1(0, 0, 2);
-    PointCartesian target1(4, 0, 2);
+    PointCartesian target1(8, 0, 2);
     PointSpheric sp1(rls1, target1);
-    PointCartesian reflection_point1 = RP::FindReflectionPoint(sp1, &map);
+    PointCartesian reflection_point1_fm = RP::FindReflectionPoint(sp1, &map, &fm);
+    PointCartesian reflection_point1_spm = RP::FindReflectionPoint(sp1, &map, &spm);
+    PointCartesian reflection_point1_efrm = RP::FindReflectionPoint(sp1, &map, &efrm);
 
     PointCartesian rls2(2*sqrt(2), 2*sqrt(2), 3);
     PointCartesian target2(4*sqrt(2), 4*sqrt(2), 3);
     PointSpheric sp2(rls2, target2);
-    PointCartesian reflection_point2 = RP::FindReflectionPoint(sp2, &map);
+    PointCartesian reflection_point2_fm = RP::FindReflectionPoint(sp2, &map, &fm);
+    PointCartesian reflection_point2_spm = RP::FindReflectionPoint(sp2, &map, &spm);
+    PointCartesian reflection_point2_efrm = RP::FindReflectionPoint(sp2, &map, &efrm);
 
     PointCartesian rls3(5, 5, 3);
     PointCartesian target3(5, 1, 3);
     PointSpheric sp3(rls3, target3);
-    PointCartesian reflection_point3 = RP::FindReflectionPoint(sp3, &map);
+    PointCartesian reflection_point3_fm = RP::FindReflectionPoint(sp3, &map, &fm);
+    PointCartesian reflection_point3_spm = RP::FindReflectionPoint(sp3, &map, &spm);
+    PointCartesian reflection_point3_efrm = RP::FindReflectionPoint(sp3, &map, &efrm);
 
-    BOOST_TEST(reflection_point1.get_x() == 2, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point1.get_y() == 0, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point1.get_h() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_x() == target1.get_x() / 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_h() == 0, tt::tolerance(1e-4));
 
-    BOOST_TEST(reflection_point2.get_x() == 3*sqrt(2), tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point2.get_y() == 3*sqrt(2), tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point2.get_h() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_x() == target1.get_x() / 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_h() == 0, tt::tolerance(1e-4));
 
-    BOOST_TEST(reflection_point3.get_x() == 5, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point3.get_y() == 3, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point3.get_h() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_x() == target1.get_x() / 2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_h() == 0, tt::tolerance(1e-4));
+
+
+
+    BOOST_TEST(reflection_point2_fm.get_x() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_fm.get_y() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_fm.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point2_spm.get_x() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_spm.get_y() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_spm.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point2_efrm.get_x() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_efrm.get_y() == 3*sqrt(2), tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_efrm.get_h() == 0, tt::tolerance(1e-4));
+
+
+
+    BOOST_TEST(reflection_point3_fm.get_x() == 5, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_fm.get_y() == 3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_fm.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point3_spm.get_x() == 5, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_spm.get_y() == 3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_spm.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point3_efrm.get_x() == 5, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_efrm.get_y() == 3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_efrm.get_h() == 0, tt::tolerance(1e-4));
+
+    // Plot derivative graphic
+    Map1d map1d(&map, rls1, target1);
+    int argc = 1;
+    char *argv[] = {"Simple derivative test"};
+    QApplication a(argc, argv);
+
+    QCustomPlot customPlot = QCustomPlot();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.graph(0)->setPen(QPen(Qt::blue));
+    const double h_min = 0, h_max = 10;
+    const double step = 0.1;
+
+    // fill relief dots
+    QVector<double> x, y;
+    for (double d = 0; d < sp1.get_d(); d += step) {
+        y.push_back(map1d.height(d));
+        x.push_back(d);
+    }
+
+    PointSpheric center_refl(sp1.get_center(), reflection_point1_fm);
+
+    double d_center = 0;
+    double d_reflection = center_refl.get_d();
+    double d_target = sp1.get_d();
+
+    // from center to reflection point
+    QVector<double> x1, y1;
+    x1.push_back(d_center);
+    x1.push_back(d_reflection);
+    y1.push_back(sp1.get_center().get_h());
+    y1.push_back(reflection_point1_fm.get_h());
+
+    // from reflection point to target
+    QVector<double> x2, y2;
+    x2.push_back(d_reflection);
+    x2.push_back(d_target);
+    y2.push_back(reflection_point1_fm.get_h());
+    y2.push_back(sp1.get_target().get_h());
+
+    // add subgrid
+    customPlot.xAxis->grid()->setSubGridVisible(true);
+    customPlot.yAxis->grid()->setSubGridVisible(true);
+
+    // add labels
+    customPlot.xAxis->setLabel("distance, m");
+    customPlot.yAxis->setLabel("height, m");
+
+    customPlot.graph(0)->setData(x, y);
+    customPlot.graph(1)->setData(x1, y1);
+    customPlot.graph(2)->setData(x2, y2);
+
+    customPlot.graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+    customPlot.graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+
+    customPlot.graph(0)->rescaleAxes();
+
+
+    customPlot.setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
+                               QCP::iSelectPlottables);
+
+    customPlot.show();
+    customPlot.resize(640, 480);
+
+    a.exec();
 }
 
 BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     DP::Constant const_dp(4);
     VG::None non_veg;
-    EL::GeoData GeoData;
+    EL::GeoData geo_data;
+    CD::Constant c(0);
 
-    Map map(&GeoData, &non_veg, &const_dp);
+    Map map(&geo_data, &non_veg, &const_dp, &c);
 
     PointCartesian rls1(0, 0, 0);
     PointCartesian rls2(20, 20, 0);
@@ -128,9 +241,17 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     PointSpheric sp2(rls2, target1);
     PointSpheric sp3(rls3, target2);
 
-    PointCartesian reflection_point1 = RP::FindReflectionPoint(sp1, &map);
-    PointCartesian reflection_point2 = RP::FindReflectionPoint(sp2, &map);
-    PointCartesian reflection_point3 = RP::FindReflectionPoint(sp3, &map);
+    PointCartesian reflection_point1_fm = RP::FindReflectionPoint(sp1, &map, &fm);
+    PointCartesian reflection_point2_fm = RP::FindReflectionPoint(sp2, &map, &fm);
+    PointCartesian reflection_point3_fm = RP::FindReflectionPoint(sp3, &map, &fm);
+
+    PointCartesian reflection_point1_spm = RP::FindReflectionPoint(sp1, &map, &spm);
+    PointCartesian reflection_point2_spm = RP::FindReflectionPoint(sp2, &map, &spm);
+    PointCartesian reflection_point3_spm = RP::FindReflectionPoint(sp3, &map, &spm);
+
+    PointCartesian reflection_point1_efrm = RP::FindReflectionPoint(sp1, &map, &efrm);
+    PointCartesian reflection_point2_efrm = RP::FindReflectionPoint(sp2, &map, &efrm);
+    PointCartesian reflection_point3_efrm = RP::FindReflectionPoint(sp3, &map, &efrm);
 
     double reflection_x1 = 7.5;
     double reflection_y1 = 0;
@@ -144,18 +265,178 @@ BOOST_AUTO_TEST_CASE(test_GeoData_FindReflectionPoint) {
     double reflection_y3 = reflection_y1;
     double reflection_h3 = reflection_h1;
 
-    BOOST_TEST(reflection_point1.get_x() == reflection_x1, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point1.get_y() == reflection_y1, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point1.get_h() == reflection_h1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_x() == reflection_x1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_y() == reflection_y1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_fm.get_h() == reflection_h1, tt::tolerance(1e-4));
 
-    BOOST_TEST(reflection_point2.get_x() == reflection_x2, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point2.get_y() == reflection_y2, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point2.get_h() == reflection_h2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_x() == reflection_x1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_y() == reflection_y1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_spm.get_h() == reflection_h1, tt::tolerance(1e-4));
 
-    BOOST_TEST(reflection_point3.get_x() == reflection_x3, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point3.get_y() == reflection_y3, tt::tolerance(1e-4));
-    BOOST_TEST(reflection_point3.get_h() == reflection_h3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_x() == reflection_x1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_y() == reflection_y1, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point1_efrm.get_h() == reflection_h1, tt::tolerance(1e-4));
+
+
+
+    BOOST_TEST(reflection_point2_fm.get_x() == reflection_x2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_fm.get_y() == reflection_y2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_fm.get_h() == reflection_h2, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point2_spm.get_x() == reflection_x2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_spm.get_y() == reflection_y2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_spm.get_h() == reflection_h2, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point2_efrm.get_x() == reflection_x2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_efrm.get_y() == reflection_y2, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point2_efrm.get_h() == reflection_h2, tt::tolerance(1e-4));
+
+
+
+    BOOST_TEST(reflection_point3_fm.get_x() == reflection_x3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_fm.get_y() == reflection_y3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_fm.get_h() == reflection_h3, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point3_spm.get_x() == reflection_x3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_spm.get_y() == reflection_y3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_spm.get_h() == reflection_h3, tt::tolerance(1e-4));
+
+    BOOST_TEST(reflection_point3_efrm.get_x() == reflection_x3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_efrm.get_y() == reflection_y3, tt::tolerance(1e-4));
+    BOOST_TEST(reflection_point3_efrm.get_h() == reflection_h3, tt::tolerance(1e-4));
+
+    // Plot derivative graphic
+    Map1d map1d(&map, rls1, target1);
+    int argc = 1;
+    char *argv[] = {"Derivative test"};
+    QApplication a(argc, argv);
+
+    QCustomPlot customPlot = QCustomPlot();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.addGraph();
+    customPlot.graph(0)->setPen(QPen(Qt::blue));
+    const double h_min = 0, h_max = 10;
+    const double step = 0.1;
+
+    // fill relief dots
+    QVector<double> x, y;
+    for (double d = 0; d < sp2.get_d(); d += step) {
+        y.push_back(map1d.height(d));
+        x.push_back(d);
+    }
+
+    PointSpheric center_refl(sp2.get_center(), reflection_point2_fm);
+
+    double d_center = 0;
+    double d_reflection = center_refl.get_d();
+    double d_target = sp2.get_d();
+
+    // from center to reflection point
+    QVector<double> x1, y1;
+    x1.push_back(d_center);
+    x1.push_back(d_reflection);
+    y1.push_back(sp2.get_center().get_h());
+    y1.push_back(reflection_point1_fm.get_h());
+
+    // from reflection point to target
+    QVector<double> x2, y2;
+    x2.push_back(d_reflection);
+    x2.push_back(d_target);
+    y2.push_back(reflection_point1_fm.get_h());
+    y2.push_back(sp2.get_target().get_h());
+
+    // add subgrid
+    customPlot.xAxis->grid()->setSubGridVisible(true);
+    customPlot.yAxis->grid()->setSubGridVisible(true);
+
+    // add labels
+    customPlot.xAxis->setLabel("distance, m");
+    customPlot.yAxis->setLabel("height, m");
+
+    customPlot.graph(0)->setData(x, y);
+    customPlot.graph(1)->setData(x1, y1);
+    customPlot.graph(2)->setData(x2, y2);
+
+    customPlot.graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+    customPlot.graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, QPen(Qt::black, 0), QColor(40, 70, 255, 50), 10));
+
+    customPlot.graph(0)->rescaleAxes();
+
+
+    customPlot.setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
+                               QCP::iSelectPlottables);
+
+    customPlot.show();
+    customPlot.resize(640, 480);
+
+    a.exec();
 }
 
+BOOST_AUTO_TEST_CASE(test_plain_FindIncidenceAngle) {
+    DP::Constant const_dp(4);
+    VG::None non_veg;
+    EL::Plain plain;
+    CD::Constant c(0);
+
+    Map map(&plain, &non_veg, &const_dp, &c);
+
+    PointCartesian rls(0, 0, 2);
+    PointCartesian target(4, 0, 2);
+    PointSpheric sp1(rls, target);
+
+    PointCartesian reflection_point_fm = RP::FindReflectionPoint(sp1, &map, &fm);
+    PointCartesian reflection_point_spm = RP::FindReflectionPoint(sp1, &map, &spm);
+    PointCartesian reflection_point_efrm = RP::FindReflectionPoint(sp1, &map, &efrm);
+
+    PointSpheric sp2_fm(rls, reflection_point_fm);
+    double incidence_angle_fm = ReflectionPoint::FindIncidenceAngle(sp2_fm, &map, &fm);
+    double incidence_angle_spm = ReflectionPoint::FindIncidenceAngle(sp2_fm, &map, &spm);
+    double incidence_angle_efrm = ReflectionPoint::FindIncidenceAngle(sp2_fm, &map, &efrm);
+
+    double theory_angle = M_PI / 4;
+    BOOST_TEST(incidence_angle_fm == theory_angle, tt::tolerance(1e-4));
+    BOOST_TEST(incidence_angle_spm == theory_angle, tt::tolerance(1e-4));
+    BOOST_TEST(incidence_angle_efrm == theory_angle, tt::tolerance(1e-4));
+}
+
+BOOST_AUTO_TEST_CASE(test_GeoData_FindIncidenceAngle) {
+    DP::Constant const_dp(4);
+    VG::None non_veg;
+    EL::GeoData geo_data;
+    CD::Constant c(0);
+
+    Map map(&geo_data, &non_veg, &const_dp, &c);
+
+    PointCartesian rls(0, 0, 0);
+    PointCartesian target(20, 0, 40);
+    PointSpheric sp1(rls, target);
+
+    PointCartesian reflection_point_fm = RP::FindReflectionPoint(sp1, &map, &fm);
+    PointCartesian reflection_point_spm = RP::FindReflectionPoint(sp1, &map, &spm);
+    PointCartesian reflection_point_efrm = RP::FindReflectionPoint(sp1, &map, &efrm);
+
+    PointSpheric sp2_fm(rls, reflection_point_fm);
+    PointSpheric sp3_fm(target, reflection_point_fm);
+
+    PointSpheric sp2_spm(rls, reflection_point_fm);
+    PointSpheric sp3_spm(target, reflection_point_fm);
+
+    PointSpheric sp2_efrm(rls, reflection_point_fm);
+    PointSpheric sp3_efrm(target, reflection_point_fm);
+
+    double incidence_angle1_fm = ReflectionPoint::FindIncidenceAngle(sp2_fm, &map, &fm);
+    double incidence_angle2_fm = ReflectionPoint::FindIncidenceAngle(sp3_fm, &map, &fm);
+
+    double incidence_angle1_spm = ReflectionPoint::FindIncidenceAngle(sp2_fm, &map, &fm);
+    double incidence_angle2_spm = ReflectionPoint::FindIncidenceAngle(sp3_fm, &map, &fm);
+
+    double incidence_angle1_efrm = ReflectionPoint::FindIncidenceAngle(sp2_fm, &map, &fm);
+    double incidence_angle2_efrm = ReflectionPoint::FindIncidenceAngle(sp3_fm, &map, &fm);
+
+    BOOST_TEST(incidence_angle1_fm == incidence_angle2_fm, tt::tolerance(1e-4));
+    BOOST_TEST(incidence_angle1_spm == incidence_angle2_spm, tt::tolerance(1e-4));
+    BOOST_TEST(incidence_angle1_efrm == incidence_angle2_efrm, tt::tolerance(1e-4));
+}
 
 BOOST_AUTO_TEST_SUITE_END()

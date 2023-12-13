@@ -5,11 +5,13 @@
 #include "elevation.h"
 #include "vegetation.h"
 #include "dielectric_permittivity.h"
+#include "conductivity.h"
 #include <complex>
 
 namespace EL = Elevation;
 namespace VG = Vegetation;
 namespace DP = DielectricPermittivity;
+namespace CD = Conductivity;
 
 class Map
 {
@@ -17,15 +19,17 @@ private:
     EL::Elevation* elevation;
     VG::Vegetation* vegetation;
     DP::DielectricPermittivity* dielectricPermittivity;
+    CD::Conductivity* conductivity;
 
 public:
-    Map(EL::Elevation* e, VG::Vegetation* v, DP::DielectricPermittivity* d)
-        :elevation(e), vegetation(v), dielectricPermittivity(d)
+    Map(EL::Elevation* e, VG::Vegetation* v, DP::DielectricPermittivity* d, CD::Conductivity* c)
+        :elevation(e), vegetation(v), dielectricPermittivity(d), conductivity(c)
     {}
 
-    double h(Point2d p) {return elevation->h(p);}
-    double v(Point2d p) {return vegetation->vegetation(p);}
-    double dp(Point2d p) {return dielectricPermittivity->dielectricPermittivity(p);}
+    double h(Point* p) const {return elevation->h(p);}
+    VG::VegetationType v(Point* p) const {return vegetation->vegetation(p);}
+    double dp(Point* p) const {return dielectricPermittivity->dielectricPermittivity(p);}
+    double c(Point* p) const {return conductivity->conductivity(p);}
 };
 
 class Map1d
@@ -40,8 +44,9 @@ public:
     {}
 
     double height(double d);
-    double vegetation(double d);
+    VG::VegetationType vegetation(double d);
     double dielectric_permittivity(double d);
+    double conductivity(double d);
 };
 
 #endif // MAP_H

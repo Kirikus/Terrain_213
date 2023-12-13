@@ -2,9 +2,9 @@
 #define SCREENANGLE_H
 
 #include "point.h"
-#include <cmath>
+#include "map.h"
+#include "models_earth.h"
 
-double ModelReliefFunction(double x, double y);
-double FindScreeningAngle(PointSpheric sp, double R);
+double FindScreeningAngle(Map* map, EarthModels::ModelEarth* model, PointSpheric sp, double R);
 
 #endif // SCREENANGLE_H
