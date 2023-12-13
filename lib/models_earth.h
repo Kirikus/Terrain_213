@@ -28,7 +28,7 @@ public:
 
 private:
     double find_earth_angle(PointCartesian center, PointCartesian target);
-    double r_e = 6378000; // Earth radius in meters
+    const double r_e = 6378000; // Earth radius in meters
 };
 
 class ModelEffectiveRadius: public ModelEarth
@@ -39,8 +39,8 @@ public:
     double find_earth_angle(PointCartesian center, PointCartesian target);
 
 private:
-    double r_e = 6378000; // Earth radius in meters
-    double k = 4./3; // Convenient coefficient for approximation
+    const double r_e = 6378000; // Earth radius in meters
+    const double k = 4./3; // Convenient coefficient for approximation
 };
 
 }
