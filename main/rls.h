@@ -5,6 +5,9 @@
 #include <map>
 
 #include "../lib/point.h"
+#include "../lib/frenel_multiplier.h"
+
+namespace RC = ReflectionCoefficients;
 
 namespace Ui {
 class RLS;
@@ -25,6 +28,9 @@ public:
         double radius;
         double top_angle;
         double bottom_angle;
+        double wave_length;
+
+        RC::Polarization polarization;
     };
 
     Data get_all_data();  // find position and parameters of RLS
