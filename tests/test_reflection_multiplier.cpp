@@ -121,14 +121,14 @@ BOOST_AUTO_TEST_CASE(test_FrenelReflectionMultiplier) {
 BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     // Map initialization
     EL::Plain plain;
-    VG::None veg;
+    VG::GeoData veg;
     DP::Constant dp(2);
     CD::Constant c(0);
 
     Map map(&plain, &veg, &dp, &c);
 
-    PointCartesian rls(0, 0, 2);
-    PointCartesian target(4, 0, 2);
+    PointCartesian rls(10, 0, 2);
+    PointCartesian target(14, 0, 2);
     PointSpheric sp(rls, target);
 
     RC::ElevationReflectionMultiplier erm;
@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     double vegetation_coeff = vrm.vegetation_coeff(incidence_angle, shrub, wave_l); // Shrub vegetation is used
     std::complex<double> polarization_coeff = frm.horizontal_polarization(&map, sp, incidence_angle, wave_l, cond1); // Horizontal polarization is used
 
-    BOOST_TEST(std::abs(rm.reflection_multiplier(&map, sp, horizontal, incidence_angle, wave_l, cond1, sko / 2, shrub)) == std::abs(frenel_coeff * vegetation_coeff * polarization_coeff), tt::tolerance(1e-6));
+    BOOST_TEST(std::abs(rm.reflection_multiplier(&map, sp, horizontal, incidence_angle, wave_l, sko / 2)) == std::abs(frenel_coeff * vegetation_coeff * polarization_coeff), tt::tolerance(1e-6));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

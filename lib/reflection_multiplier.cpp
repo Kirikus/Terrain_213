@@ -2,9 +2,12 @@
 
 namespace RC = ReflectionCoefficients;
 
-std::complex<double> RC::ReflectionMultiplier::reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double conductivity, double sko, Vegetation::VegetationType veg)
+std::complex<double> RC::ReflectionMultiplier::reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double sko)
 {
+    PointCartesian reflection_point = sp.get_target();
     double el_c = ElevationCoeff.frenel_coefficient(incidence_angle, wave_l, sko);
+    double conductivity = map->c(&reflection_point);
+    Vegetation::VegetationType veg = map->v(&reflection_point);
 
     std::complex<double> fr_c;
     switch (pol) {
