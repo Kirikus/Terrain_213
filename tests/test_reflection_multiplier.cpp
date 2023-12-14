@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(test_ReflectionMultiplier) {
     RC::ElevationReflectionMultiplier erm;
     RC::VegetationReflectionMultiplier vrm;
     RC::FrenelReflectionMultiplier frm;
-    RC::ReflectionMultiplier rm(&erm, &frm, &vrm);
+    RC::ReflectionMultiplier rm;
 
     ReflectionCoefficients::Polarization horizontal = ReflectionCoefficients::HorizontalPolarization;
     ReflectionCoefficients::Polarization vertical = ReflectionCoefficients::VerticalPolarization;
