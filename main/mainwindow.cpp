@@ -5,6 +5,21 @@
 
 #include "./ui_mainwindow.h"
 #include "../lib/screenangle.h"
+#include "../lib/models_earth.h"
+#include "../lib/reflection_point.h"
+
+
+namespace EM = EarthModels;
+namespace EL = Elevation;
+namespace VG = Vegetation;
+namespace DP = DielectricPermittivity;
+namespace RP = ReflectionPoint;
+
+
+EM::ModelFlat fm;
+EM::ModelSpheric spm;
+EM::ModelEffectiveRadius efrm;
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -58,8 +73,6 @@ void MainWindow::_plot_angle_map(AngleMap angle_map)
     size_t n = angles.size();
     for (size_t i = 0; i < n; i++)
     {
-//        ui->visibility_map->addGraph(ui->visibility_map->xAxis, ui->visibility_map->yAxis);
-
         contour_curves.push_back(new QCPCurve(ui->visibility_map->xAxis, ui->visibility_map->yAxis));
         contour_curves.back()->data()->set(angle_map.contours[i].get_data(), true);
         contour_curves.back()->setPen(QPen(colors[i]));
@@ -118,6 +131,14 @@ void MainWindow::on_apply_button_clicked(QAbstractButton *button)
 
 AngleMap MainWindow::_screen_angle_search(RLS::Data data)
 {
+    EL::GeoData geo_data;
+    VG::None veg;
+    DP::Constant dp(0);
+    CD::Constant c(0);
+    EM::ModelFlat fe;
+
+    Map map(&geo_data, &veg, &dp, &c);
+
     double angle_iter = 1000;  // count of iteration in angle loop
     double R_iter = 100;  // count of iteration in radius loop
     double R_step = data.radius / R_iter;  // step for in cycle
@@ -144,7 +165,7 @@ AngleMap MainWindow::_screen_angle_search(RLS::Data data)
         {
             current_point.change_r(R);
 
-            double screening_angle = FindScreeningAngle(current_point, data.radius);
+            double screening_angle = FindScreeningAngle(&map, &fe, current_point, data.radius);
 
             for (int i = n - 2; i >= 0; i--)
             {
