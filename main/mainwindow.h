@@ -39,9 +39,7 @@ private:
 
     QVector<QVector<QCPCurve*>> rls_contour_curves;  // contours for screening angle map for each rls
     QVector<QColor> colors{QColor("#F2E750"), QColor("#F2B807"), QColor("#F28705"), QColor("#C52104"), QColor("#710301")};  // colors for graphs in angle map
-//    QVector<QColor> colors{QColor("#F2B807"), QColor("#F28705")};  // colors for graphs in angle map
     std::vector<double> angles = {(M_PI / 2) / 8, (M_PI / 2) / 8 * 2, (M_PI / 2) / 8 * 3, (M_PI / 2) / 8 * 4, (M_PI / 2)};  // angles for the i contour (<= angles[i])
-//    std::vector<double> angles = {(M_PI / 2) / 5, (M_PI / 2)};  // angles for the i contour (<= angles[i])
 
     void _plot_image();
     void _plot_angle_map(AngleMap angle_map);
