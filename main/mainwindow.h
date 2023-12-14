@@ -28,6 +28,7 @@ class MainWindow : public QMainWindow {
     void on_RLS_widgets_tabCloseRequested(int index);
     void on_add_RLS_clicked();
     void on_apply_button_clicked(QAbstractButton *button);
+    void on_apply_button_reflection_clicked(QAbstractButton *button);
 
 protected:
     virtual void resizeEvent(QResizeEvent *);
