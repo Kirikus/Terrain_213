@@ -23,7 +23,7 @@ public:
 class None: public Vegetation
 {
 public:
-    VegetationType vegetation(Point* p) override {return VegetationType::None;}
+    virtual VegetationType vegetation(Point* p) override {return VegetationType::None;}
 };
 
 // coeff - the coefficient is from 1 to 3
@@ -38,7 +38,7 @@ public:
         :coeff(coeff)
     {}
 
-    VegetationType vegetation(Point* p) override {return coeff;}
+    virtual VegetationType vegetation(Point* p) override {return coeff;}
 private:
     VegetationType coeff;
 };
@@ -46,7 +46,7 @@ private:
 class GeoData: public Vegetation
 {
 public:
-    VegetationType vegetation(Point* p) override {return veg_func(p);}
+    virtual VegetationType vegetation(Point* p) override {return veg_func(p);}
 private:
     VegetationType veg_func(Point* p);
 };

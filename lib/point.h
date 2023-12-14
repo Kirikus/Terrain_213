@@ -19,9 +19,9 @@ public:
         :x{x}, y{y}
     {}
 
-    double get_x() const override {return x;}
-    double get_y() const override {return y;}
-    double get_h() const override {return 0;}
+    virtual double get_x() const override {return x;}
+    virtual double get_y() const override {return y;}
+    virtual double get_h() const override {return 0;}
 
 private:
     double x; // in meters

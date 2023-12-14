@@ -18,7 +18,7 @@ public:
         :coeff(coeff)
     {}
 
-    double conductivity(Point* p) override {return coeff;}
+    virtual double conductivity(Point* p) override {return coeff;}
 private:
     double coeff;
 };
@@ -26,7 +26,7 @@ private:
 class GeoData: public Conductivity
 {
 public:
-    double conductivity(Point* p) override {return conductivity_func(p);}
+    virtual double conductivity(Point* p) override {return conductivity_func(p);}
 private:
     double conductivity_func(Point* p);//todo
 };
