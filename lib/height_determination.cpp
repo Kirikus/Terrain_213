@@ -3,6 +3,20 @@
 namespace EM = EarthModels;
 namespace RP = ReflectionPoint;
 
+// This function calculates target height
+// function accepts:
+// 1) pointer to the map;
+// 2) ModelEarth* model - pointer to the model data;
+// 3) rls point;
+// 4) target 2d point;
+// 5) reflection point pointer;
+// 6) r - distance between rls and target;
+// 7) r1 - distance between rls and reflection_point;
+// 8) r2 - distance between reflection_point and target;
+// 9) r_max - range resolution.
+// function returns:
+// 1) target height.
+
 double FindTargetHeight(Map* map, EM::ModelEarth* model, PointCartesian rls, Point2d target, PointCartesian* reflection_point, double r, double r1, double r2, double r_max)
 {
     PointCartesian target_cartesian(target.get_x(), target.get_y(), 0);

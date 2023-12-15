@@ -23,7 +23,7 @@ VG::VegetationType Vegetation::GeoData::veg_func(Point* p)
 // function accepts:
 // 1) Point* p - a pointer to the point where we are looking at vegetation.
 // function returns:
-// double h - the height of the relief point.
+// 1) double h - the height of the relief point.
 
 double Elevation::GeoData::relief_func(Point* p)
 {
@@ -34,7 +34,7 @@ double Elevation::GeoData::relief_func(Point* p)
 // function accepts:
 // 1) Point* p - a pointer to the point where we are looking at vegetation.
 // function returns:
-// complex dp - the complex value of the dielectric constant.
+// 1) complex dp - the complex value of the dielectric constant.
 
 double DielectricPermittivity::GeoData::dielectric_func(Point* p)
 {
@@ -45,7 +45,7 @@ double DielectricPermittivity::GeoData::dielectric_func(Point* p)
 // function accepts:
 // 1) Point* p - a pointer to the point where we are looking at vegetation.
 // function returns:
-// double cond - the value of the conductivity.
+// 1) double cond - the value of the conductivity.
 
 double Conductivity::GeoData::conductivity_func(Point* p)
 {
