@@ -20,9 +20,9 @@ public:
     {}
     Point2d() = default;
 
-    double get_x() const override {return x;}
-    double get_y() const override {return y;}
-    double get_h() const override {return 0;}
+    virtual double get_x() const override {return x;}
+    virtual double get_y() const override {return y;}
+    virtual double get_h() const override {return 0;}
 
     bool operator==(Point2d& point) { return (x == point.get_x()) && (y == point.get_y()); }
     bool operator!=(Point2d& point) { return !(*this == point); }

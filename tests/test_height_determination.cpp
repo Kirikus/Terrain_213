@@ -29,26 +29,56 @@ BOOST_AUTO_TEST_CASE(test_plain_height_determination) {
 
     PointCartesian center1(0, 0, 4);
     Point2d target1(8, 0);
+    PointCartesian refl_point1_fm(0, 0, 0);
+    PointCartesian refl_point1_spm(0, 0, 0);
+    PointCartesian refl_point1_efrm(0, 0, 0);
 
     PointCartesian center2(2, 2, 2);
     Point2d target2(6, 6);
+    PointCartesian refl_point2_fm(0, 0, 0);
+    PointCartesian refl_point2_spm(0, 0, 0);
+    PointCartesian refl_point2_efrm(0, 0, 0);
 
-    double h1_fm = FindTargetHeight(&map, &fm, center1, target1, 8, 4 * std::sqrt(2), 4 * std::sqrt(2), 10);
-    double h1_spm = FindTargetHeight(&map, &spm, center1, target1, 8, 4 * std::sqrt(2), 4 * std::sqrt(2), 10);
-    double h1_efrm = FindTargetHeight(&map, &efrm, center1, target1, 8, 4 * std::sqrt(2), 4 * std::sqrt(2), 10);
+    double h1_fm = FindTargetHeight(&map, &fm, center1, target1, &refl_point1_fm, 8, 4 * std::sqrt(2), 4 * std::sqrt(2), 10);
+    double h1_spm = FindTargetHeight(&map, &spm, center1, target1, &refl_point1_spm, 8, 4 * std::sqrt(2), 4 * std::sqrt(2), 10);
+    double h1_efrm = FindTargetHeight(&map, &efrm, center1, target1, &refl_point1_efrm, 8, 4 * std::sqrt(2), 4 * std::sqrt(2), 10);
 
-    double h2_fm = FindTargetHeight(&map, &fm, center2, target2, 4 * std::sqrt(2), 2 * sqrt(3), 2 * sqrt(3), 10);
-    double h2_spm = FindTargetHeight(&map, &spm, center2, target2, 4 * std::sqrt(2), 2 * sqrt(3), 2 * sqrt(3), 10);
-    double h2_efrm = FindTargetHeight(&map, &efrm, center2, target2, 4 * std::sqrt(2), 2 * sqrt(3), 2 * sqrt(3), 10);
+    double h2_fm = FindTargetHeight(&map, &fm, center2, target2, &refl_point2_fm, 4 * std::sqrt(2), 2 * sqrt(3), 2 * sqrt(3), 10);
+    double h2_spm = FindTargetHeight(&map, &spm, center2, target2, &refl_point2_spm, 4 * std::sqrt(2), 2 * sqrt(3), 2 * sqrt(3), 10);
+    double h2_efrm = FindTargetHeight(&map, &efrm, center2, target2, &refl_point2_efrm, 4 * std::sqrt(2), 2 * sqrt(3), 2 * sqrt(3), 10);
 
 
     BOOST_TEST(h1_fm == 4, tt::tolerance(1e-4));
     BOOST_TEST(h1_spm == 4, tt::tolerance(1e-4));
     BOOST_TEST(h1_efrm == 4, tt::tolerance(1e-4));
 
+    BOOST_TEST(refl_point1_fm.get_x() == 4, tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_fm.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_fm.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(refl_point1_spm.get_x() == 4, tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_spm.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_spm.get_h() == 0, tt::tolerance(1e-4));
+
+    BOOST_TEST(refl_point1_efrm.get_x() == 4, tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_efrm.get_y() == 0, tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_efrm.get_h() == 0, tt::tolerance(1e-4));
+
     BOOST_TEST(h2_fm == 2, tt::tolerance(1e-2));
     BOOST_TEST(h2_spm == 2, tt::tolerance(1e-2));
     BOOST_TEST(h2_efrm == 2, tt::tolerance(1e-2));
+
+    BOOST_TEST(refl_point2_fm.get_x() == 4, tt::tolerance(1e-2));
+    BOOST_TEST(refl_point2_fm.get_y() == 4, tt::tolerance(1e-2));
+    BOOST_TEST(refl_point2_fm.get_h() == 0, tt::tolerance(1e-2));
+
+    BOOST_TEST(refl_point2_spm.get_x() == 4, tt::tolerance(1e-2));
+    BOOST_TEST(refl_point2_spm.get_y() == 4, tt::tolerance(1e-2));
+    BOOST_TEST(refl_point2_spm.get_h() == 0, tt::tolerance(1e-2));
+
+    BOOST_TEST(refl_point2_efrm.get_x() == 4, tt::tolerance(1e-2));
+    BOOST_TEST(refl_point2_efrm.get_y() == 4, tt::tolerance(1e-2));
+    BOOST_TEST(refl_point2_efrm.get_h() == 0, tt::tolerance(1e-2));
 }
 
 BOOST_AUTO_TEST_CASE(test_geo_data_height_determination) {
@@ -84,10 +114,25 @@ BOOST_AUTO_TEST_CASE(test_geo_data_height_determination) {
     double r2_efrm = efrm.find_r(sp_t.get_center(), sp_t.get_target());
 
     Point2d target2d(target1.get_x(), target1.get_y());
+    PointCartesian refl_point1_fm(0, 0, 0);
+    PointCartesian refl_point1_spm(0, 0, 0);
+    PointCartesian refl_point1_efrm(0, 0, 0);
 
-    double h1_fm = FindTargetHeight(&map, &fm, center1, target2d, r_fm, r1_fm, r2_fm, r1_fm + r2_fm + r_fm);
-    double h1_spm = FindTargetHeight(&map, &spm, center1, target2d, r_spm, r1_spm, r2_spm, r1_spm + r2_spm + r_spm);
-    double h1_efrm = FindTargetHeight(&map, &efrm, center1, target2d, r_efrm, r1_efrm, r2_efrm, r1_efrm + r2_efrm + r_efrm);
+    double h1_fm = FindTargetHeight(&map, &fm, center1, target2d, &refl_point1_fm, r_fm, r1_fm, r2_fm, r1_fm + r2_fm + r_fm);
+    double h1_spm = FindTargetHeight(&map, &spm, center1, target2d, &refl_point1_spm, r_spm, r1_spm, r2_spm, r1_spm + r2_spm + r_spm);
+    double h1_efrm = FindTargetHeight(&map, &efrm, center1, target2d, &refl_point1_efrm, r_efrm, r1_efrm, r2_efrm, r1_efrm + r2_efrm + r_efrm);
+
+    BOOST_TEST(refl_point1_fm.get_x() == reflection_point1_fm.get_x(), tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_fm.get_y() == reflection_point1_fm.get_y(), tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_fm.get_h() == reflection_point1_fm.get_h(), tt::tolerance(1e-4));
+
+    BOOST_TEST(refl_point1_spm.get_x() == reflection_point1_spm.get_x(), tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_spm.get_y() == reflection_point1_spm.get_y(), tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_spm.get_h() == reflection_point1_spm.get_h(), tt::tolerance(1e-4));
+
+    BOOST_TEST(refl_point1_efrm.get_x() == reflection_point1_efrm.get_x(), tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_efrm.get_y() == reflection_point1_efrm.get_y(), tt::tolerance(1e-4));
+    BOOST_TEST(refl_point1_efrm.get_h() == reflection_point1_efrm.get_h(), tt::tolerance(1e-4));
 
     BOOST_TEST(h1_fm == 40, tt::tolerance(1e-4));
     BOOST_TEST(h1_spm == 40, tt::tolerance(1e-4));

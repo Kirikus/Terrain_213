@@ -3,7 +3,7 @@
 namespace EM = EarthModels;
 namespace RP = ReflectionPoint;
 
-double FindTargetHeight(Map* map, EM::ModelEarth* model, PointCartesian rls, Point2d target, double r, double r1, double r2, double r_max)
+double FindTargetHeight(Map* map, EM::ModelEarth* model, PointCartesian rls, Point2d target, PointCartesian* reflection_point, double r, double r1, double r2, double r_max)
 {
     PointCartesian target_cartesian(target.get_x(), target.get_y(), 0);
     PointSpheric sp(rls, target_cartesian);
@@ -49,6 +49,7 @@ double FindTargetHeight(Map* map, EM::ModelEarth* model, PointCartesian rls, Poi
             {
                 deviation_min = curr_deviation;
                 target_height = curr_h;
+                *reflection_point = relief_dot;
             }
 
             curr_h += step_h;

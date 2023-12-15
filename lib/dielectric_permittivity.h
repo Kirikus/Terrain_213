@@ -19,7 +19,7 @@ public:
         :coeff(coeff)
     {}
 
-    double dielectricPermittivity(Point* p) override {return coeff;}
+    virtual double dielectricPermittivity(Point* p) override {return coeff;}
 private:
     double coeff;
 };
@@ -27,7 +27,7 @@ private:
 class GeoData: public DielectricPermittivity
 {
 public:
-    double dielectricPermittivity(Point* p) override {return dielectric_func(p);}
+    virtual double dielectricPermittivity(Point* p) override {return dielectric_func(p);}
 private:
     double dielectric_func(Point* p);//todo
 };
