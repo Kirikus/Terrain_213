@@ -30,7 +30,7 @@ public:
         double bottom_angle;
         double wave_length;
 
-        RC::Polarization polarization;
+        RC::Polarization polarization = RC::HorizontalPolarization;
     };
 
     Data get_all_data();  // find position and parameters of RLS
