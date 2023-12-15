@@ -6,7 +6,10 @@
 #include "./ui_mainwindow.h"
 #include "../lib/screenangle.h"
 #include "../lib/models_earth.h"
-#include "../lib/reflection_point.h"
+
+#include "../lib/frenel_multiplier.h"
+#include "../lib/reflection_multiplier.h"
+#include "../lib/map.h"
 
 
 namespace EM = EarthModels;
@@ -19,6 +22,7 @@ namespace RP = ReflectionPoint;
 EM::ModelFlat fm;
 EM::ModelSpheric spm;
 EM::ModelEffectiveRadius efrm;
+std::vector<EM::ModelEarth*> models{&fm, &spm, &efrm};
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -45,7 +49,6 @@ void MainWindow::_plot_image()
     std::pair<double, double> axes_range = std::pair<double, double>(200, 200);  // range of Ox and Oy for default map image
     ui->visibility_map->xAxis->setRange(-axes_range.first, axes_range.first);
     ui->visibility_map->yAxis->setRange(-axes_range.second, axes_range.second);
-//    ui->visibility_map->addGraph();
     ui->visibility_map->legend->setVisible(true);
     QFont legendFont = font();  // start out with MainWindow's font..
     legendFont.setPointSize(9); // and make a bit smaller for legend
@@ -64,16 +67,18 @@ void MainWindow::_plot_image()
     MyImage->setScaled(true, Qt::AspectRatioMode::IgnoreAspectRatio);
 }
 
-void MainWindow::_plot_angle_map(AngleMap angle_map)
+void MainWindow::_plot_angle_map(AngleMap angle_map, PointCartesian rls)
 {
-//    ui->visibility_map->graph()->setName("Bottom maxwell function");
-
     QVector<QCPCurve*> contour_curves;
 
     size_t n = angles.size();
     for (size_t i = 0; i < n; i++)
     {
         contour_curves.push_back(new QCPCurve(ui->visibility_map->xAxis, ui->visibility_map->yAxis));
+        if (i == 0)
+            contour_curves.back()->setName(QString("Угол закрытия > ") + QString::number(0));
+        else
+            contour_curves.back()->setName(QString("Угол закрытия > ") + QString::number(std::round(angles[i - 1] * 100) / 100));
         contour_curves.back()->data()->set(angle_map.contours[i].get_data(), true);
         contour_curves.back()->setPen(QPen(colors[i]));
 
@@ -82,17 +87,29 @@ void MainWindow::_plot_angle_map(AngleMap angle_map)
         contour_curves.back()->setBrush(QBrush(brush_color));
     }
 
+    QVector<double> rls_x{rls.get_x()};
+    QVector<double> rls_y{rls.get_y()};
+    ui->visibility_map->graph(0)->addData(rls_x, rls_y);
+
     rls_contour_curves.push_back(contour_curves);
 }
 
 MainWindow::~MainWindow()
 {
-    for (auto rls : rls_contour_curves)
-        for (auto contour : rls)
-            delete contour;
+    if (!rls_contour_curves.empty())
+        for (auto rls : rls_contour_curves)
+            for (auto contour : rls)
+                delete contour;
     delete ui;
 }
 
+void MainWindow::get_angles()
+{
+    angles[0] = ui->angle_1->value();
+    angles[1] = ui->angle_2->value();
+    angles[2] = ui->angle_3->value();
+    angles[3] = ui->angle_4->value();
+}
 
 void MainWindow::on_add_RLS_clicked()
 {
@@ -110,32 +127,56 @@ void MainWindow::on_RLS_widgets_tabCloseRequested(int index)
 
 void MainWindow::on_apply_button_clicked(QAbstractButton *button)
 {
+    get_angles();
+
     if (!rls_contour_curves.empty())  // it's replot
     {
         for (auto rls : rls_contour_curves)
             for (auto contour : rls)
-                delete contour;
+                ui->visibility_map->removePlottable(contour);
+
         rls_contour_curves.clear();
-        ui->visibility_map->clearItems();
-        ui->visibility_map->replot();
+        ui->visibility_map->clearGraphs();
     }
+
+    ui->visibility_map->addGraph();
+    ui->visibility_map->graph(0)->setName("РЛС");
+    ui->visibility_map->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::red, 0), QColor(255, 0, 0, 200), 10));
+    ui->visibility_map->graph(0)->setLineStyle(QCPGraph::lsNone);
 
     for (int i = 0; i < ui->RLS_widgets->count(); ++i)
     {
         RLS* rls = (RLS*)ui->RLS_widgets->widget(i);
         RLS::Data data = rls->get_all_data();
         AngleMap angle_map = _screen_angle_search(data);
-        _plot_angle_map(angle_map);
+        _plot_angle_map(angle_map, data.position);
     }
+    ui->visibility_map->replot();
 }
 
 AngleMap MainWindow::_screen_angle_search(RLS::Data data)
 {
+    EM::ModelEarth* model;
+    int i = ui->reflection_calculation_mode->checkedId();
+    switch(i)
+    {
+    case -3:  // flat
+        model = models[0];
+        break;
+    case -2:  // curve
+        model = models[1];
+        break;
+    case -4:  // reflection
+        model = models[2];
+        break;
+    default:
+        break;
+    }
+
     EL::GeoData geo_data;
     VG::None veg;
     DP::Constant dp(0);
     CD::Constant c(0);
-    EM::ModelFlat fe;
 
     Map map(&geo_data, &veg, &dp, &c);
 
@@ -151,8 +192,6 @@ AngleMap MainWindow::_screen_angle_search(RLS::Data data)
 
     int last_external_contour = -1;  // index of last contour which was external
     PointSpheric previous_external_point(current_point);
-//    PointSpheric previous_internal_point(current_point);
-
     PointSpheric previous_internal_point(current_point);  // prevoius internal point of external contour
 
     for (double azimuth = 0; azimuth < 2 * M_PI; azimuth += 2 * M_PI / angle_iter)
@@ -164,18 +203,15 @@ AngleMap MainWindow::_screen_angle_search(RLS::Data data)
         for (double R = R_step; R <= data.radius; R += R_step)
         {
             current_point.change_r(R);
+            double screening_angle = FindScreeningAngle(&map, model, current_point, data.radius);
 
-            double screening_angle = FindScreeningAngle(&map, &fe, current_point, data.radius);
-
-            for (int i = n - 2; i >= 0; i--)
-            {
+            for (int i = 0; i < n - 1; i++)
                 if (screening_angle > angles[i])
                 {
                     max_points[i + 1] = PointScreenAngle(current_point, screening_angle);
                     all_empty = false;
                     break;
                 }
-            }
         }
 
         if (all_empty)
@@ -256,7 +292,6 @@ QVector<QCPCurveData> Contour::get_data()
     if (if_zero())
         return get_zero_data();
 
-//    QVector<QCPCurveData> result(point_count);
     QVector<QCPCurveData> result;
 
     bool point_before = false;  // if there were point for previous azimuth value
@@ -325,7 +360,6 @@ QVector<QCPCurveData> Contour::get_data()
     }
     return result;
 }
-
 
 QVector<QCPCurveData> Contour::get_zero_data()
 {

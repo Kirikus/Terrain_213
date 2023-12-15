@@ -40,10 +40,9 @@ private:
 
     QVector<QVector<QCPCurve*>> rls_contour_curves;  // contours for screening angle map for each rls
     QVector<QColor> colors{QColor("#F2E750"), QColor("#F2B807"), QColor("#F28705"), QColor("#C52104"), QColor("#710301")};  // colors for graphs in angle map
-    std::vector<double> angles = {(M_PI / 2) / 8, (M_PI / 2) / 8 * 2, (M_PI / 2) / 8 * 3, (M_PI / 2) / 8 * 4, (M_PI / 2)};  // angles for the i contour (<= angles[i])
-
+    std::vector<double> angles = {(M_PI / 2) / 16, (M_PI / 2) / 16 * 2, (M_PI / 2) / 16 * 3, (M_PI / 2) / 16 * 4, (M_PI / 2)};  // angles for the i contour (<= angles[i])
     void _plot_image();
-    void _plot_angle_map(AngleMap angle_map);
+    void _plot_angle_map(AngleMap angle_map, PointCartesian rls);
     AngleMap _screen_angle_search(RLS::Data data);
     void plot_reflection_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
     std::complex<double> find_reflection_coefficient(RLS::Data rls_data, Map* map, PointCartesian reflection_point, EarthModels::ModelEarth* model);
