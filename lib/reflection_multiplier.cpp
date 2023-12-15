@@ -2,6 +2,19 @@
 
 namespace RC = ReflectionCoefficients;
 
+// This function calculates total reflectance coefficient
+// function accepts:
+// 1) pointer to the map;
+// 2) sp - related rls and relfection point;
+// 3) pol - antenna polarization;
+// 4) incidence angle;
+// 5) wave lenght;
+// 6) conductivity;
+// 7) sko;
+// 8) veg.
+// function returns:
+// 1) total reflectance coefficient.
+
 std::complex<double> RC::ReflectionMultiplier::reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double conductivity, double sko, Vegetation::VegetationType veg)
 {
     double el_c = ElevationCoeff.frenel_coefficient(incidence_angle, wave_l, sko);
