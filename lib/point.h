@@ -94,15 +94,11 @@ private:
 struct PointScreenAngle
 {
 public:
-    Point2d point2d{0, 0};
     PointSpheric point_spheric;
-    double screening_angle;
+    double screening_angle{-1};
 
-    PointScreenAngle(const Point2d point, const double angle) : point2d{point}, screening_angle{angle} {};
+    PointScreenAngle() = default;
     PointScreenAngle(const PointSpheric point, const double angle) : point_spheric{point}, screening_angle{angle} {};
-    PointScreenAngle(const double x, const double y, const double angle) : point2d{x, y}, screening_angle{angle} {};
-    PointScreenAngle() : point2d{0, 0}, screening_angle{-1} {};
-
     bool empty() { return screening_angle == -1 ? true : false; }
 };
 
