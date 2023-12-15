@@ -111,7 +111,7 @@ void MainWindow::on_visibility_map_apply_button_clicked(QAbstractButton *button)
 AngleMap MainWindow::visibility_map_screen_angle_search(RLS::Data data)
 {
     EM::ModelEarth* model;
-    int i = ui->reflection_calculation_mode->checkedId();
+    int i = ui->visibility_map_calculation_mode->checkedId();
     switch(i)
     {
     case -3:  // flat

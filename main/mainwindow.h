@@ -40,6 +40,9 @@ class MainWindow : public QMainWindow {
 
     void on_reflection_apply_button_clicked(QAbstractButton *button);
 
+    void on_stationary_height_apply_button_clicked(QAbstractButton *button);
+
+
 protected:
     virtual void resizeEvent(QResizeEvent *);
 
@@ -50,6 +53,11 @@ private:
     EM::ModelSpheric spm;
     EM::ModelEffectiveRadius efrm;
     std::vector<EM::ModelEarth*> models{&fm, &spm, &efrm};
+
+    DP::Constant const_dp{4};
+    VG::GeoData vegetation;
+    EL::GeoData geo_data;
+    CD::Constant c{5};
 
     //------VISIBILITY MAP------------------------------------------------
     size_t visibility_map_rls_index = 0;  // index of last RLS in RLS_widget
@@ -65,6 +73,12 @@ private:
     //------REFLECTION POINT----------------------------------------------
     void reflection_plot_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
     std::complex<double> reflection_find_coefficient(RLS::Data rls_data, Map* map, PointCartesian reflection_point, EarthModels::ModelEarth* model);
+
+    //------STATIONARY HEIGHT DETERMINATION-------------------------------
+    void stationary_height_plot_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
+
+    //------DINAMIC HEIGHT DETERMINATION-------------------------------
+    void dinamic_height_plot_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
 };
 
 #endif  // MAINWINDOW_H

@@ -32,12 +32,7 @@ void MainWindow::on_reflection_apply_button_clicked(QAbstractButton *button)
         break;
     }
 
-    DP::Constant const_dp(4);
-    VG::GeoData veg;
-    EL::GeoData geo_data;
-    CD::Constant c(5);
-
-    Map map(&geo_data, &veg, &const_dp, &c);
+    Map map(&geo_data, &vegetation, &const_dp, &c);
 
     PointCartesian target;
     target.change_x(ui->reflection_object_x->value());
@@ -160,5 +155,5 @@ void MainWindow::reflection_plot_graph(PointCartesian rls, PointCartesian target
     ui->reflection_point_graph->yAxis->setLabel("Высота, м");
 
     ui->reflection_point_graph->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
-    ui->visibility_map->replot();
+    ui->reflection_point_graph->replot();
 }
