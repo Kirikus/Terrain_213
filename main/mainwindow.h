@@ -26,10 +26,11 @@ class MainWindow : public QMainWindow {
     ~MainWindow();
 
   private slots:
-    void on_RLS_widgets_tabCloseRequested(int index);
-    void on_add_RLS_clicked();
-    void on_apply_button_clicked(QAbstractButton *button);
-    void on_apply_button_reflection_clicked(QAbstractButton *button);
+    void on_visibility_map_apply_button_clicked(QAbstractButton *button);
+    void on_visibility_map_add_RLS_clicked();
+    void on_visibility_map_RLS_widgets_tabCloseRequested(int index);
+
+    void on_reflection_apply_button_clicked(QAbstractButton *button);
 
 protected:
     virtual void resizeEvent(QResizeEvent *);
@@ -40,7 +41,7 @@ private:
 
     QVector<QVector<QCPCurve*>> rls_contour_curves;  // contours for screening angle map for each rls
     QVector<QColor> colors{QColor("#F2E750"), QColor("#F2B807"), QColor("#F28705"), QColor("#C52104"), QColor("#710301")};  // colors for graphs in angle map
-    std::vector<double> angles = {(M_PI / 2) / 16, (M_PI / 2) / 16 * 2, (M_PI / 2) / 16 * 3, (M_PI / 2) / 16 * 4, (M_PI / 2)};  // angles for the i contour (<= angles[i])
+    std::vector<double> angles;  // angles for the i contour (<= angles[i])
     void _plot_image();
     void _plot_angle_map(AngleMap angle_map, PointCartesian rls);
     AngleMap _screen_angle_search(RLS::Data data);

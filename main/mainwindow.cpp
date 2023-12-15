@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    this->on_add_RLS_clicked(); // add defualt 1 RLS
+    this->on_visibility_map_add_RLS_clicked(); // add defualt 1 RLS
     this->_plot_image();
     ui->visibility_map->yAxis->setScaleRatio(ui->visibility_map->xAxis, 1.0);
     ui->visibility_map->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom |
@@ -105,27 +105,25 @@ MainWindow::~MainWindow()
 
 void MainWindow::get_angles()
 {
-    angles[0] = ui->angle_1->value();
-    angles[1] = ui->angle_2->value();
-    angles[2] = ui->angle_3->value();
-    angles[3] = ui->angle_4->value();
+    angles.push_back(ui->visibility_map_angle_1->value());
+    angles.push_back(ui->visibility_map_angle_2->value());
+    angles.push_back(ui->visibility_map_angle_3->value());
+    angles.push_back(ui->visibility_map_angle_4->value());
+    angles.push_back(M_PI / 2);
 }
 
-void MainWindow::on_add_RLS_clicked()
+void MainWindow::on_visibility_map_add_RLS_clicked()
 {
     RLS *NewRls = new RLS;
     std::string name = "РЛС " + std::to_string(++(this->_rls_index));
-    ui->RLS_widgets->addTab(NewRls, QString::fromStdString(name));
+    ui->visibility_map_RLS_widgets->addTab(NewRls, QString::fromStdString(name));
 }
 
 
-void MainWindow::on_RLS_widgets_tabCloseRequested(int index)
-{
-    ui->RLS_widgets->removeTab(index);
-}
+void MainWindow::on_visibility_map_RLS_widgets_tabCloseRequested(int index)
+{ ui->visibility_map_RLS_widgets->removeTab(index); }
 
-
-void MainWindow::on_apply_button_clicked(QAbstractButton *button)
+void MainWindow::on_visibility_map_apply_button_clicked(QAbstractButton *button)
 {
     get_angles();
 
@@ -144,9 +142,9 @@ void MainWindow::on_apply_button_clicked(QAbstractButton *button)
     ui->visibility_map->graph(0)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, QPen(Qt::red, 0), QColor(255, 0, 0, 200), 10));
     ui->visibility_map->graph(0)->setLineStyle(QCPGraph::lsNone);
 
-    for (int i = 0; i < ui->RLS_widgets->count(); ++i)
+    for (int i = 0; i < ui->visibility_map_RLS_widgets->count(); ++i)
     {
-        RLS* rls = (RLS*)ui->RLS_widgets->widget(i);
+        RLS* rls = (RLS*)ui->visibility_map_RLS_widgets->widget(i);
         RLS::Data data = rls->get_all_data();
         AngleMap angle_map = _screen_angle_search(data);
         _plot_angle_map(angle_map, data.position);
@@ -413,7 +411,7 @@ QVector<QCPCurveData> Contour::get_zero_data()
 
 // Reflection ---------------------------------------------------------------------------------------------------
 
-void MainWindow::on_apply_button_reflection_clicked(QAbstractButton *button)
+void MainWindow::on_reflection_apply_button_clicked(QAbstractButton *button)
 {
     if (!ui->reflection_coefficient->displayText().isEmpty())  // if there was any output
     {
@@ -449,12 +447,12 @@ void MainWindow::on_apply_button_reflection_clicked(QAbstractButton *button)
     Map map(&geo_data, &veg, &const_dp, &c);
 
     PointCartesian target;
-    target.change_x(ui->object_x->value());
-    target.change_y(ui->object_y->value());
-    target.change_z(ui->object_z->value());
+    target.change_x(ui->reflection_object_x->value());
+    target.change_y(ui->reflection_object_y->value());
+    target.change_z(ui->reflection_object_z->value());
 
     RLS::Data rls_data;
-    rls_data = ui->rls->get_all_data();
+    rls_data = ui->reflection_rls->get_all_data();
     PointCartesian rls = rls_data.position;
 
     PointCartesian reflection_point = RP::FindReflectionPoint(PointSpheric(rls, target), &map, model);
@@ -571,4 +569,3 @@ void MainWindow::plot_reflection_graph(PointCartesian rls, PointCartesian target
     ui->reflection_point_graph->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
     ui->visibility_map->replot();
 }
-

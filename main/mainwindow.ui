@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="main_tab_widget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="visibility_map_tab">
        <attribute name="title">
@@ -26,7 +26,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
-         <widget class="QTabWidget" name="RLS_widgets">
+         <widget class="QTabWidget" name="visibility_map_RLS_widgets">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -70,7 +70,7 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QPushButton" name="add_RLS">
+         <widget class="QPushButton" name="visibility_map_add_RLS">
           <property name="maximumSize">
            <size>
             <width>287</width>
@@ -83,7 +83,7 @@
          </widget>
         </item>
         <item row="4" column="0">
-         <widget class="QGroupBox" name="calculation_parametres">
+         <widget class="QGroupBox" name="visibility_map_calculation_parametres">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -111,8 +111,72 @@
            <bool>false</bool>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="visibility_map_angle_2">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+              </font>
+             </property>
+             <property name="maximum">
+              <double>1.570000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.200000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="visibility_map_angle_4">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+              </font>
+             </property>
+             <property name="maximum">
+              <double>1.570000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.400000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QRadioButton" name="visibility_map_flat_surface_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Плоская поверхность земли</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="visibility_map_angle_2_label">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+              </font>
+             </property>
+             <property name="text">
+              <string>Угол 2 (радианы)</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="1">
-            <widget class="QDoubleSpinBox" name="angle_1">
+            <widget class="QDoubleSpinBox" name="visibility_map_angle_1">
              <property name="font">
               <font>
                <family>Segoe UI</family>
@@ -129,8 +193,20 @@
              </property>
             </widget>
            </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="visibility_map_angle_3_label">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+              </font>
+             </property>
+             <property name="text">
+              <string>Угол 3 (радианы)</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="angle_1_label">
+            <widget class="QLabel" name="visibility_map_angle_1_label">
              <property name="font">
               <font>
                <family>Segoe UI</family>
@@ -141,24 +217,26 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="0" colspan="2">
-            <widget class="QRadioButton" name="flat_surface_mode">
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="visibility_map_angle_3">
              <property name="font">
               <font>
-               <family>Tw Cen MT Condensed</family>
-               <pointsize>10</pointsize>
+               <family>Segoe UI</family>
               </font>
              </property>
-             <property name="text">
-              <string>Плоская поверхность земли</string>
+             <property name="maximum">
+              <double>1.570000000000000</double>
              </property>
-             <property name="checked">
-              <bool>true</bool>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.300000000000000</double>
              </property>
             </widget>
            </item>
            <item row="6" column="0" colspan="2">
-            <widget class="QRadioButton" name="refraction_mode">
+            <widget class="QRadioButton" name="visibility_map_refraction_mode">
              <property name="font">
               <font>
                <family>Tw Cen MT Condensed</family>
@@ -171,7 +249,7 @@
             </widget>
            </item>
            <item row="5" column="0">
-            <widget class="QRadioButton" name="curvature_mode">
+            <widget class="QRadioButton" name="visibility_map_curvature_mode">
              <property name="maximumSize">
               <size>
                <width>428</width>
@@ -189,32 +267,8 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="angle_2_label">
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-              </font>
-             </property>
-             <property name="text">
-              <string>Угол 2 (радианы)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="angle_3_label">
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-              </font>
-             </property>
-             <property name="text">
-              <string>Угол 3 (радианы)</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="angle_4_label">
+            <widget class="QLabel" name="visibility_map_angle_4_label">
              <property name="font">
               <font>
                <family>Segoe UI</family>
@@ -222,60 +276,6 @@
              </property>
              <property name="text">
               <string>Угол 4 (радианы)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QDoubleSpinBox" name="angle_4">
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-              </font>
-             </property>
-             <property name="maximum">
-              <double>1.570000000000000</double>
-             </property>
-             <property name="singleStep">
-              <double>0.100000000000000</double>
-             </property>
-             <property name="value">
-              <double>0.400000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QDoubleSpinBox" name="angle_3">
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-              </font>
-             </property>
-             <property name="maximum">
-              <double>1.570000000000000</double>
-             </property>
-             <property name="singleStep">
-              <double>0.100000000000000</double>
-             </property>
-             <property name="value">
-              <double>0.300000000000000</double>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QDoubleSpinBox" name="angle_2">
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-              </font>
-             </property>
-             <property name="maximum">
-              <double>1.570000000000000</double>
-             </property>
-             <property name="singleStep">
-              <double>0.100000000000000</double>
-             </property>
-             <property name="value">
-              <double>0.200000000000000</double>
              </property>
             </widget>
            </item>
@@ -296,7 +296,7 @@
          </spacer>
         </item>
         <item row="5" column="0">
-         <widget class="QDialogButtonBox" name="apply_button">
+         <widget class="QDialogButtonBox" name="visibility_map_apply_button">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -368,7 +368,7 @@
             </widget>
            </item>
            <item row="3" column="0">
-            <widget class="QLabel" name="reflection_coef_label">
+            <widget class="QLabel" name="reflection_coefficient_label">
              <property name="text">
               <string>Коэффициент отражения</string>
              </property>
@@ -481,7 +481,7 @@
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QGroupBox" name="object_position_box">
+         <widget class="QGroupBox" name="reflection_point_object_position_box">
           <property name="maximumSize">
            <size>
             <width>448</width>
@@ -493,14 +493,14 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_7">
            <item row="1" column="0">
-            <widget class="QLabel" name="y_label">
+            <widget class="QLabel" name="reflection_object_y_label">
              <property name="text">
               <string>Y координата (м)</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QDoubleSpinBox" name="object_z">
+            <widget class="QDoubleSpinBox" name="reflection_object_z">
              <property name="minimum">
               <double>-1000.000000000000000</double>
              </property>
@@ -510,7 +510,7 @@
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QDoubleSpinBox" name="object_y">
+            <widget class="QDoubleSpinBox" name="reflection_object_y">
              <property name="minimum">
               <double>-1000.000000000000000</double>
              </property>
@@ -520,14 +520,14 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="x_label">
+            <widget class="QLabel" name="reflection_object_x_label">
              <property name="text">
               <string>X координата (м)</string>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QDoubleSpinBox" name="object_x">
+            <widget class="QDoubleSpinBox" name="reflection_object_x">
              <property name="minimum">
               <double>-1000.000000000000000</double>
              </property>
@@ -537,14 +537,14 @@
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QLabel" name="z_label">
+            <widget class="QLabel" name="reflection_object_z_label">
              <property name="text">
               <string>Z координата (м)</string>
              </property>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QDialogButtonBox" name="apply_button_reflection">
+            <widget class="QDialogButtonBox" name="reflection_apply_button">
              <property name="standardButtons">
               <set>QDialogButtonBox::Apply</set>
              </property>
@@ -554,7 +554,7 @@
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="RLS" name="rls" native="true">
+         <widget class="RLS" name="reflection_rls" native="true">
           <property name="maximumSize">
            <size>
             <width>448</width>
@@ -572,6 +572,242 @@
            </size>
           </property>
          </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="stationary_height_determination_tab">
+       <attribute name="title">
+        <string>Поиск высоты неподвижной цели</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_11">
+        <item row="0" column="0">
+         <widget class="RLS" name="stationary_height_rls" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>448</width>
+            <height>400</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" rowspan="5">
+         <widget class="QCustomPlot" name="stationary_height_graph" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>630</width>
+            <height>630</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="stationary_height_calculation_parametres">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>448</width>
+            <height>102</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Tw Cen MT Condensed</family>
+           </font>
+          </property>
+          <property name="title">
+           <string extracomment="Используется для вычисления карты видимости и точки переотражения">Глобальные параметры расчётов</string>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="stationary_height_curvature_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>С учётом кривизны Земли</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="stationary_height_flat_surface_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Плоская поверхность земли</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="stationary_height_refraction_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>С учётом преломления в атмосфере земли</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QGroupBox" name="stationary_height_object_position_box">
+          <property name="maximumSize">
+           <size>
+            <width>448</width>
+            <height>244</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Положение объекта</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_10">
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="stationary_height_R1"/>
+           </item>
+           <item row="5" column="1">
+            <widget class="QDialogButtonBox" name="stationary_height_apply_button">
+             <property name="standardButtons">
+              <set>QDialogButtonBox::Apply</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="stationary_height_R">
+             <property name="minimum">
+              <double>-1000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000.990000000000009</double>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="stationary_height_y">
+             <property name="minimum">
+              <double>-1000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000.990000000000009</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDoubleSpinBox" name="stationary_height_x">
+             <property name="minimum">
+              <double>-1000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000.990000000000009</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="stationary_height_x_label">
+             <property name="text">
+              <string>X координата (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="stationary_height_y_label">
+             <property name="text">
+              <string>Y координата (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="stationary_height_R_label">
+             <property name="text">
+              <string>Расстояние до цели R (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="stationary_height_R2"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="stationary_height_R1_label">
+             <property name="text">
+              <string>Расстояние от РЛС до точки переотражения R1 (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="stationary_height_R2_label">
+             <property name="text">
+              <string>Расстояние от точки переотражения до цели R2 (м)</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QGroupBox" name="stationary_height_result_box">
+          <property name="maximumSize">
+           <size>
+            <width>448</width>
+            <height>86</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Результат</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="2" column="0">
+            <widget class="QLabel" name="stationary_height_h_label">
+             <property name="text">
+              <string>Высота цели (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="stationary_height_h">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <spacer name="stationary_height_spacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>244</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
