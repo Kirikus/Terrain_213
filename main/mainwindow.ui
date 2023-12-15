@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1126</width>
-    <height>739</height>
+    <width>1071</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="main_tab_widget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="visibility_map_tab">
        <attribute name="title">
@@ -161,6 +161,9 @@
              <property name="checked">
               <bool>true</bool>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">visibility_map_calculation_mode</string>
+             </attribute>
             </widget>
            </item>
            <item row="1" column="0">
@@ -246,6 +249,9 @@
              <property name="text">
               <string>С учётом преломления в атмосфере земли</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">visibility_map_calculation_mode</string>
+             </attribute>
             </widget>
            </item>
            <item row="5" column="0">
@@ -265,6 +271,9 @@
              <property name="text">
               <string>С учётом кривизны земли</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">visibility_map_calculation_mode</string>
+             </attribute>
             </widget>
            </item>
            <item row="3" column="0">
@@ -502,20 +511,20 @@
            <item row="2" column="1">
             <widget class="QDoubleSpinBox" name="reflection_object_z">
              <property name="minimum">
-              <double>-1000.000000000000000</double>
+              <double>-1000000.000000000000000</double>
              </property>
              <property name="maximum">
-              <double>1000.990000000000009</double>
+              <double>1000000.989999999990687</double>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
             <widget class="QDoubleSpinBox" name="reflection_object_y">
              <property name="minimum">
-              <double>-1000.000000000000000</double>
+              <double>-1000000.000000000000000</double>
              </property>
              <property name="maximum">
-              <double>1000.990000000000009</double>
+              <double>1000000.989999999990687</double>
              </property>
             </widget>
            </item>
@@ -529,10 +538,10 @@
            <item row="0" column="1">
             <widget class="QDoubleSpinBox" name="reflection_object_x">
              <property name="minimum">
-              <double>-1000.000000000000000</double>
+              <double>-1000000.000000000000000</double>
              </property>
              <property name="maximum">
-              <double>1000.990000000000009</double>
+              <double>1000000.989999999990687</double>
              </property>
             </widget>
            </item>
@@ -640,6 +649,9 @@
              <property name="text">
               <string>С учётом кривизны Земли</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">stationary_height_calculation_mode</string>
+             </attribute>
             </widget>
            </item>
            <item row="0" column="0">
@@ -656,6 +668,9 @@
              <property name="checked">
               <bool>true</bool>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">stationary_height_calculation_mode</string>
+             </attribute>
             </widget>
            </item>
            <item row="2" column="0">
@@ -669,6 +684,9 @@
              <property name="text">
               <string>С учётом преломления в атмосфере земли</string>
              </property>
+             <attribute name="buttonGroup">
+              <string notr="true">stationary_height_calculation_mode</string>
+             </attribute>
             </widget>
            </item>
           </layout>
@@ -687,7 +705,11 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_10">
            <item row="3" column="1">
-            <widget class="QDoubleSpinBox" name="stationary_height_R1"/>
+            <widget class="QDoubleSpinBox" name="stationary_height_R1">
+             <property name="maximum">
+              <double>1000000.989999999990687</double>
+             </property>
+            </widget>
            </item>
            <item row="5" column="1">
             <widget class="QDialogButtonBox" name="stationary_height_apply_button">
@@ -699,30 +721,30 @@
            <item row="2" column="1">
             <widget class="QDoubleSpinBox" name="stationary_height_R">
              <property name="minimum">
-              <double>-1000.000000000000000</double>
+              <double>-1000000.000000000000000</double>
              </property>
              <property name="maximum">
-              <double>1000.990000000000009</double>
+              <double>1000000.989999999990687</double>
              </property>
             </widget>
            </item>
            <item row="1" column="1">
             <widget class="QDoubleSpinBox" name="stationary_height_y">
              <property name="minimum">
-              <double>-1000.000000000000000</double>
+              <double>-1000000.000000000000000</double>
              </property>
              <property name="maximum">
-              <double>1000.990000000000009</double>
+              <double>1000000.989999999990687</double>
              </property>
             </widget>
            </item>
            <item row="0" column="1">
             <widget class="QDoubleSpinBox" name="stationary_height_x">
              <property name="minimum">
-              <double>-1000.000000000000000</double>
+              <double>-1000000.000000000000000</double>
              </property>
              <property name="maximum">
-              <double>1000.990000000000009</double>
+              <double>1000000.989999999990687</double>
              </property>
             </widget>
            </item>
@@ -748,7 +770,11 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QDoubleSpinBox" name="stationary_height_R2"/>
+            <widget class="QDoubleSpinBox" name="stationary_height_R2">
+             <property name="maximum">
+              <double>1000000.989999999990687</double>
+             </property>
+            </widget>
            </item>
            <item row="3" column="0">
             <widget class="QLabel" name="stationary_height_R1_label">
@@ -804,10 +830,227 @@
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>244</height>
+            <height>277</height>
            </size>
           </property>
          </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="dinamic_height_determination">
+       <attribute name="title">
+        <string>Поиск высоты подвижной цели</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_13">
+        <item row="1" column="1">
+         <widget class="QGroupBox" name="dinamic_height_calculation_parametres">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>393</width>
+            <height>102</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Tw Cen MT Condensed</family>
+           </font>
+          </property>
+          <property name="title">
+           <string extracomment="Используется для вычисления карты видимости и точки переотражения">Глобальные параметры расчётов</string>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="1" column="0">
+            <widget class="QRadioButton" name="dinamic_height_curvature_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>С учётом кривизны Земли</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QRadioButton" name="dinamic_height_flat_surface_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Плоская поверхность земли</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QRadioButton" name="dinamic_height_refraction_mode">
+             <property name="font">
+              <font>
+               <family>Tw Cen MT Condensed</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>С учётом преломления в атмосфере земли</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="2" rowspan="5">
+         <widget class="QCustomPlot" name="dinamic_height_graph" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>630</width>
+            <height>630</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" colspan="2">
+         <widget class="QSlider" name="dinamic_height_slider">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+          <property name="pageStep">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+          <property name="sliderPosition">
+           <number>1</number>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="invertedAppearance">
+           <bool>false</bool>
+          </property>
+          <property name="invertedControls">
+           <bool>false</bool>
+          </property>
+          <property name="tickPosition">
+           <enum>QSlider::TicksAbove</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <spacer name="dinamic_height_spacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <widget class="RLS" name="dinamic_height_rls" native="true">
+          <property name="maximumSize">
+           <size>
+            <width>393</width>
+            <height>400</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QGroupBox" name="dinamic_height_object_start_condition_box">
+          <property name="maximumSize">
+           <size>
+            <width>393</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Начальное состояние объекта</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_14">
+           <item row="4" column="1">
+            <widget class="QDoubleSpinBox" name="dinamic_height_R2"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="dinamic_height_R1_label">
+             <property name="text">
+              <string>Расстояние от РЛС до точки переотражения R1 (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDoubleSpinBox" name="dinamic_height_R"/>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="dinamic_height_R2_label">
+             <property name="text">
+              <string>Расстояние от точки переотражения до цели R2 (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QDoubleSpinBox" name="dinamic_height_object_x"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="dinamic_height_object_x_label">
+             <property name="text">
+              <string>Y координата (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="dinamic_height_R1"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="dinamic_height_R_label">
+             <property name="text">
+              <string>Расстояние до цели R (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="dinamic_height_object_y"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="dinamic_height_object_y_label">
+             <property name="text">
+              <string>X координата (м)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QDialogButtonBox" name="dinamic_height_apply_button">
+             <property name="standardButtons">
+              <set>QDialogButtonBox::Apply</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -820,7 +1063,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1126</width>
+     <width>1071</width>
      <height>22</height>
     </rect>
    </property>
@@ -857,5 +1100,7 @@
  <connections/>
  <buttongroups>
   <buttongroup name="reflection_calculation_mode"/>
+  <buttongroup name="stationary_height_calculation_mode"/>
+  <buttongroup name="visibility_map_calculation_mode"/>
  </buttongroups>
 </ui>
