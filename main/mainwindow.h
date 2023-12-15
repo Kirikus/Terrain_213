@@ -7,6 +7,7 @@
 #include <qcustomplot.h>
 #include <rls.h>
 #include "../lib/point.h"
+#include "../lib/reflection_point.h"
 #include <iostream>
 
 class AngleMap;
@@ -44,6 +45,9 @@ private:
     void _plot_image();
     void _plot_angle_map(AngleMap angle_map);
     AngleMap _screen_angle_search(RLS::Data data);
+    void plot_reflection_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
+    std::complex<double> find_reflection_coefficient(RLS::Data rls_data, Map* map, PointCartesian reflection_point, EarthModels::ModelEarth* model);
+    void get_angles();
 };
 
 struct Contour
