@@ -32,8 +32,8 @@ double FindTargetHeight(Map* map, EM::ModelEarth* model, PointCartesian rls, Poi
         double curr_incidence_angle = std::abs(RP::FindPhi(derivative, k1));
         double curr_reflection_angle = 0;
 
-        double step_h = 0.005;
-        double curr_h = 0.005;
+        double step_h = 0.05;
+        double curr_h = 0.05;
         for (; r_max >= curr_h;) {
             sp.move_target(sp.get_target().get_x(), sp.get_target().get_y(), curr_h);
             PointSpheric rp2(sp.get_target(), relief_dot);
