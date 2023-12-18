@@ -14,7 +14,7 @@ class ReflectionMultiplier
 public:
     ReflectionMultiplier() = default;
 
-    std::complex<double> reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double conductivity, double sko, Vegetation::VegetationType veg);
+    std::complex<double> reflection_multiplier(Map* map, PointSpheric sp, Polarization pol, double incidence_angle, double wave_l, double sko);
 private:
     ElevationReflectionMultiplier ElevationCoeff;
     FrenelReflectionMultiplier FrenelCoeff;

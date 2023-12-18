@@ -3,11 +3,13 @@
 namespace EM = EarthModels;
 
 // The FindScreeningAngle function searches for the closing angle for a given approximate relief, returns the angle in radians
-// Accepts:
-// Map* map - pointer to the map data
-// ModelEarth* model - pointer to the model data
-// PointSpheric sp - associated radar and terrain points
-// R is the radius of the closing angle search (specified in meters).
+// function accepts:
+// 1) Map* map - pointer to the map data;
+// 2) ModelEarth* model - pointer to the model data;
+// 4) PointSpheric sp - associated radar and terrain points;
+// 5) R is the radius of the closing angle search (specified in meters).
+// function returns:
+// 1) screening angle for given R.
 // Traversed by a continuous relief function
 
 double FindScreeningAngle(Map* map, EM::ModelEarth* model, PointSpheric sp, double R)

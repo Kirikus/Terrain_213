@@ -3,6 +3,12 @@
 namespace EM = EarthModels;
 
 // This function calculates angle between two radii of earth
+// function accepts:
+// 1) center - point with center coordinates
+// 2) target - point with target coordinates
+// function returns:
+// 1) Angle between two radii of earth
+
 double EM::ModelEffectiveRadius::find_earth_angle(PointCartesian center, PointCartesian target)
 {
     double x = center.get_x() - target.get_x();
@@ -14,6 +20,12 @@ double EM::ModelEffectiveRadius::find_earth_angle(PointCartesian center, PointCa
 }
 
 // This function calculates distance between center and target
+// function accepts:
+// 1) center - point with center coordinates
+// 2) target - point with target coordinates
+// function returns:
+// 1) distance between these points
+
 double EM::ModelEffectiveRadius::find_r(PointCartesian center, PointCartesian target)
 {
     double h_t = k*r_e + target.get_h(); //height relative to the center of the earth
@@ -26,6 +38,12 @@ double EM::ModelEffectiveRadius::find_r(PointCartesian center, PointCartesian ta
 }
 
 // This function calculates elevation angle between center and target
+// function accepts:
+// 1) center - point with center coordinates
+// 2) target - point with target coordinates
+// function returns:
+// 1) elevation angle
+
 double EM::ModelEffectiveRadius::find_phi(PointCartesian center, PointCartesian target)
 {
     double h_a = target.get_h();
