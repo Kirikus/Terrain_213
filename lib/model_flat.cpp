@@ -2,7 +2,13 @@
 
 namespace EM = EarthModels;
 
-//This function calculates distance between center and target
+// This function calculates distance between center and target
+// function accepts:
+// 1) center - point with center coordinates
+// 2) target - point with target coordinates
+// function returns:
+// 1) distance between these points
+
 double EM::ModelFlat::find_r(PointCartesian center, PointCartesian target)
 {
     double x = target.get_x() - center.get_x();
@@ -13,7 +19,13 @@ double EM::ModelFlat::find_r(PointCartesian center, PointCartesian target)
     return r;
 }
 
-//This function calculates elevation angle between center and target
+// This function calculates elevation angle between center and target
+// function accepts:
+// 1) center - point with center coordinates
+// 2) target - point with target coordinates
+// function returns:
+// 1) elevation angle
+
 double EM::ModelFlat::find_phi(PointCartesian center, PointCartesian target)
 {
     double h = target.get_h() - center.get_h();

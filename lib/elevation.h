@@ -14,7 +14,7 @@ public:
 class GeoData: public Elevation
 {
 public:
-  double h(Point* p) override {return relief_func(p);}
+  virtual double h(Point* p) override {return relief_func(p);}
 private:
   double relief_func(Point* p);
 }; // todo
@@ -26,7 +26,7 @@ public:
         :H(H), slope(slope)
     {}
 
-  double h(Point* p) override {return H - std::hypot(p->get_x(), p->get_y()) * slope;}
+  virtual double h(Point* p) override {return H - std::hypot(p->get_x(), p->get_y()) * slope;}
 private:
     double H;
     double slope;
@@ -35,7 +35,7 @@ private:
 class Plain: public Elevation
 {
 public:
-    double h(Point* p) override {return 0;}
+    virtual double h(Point* p) override {return 0;}
 };
 }
 

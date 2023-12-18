@@ -5,12 +5,12 @@ namespace VG = Vegetation;
 
 // This function calculates attenuation coefficient for vegetation
 // function accepts:
-// 1) incidence angle in radians
-// 2) tabular coefficient a
-// 3) tabular coefficient b
-// 4) wave length in meters
+// 1) incidence angle in radians;
+// 2) tabular coefficient a;
+// 3) tabular coefficient b;
+// 4) wave length in meters.
 // function returns:
-// attenuation coefficient for vegetation
+// 1) attenuation coefficient for vegetation.
 // formula (2.18) on the page 50
 
 double RC::VegetationReflectionMultiplier::vegetation_coeff(double incidence_angle, VG::VegetationType relief, double wave_l)
