@@ -43,6 +43,10 @@ class MainWindow : public QMainWindow {
     void on_stationary_height_apply_button_clicked(QAbstractButton *button);
 
 
+    void on_dinamic_height_apply_button_clicked(QAbstractButton *button);
+
+    void on_dinamic_height_slider_sliderMoved(int position);
+
 protected:
     virtual void resizeEvent(QResizeEvent *);
 
@@ -78,6 +82,14 @@ private:
     void stationary_height_plot_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
 
     //------DINAMIC HEIGHT DETERMINATION-------------------------------
+    PointSpheric dinamic_height_object;  // current position of an object
+    EM::ModelEarth* dinamic_height_model;
+    Map dinamic_height_map{&geo_data, &vegetation, &const_dp, &c};
+    RLS::Data dinamic_height_rls_data;
+    double dinamic_height_R;
+    double dinamic_height_R1;
+    double dinamic_height_R2;
+
     void dinamic_height_plot_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map);
 };
 
