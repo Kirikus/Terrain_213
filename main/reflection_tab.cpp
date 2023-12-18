@@ -70,7 +70,7 @@ std::complex<double> MainWindow::reflection_find_coefficient(RLS::Data rls_data,
 
     RC::ReflectionMultiplier reflection_multiplier;
 
-    return reflection_multiplier.reflection_multiplier(map, point, rls_data.polarization, incidence_angle, wave_l, conductivity, sko, vegetation);
+    return reflection_multiplier.reflection_multiplier(map, point, rls_data.polarization, incidence_angle, wave_l, sko);
 }
 
 void MainWindow::reflection_plot_graph(PointCartesian rls, PointCartesian target, PointCartesian reflection_point, Map* map)
