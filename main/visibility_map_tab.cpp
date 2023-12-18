@@ -127,14 +127,9 @@ AngleMap MainWindow::visibility_map_screen_angle_search(RLS::Data data)
         break;
     }
 
-    EL::GeoData geo_data;
-    VG::None veg;
-    DP::Constant dp(0);
-    CD::Constant c(0);
+    Map map(&geo_data, &vegetation, &const_dp, &c);
 
-    Map map(&geo_data, &veg, &dp, &c);
-
-    double angle_iter = 1000;  // count of iteration in angle loop
+    double angle_iter = 100;  // count of iteration in angle loop
     double R_iter = 100;  // count of iteration in radius loop
     double R_step = data.radius / R_iter;  // step for in cycle
 
