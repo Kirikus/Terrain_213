@@ -43,11 +43,11 @@ void MainWindow::on_stationary_height_apply_button_clicked(QAbstractButton *butt
 
     PointCartesian reflection_point;
 
-    double h = FindTargetHeight(&map, model, rls, Point2d(x ,y), &reflection_point, R, R1, R2, rls_data.radius);
+    double h = FindTargetHeight(&map, model, rls, Point2d(x, y), &reflection_point, R, R1, R2, rls_data.radius);
 
     ui->stationary_height_h->insert(QString::number(std::round(h * 100) / 100));
 
-    PointCartesian target(x ,y ,h);
+    PointCartesian target(x, y, h);
 
     stationary_height_plot_graph(rls, target, reflection_point, &map);
 }
