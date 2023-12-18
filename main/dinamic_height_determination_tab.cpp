@@ -74,8 +74,7 @@ void MainWindow::on_dinamic_height_slider_sliderMoved(int position)
         double R2 = reflection_point_to_object.get_R();
         double h = FindTargetHeight(&dinamic_height_map, dinamic_height_model, dinamic_height_rls_data.position, Point2d(x, y), &reflection_point, R, R1, R2, dinamic_height_rls_data.radius);
 
-        ui->dinamic_height_h->insert("h=" + QString::number(h) + " R=" + QString::number(R) + " R1=" + QString::number(R1) + " R2=" + QString::number(R2));
-//        ui->dinamic_height_h->insert(QString::number(std::round(h * 100) / 100));
+        ui->dinamic_height_h->insert(QString::number(std::round(h * 100) / 100));
 
         PointCartesian target(current_object.get_target().get_x(), current_object.get_target().get_y(), current_object.get_target().get_h());
         dinamic_height_plot_graph(dinamic_height_rls_data.position, target, reflection_point, &dinamic_height_map);
