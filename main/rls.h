@@ -4,6 +4,11 @@
 #include <QWidget>
 #include <map>
 
+#include "../lib/point.h"
+#include "../lib/frenel_multiplier.h"
+
+namespace RC = ReflectionCoefficients;
+
 namespace Ui {
 class RLS;
 }
@@ -16,22 +21,22 @@ public:
     explicit RLS(QWidget *parent = nullptr);
     ~RLS();
 
-    void get_all_data();  // find position and parameters of RLS
+    struct Data
+    {
+        PointCartesian position;
+
+        double radius;
+        double top_angle;
+        double bottom_angle;
+        double wave_length;
+
+        RC::Polarization polarization = RC::HorizontalPolarization;
+    };
+
+    Data get_all_data();  // find position and parameters of RLS
 
 private:
     Ui::RLS *ui;
-    double latitude_degree;
-    double latitude_minutes;
-    double latitude_seconds;
-
-    double longitude_degree;
-    double longitudee_minutes;
-    double longitude_seconds;
-
-    double high;
-    double radius;
-    double top_angle;
-    double bottom_angle;
 };
 
 #endif // RLS_H

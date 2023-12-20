@@ -20,7 +20,10 @@ PointSpheric::PointSpheric(PointCartesian center, PointCartesian target)
     this->azimuth *= M_PI;
 
     //atan defined in the range from -90 to 90
-    this->phi = atan(h/xy);
+    if (xy == 0)
+        this->phi = 0;
+    else
+        this->phi = atan(h/xy);
 }
 
 PointSpheric::PointSpheric(const PointSpheric& sp)
@@ -38,7 +41,7 @@ void PointSpheric::change_r(double new_R)
     double x = cos(azimuth)*cos(phi)*R;
     double y = sin(azimuth)*cos(phi)*R;
     double h = sin(phi)*R;
-    move_target(center.get_x() + x,center.get_y() + y,center.get_h() + h);
+    move_target(center.get_x() + x, center.get_y() + y, center.get_h() + h);
 }
 
 void PointSpheric::change_azimuth(double new_azimuth)
@@ -87,5 +90,8 @@ void PointSpheric::move_target(double new_x, double new_y, double new_h)
     this->azimuth *= M_PI;
 
     //atan defined in the range from -90 to 90
-    this->phi = atan(h/xy);
+    if (xy == 0)
+        this->phi = 0;
+    else
+        this->phi = atan(h/xy);
 }

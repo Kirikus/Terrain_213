@@ -18,10 +18,14 @@ public:
     Point2d(double x, double y)
         :x{x}, y{y}
     {}
+    Point2d() = default;
 
     virtual double get_x() const override {return x;}
     virtual double get_y() const override {return y;}
     virtual double get_h() const override {return 0;}
+
+    bool operator==(Point2d& point) { return (x == point.get_x()) && (y == point.get_y()); }
+    bool operator!=(Point2d& point) { return !(*this == point); }
 
 private:
     double x; // in meters
@@ -44,6 +48,10 @@ public:
     PointCartesian(Point2d p, double h)
         :x{p.get_x()}, y{p.get_y()}, h{h}
     {}
+
+    void change_x(const double x) { this->x = x; }
+    void change_y(const double y) { this->y = y; }
+    void change_z(const double h) { this->h = h; }
 
     virtual double get_x() const override {return x;};
     virtual double get_y() const override {return y;};
@@ -78,9 +86,20 @@ private:
     PointCartesian center;
     PointCartesian target;
 
-    double azimuth; //in radians
-    double R; //in meters
-    double phi; //in radians
+    double azimuth{0}; //in radians
+    double R{0}; //in meters
+    double phi{0}; //in radians
+};
+
+struct PointScreenAngle
+{
+public:
+    PointSpheric point_spheric;
+    double screening_angle{-1};
+
+    PointScreenAngle() = default;
+    PointScreenAngle(const PointSpheric point, const double angle) : point_spheric{point}, screening_angle{angle} {};
+    bool empty() { return screening_angle == -1 ? true : false; }
 };
 
 #endif // POINT_H

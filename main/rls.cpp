@@ -13,18 +13,35 @@ RLS::~RLS()
     delete ui;
 }
 
-void RLS::get_all_data()
+RLS::Data RLS::get_all_data()
 {
-    this->latitude_degree = ui->latitude_degree->value();
-    this->latitude_minutes = ui->latitude_minutes->value();
-    this->latitude_seconds = ui->latitude_seconds->value();
+    Data data;
+    data.position.change_x(ui->x->value());
+    data.position.change_y(ui->y->value());
+    data.position.change_z(ui->z->value());
 
-    this->longitude_degree = ui->longitude_degree->value();
-    this->longitude_degree = ui->longitude_minutes->value();
-    this->longitude_degree = ui->longitude_seconds->value();
+    data.radius = ui->radius->value();
+    data.top_angle = ui->top_angle->value();
+    data.bottom_angle = ui->bottom_angle->value();
+    data.wave_length = ui->wave_length->value();
 
-    this->high = ui->high->value();
-    this->radius = ui->radius->value();
-    this->top_angle = ui->top_angle->value();
-    this->bottom_angle = ui->bottom_angle->value();
+    int polarization_id = ui->polarization_type->checkedId();
+    switch (polarization_id) {
+    case -2:
+        data.polarization = RC::VerticalPolarization;
+        break;
+    case -3:
+        data.polarization = RC::HorizontalPolarization;
+        break;
+    case -4:
+        data.polarization = RC::CircularPolarization;
+        break;
+    case -5:
+        data.polarization = RC::CrossPolarization;
+        break;
+    default:
+        break;
+    }
+
+    return data;
 }
